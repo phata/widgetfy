@@ -2,7 +2,7 @@
 
 /**
  * class Widgetarian\Widgetfy\Site\Youtube
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -43,7 +43,7 @@ use Widgetarian\Widgetfy\Cache as Cache;
 class Youtube implements Common {
 
     /**
-     * Implements Widgetarian\Widgetfy\SiteCommon::translate
+     * Implements Widgetarian\Widgetfy\Site\Common::translate
      *
      * determine if the URL is translatable
      * by this site adapter
@@ -58,7 +58,7 @@ class Youtube implements Common {
     }
 
     /**
-     * Implements Widgetarian\Widgetfy\SiteCommon::translate
+     * Implements Widgetarian\Widgetfy\Site\Common::translate
      *
      * translate the provided URL into
      * HTML embed code of it
@@ -103,6 +103,9 @@ class Youtube implements Common {
                 );
 
             } else {
+
+                $width = 576; $height = 432; // temp default
+
                 return array(
                     'html' => '<a target="_blank" '.
                         'href="http://www.youtube.com/watch?v='.$vid.'">'.
@@ -113,10 +116,10 @@ class Youtube implements Common {
                 );
             }
 
-        } elseif ((preg_match('/^\/view_play_list$/', $url_parsed["path"])) or 
+        } elseif ((preg_match('/^\/view_play_list$/', $url_parsed["path"])) or
                 (preg_match('/^\/playlist$/', $url_parsed["path"]))) {
 
-            parse_str($url_parsed["query"], $args); 
+            parse_str($url_parsed["query"], $args);
             $width = 640; $height = 360; // temp default
             $query_str="&version=3&fs=1";
 
