@@ -1,5 +1,41 @@
 <?php
 
+/**
+ * class Widgetarian\Widgetfy\Cache
+ * 
+ * Licence:
+ *
+ * This file is part of Widgetfy.
+ *
+ * Widgetfy is free software: you can redistribute
+ * it and/or modify it under the terms of the GNU
+ * Lesser General Public License as published by the
+ * Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * Widgetfy is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser
+ * General Public Licensefor more details.
+ *
+ * You should have received a copy of the GNU Lesser
+ * General Public License along with Widgetfy.  If
+ * not, see <http://www.gnu.org/licenses/lgpl.html>.
+ *
+ * Description:
+ *
+ * This file defines Widgetarian\Widgetfy\Cache
+ * which is a Proxy to Cache implementation
+ *
+ *
+ * @package   Widgetfy
+ * @author    Koala Yeung <koalay@gmail.com>
+ * @copyright 2014 Koala Yeung
+ * @licence   http://www.gnu.org/licenses/lgpl.html
+ * @link      http://github.com/Widgetarian/Widgetfy
+ */
+
 namespace Widgetarian\Widgetfy;
 
 // use FileCache as default
@@ -16,11 +52,11 @@ class Cache {
     }
 
     /**
-     * @param object $handler cache hander that implements Widgetarian\Widgetify\Cache\Common
+     * @param object $handler cache hander that implements Widgetarian\Widgetfy\Cache\Common
      */
     public static function setHandler($handler) {
-        if (!is_subclass_of(self::$handler, 'Widgetarian\Widgetify\Cache\Common')) {
-            throw new Exception('Cache handler must implement the Widgetarian\Widgetify\Cache\Common interface');
+        if (!is_subclass_of(self::$handler, 'Widgetarian\Widgetfy\Cache\Common')) {
+            throw new Exception('Cache handler must implement the Widgetarian\Widgetfy\Cache\Common interface');
         }
         self::$handler = $handler;
     }
