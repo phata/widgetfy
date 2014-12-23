@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Translator
+ * Unit test for Widgetarian\Widgetfy\Site\MySpace
  * 
  * Licence:
  *
@@ -25,9 +25,8 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Translator
- * which is the main interface to translate url into
- * widget embed code.
+ * This file is a unit test for
+ * - Widgetarian\Widgetfy\Site\MySpace
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -36,26 +35,18 @@
  * @link      http://github.com/Widgetarian/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy;
+use Widgetarian\Widgetfy\Site\MySpace as MySpace;
 
-class Translator {
+class MySpaceTest extends PHPUnit_Framework_TestCase {
 
-    public static $sites = array(
-        '/^[\w]+\.youtube\.com$/' => 'Youtube',
-        '/^www\.ted\.com$/' => 'TED',
-        '/^myspace\.com$/' => 'MySpace',
-    );
-
-    public static function translate($url) {
-        $url_parsed = parse_url($url);
-        foreach (self::$sites as $regex => $class) {
-            // if host matches
-            if (preg_match($regex, $url_parsed['host'])) {
-                if (call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'), $url_parsed)) {
-                    return call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'), $url_parsed);
-                }
-            }
-        }
+    public function testTranslateVideo() {
+        $url = parse_url('https://myspace.com/themahoganysessions/video/fink-this-is-the-thing-mahogany-session/109566653');
+        $this->assertTrue(MySpace::translatable($url));
+        $this->assertEquals(MySpace::translate($url), array(
+			'html' => '<iframe width="480" height="270" src="//media.myspace.com/play/video/fink-this-is-the-thing-mahogany-session-109566653" frameborder="0" allowtransparency="true" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+			'width' => 480,
+			'height' => 270,
+		));
     }
 
 }
