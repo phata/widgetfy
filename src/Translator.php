@@ -45,6 +45,7 @@ class Translator {
         '/^www\.ted\.com$/' => 'TED',
         '/^myspace\.com$/' => 'MySpace',
         '/^[\w]+\.liveleak\.com$/' => 'LiveLeak',
+        '/^www\.dailymotion\.com$/' => 'Dailymotion',
     );
 
     public static function translate($url) {
