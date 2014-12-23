@@ -1,8 +1,8 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Translator
- * 
+ * Unit test for Widgetarian\Widgetfy\Site\LiveLeak
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -25,9 +25,8 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Translator
- * which is the main interface to translate url into
- * widget embed code.
+ * This file is a unit test for
+ * - Widgetarian\Widgetfy\Site\LiveLeak
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -36,27 +35,18 @@
  * @link      http://github.com/Widgetarian/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy;
+use Widgetarian\Widgetfy\Site\LiveLeak as LiveLeak;
 
-class Translator {
+class LiveLeakTest extends PHPUnit_Framework_TestCase {
 
-    public static $sites = array(
-        '/^[\w]+\.youtube\.com$/' => 'Youtube',
-        '/^www\.ted\.com$/' => 'TED',
-        '/^myspace\.com$/' => 'MySpace',
-        '/^[\w]+\.liveleak\.com$/' => 'LiveLeak',
-    );
-
-    public static function translate($url) {
-        $url_parsed = parse_url($url);
-        foreach (self::$sites as $regex => $class) {
-            // if host matches
-            if (preg_match($regex, $url_parsed['host'])) {
-                if (call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'), $url_parsed)) {
-                    return call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'), $url_parsed);
-                }
-            }
-        }
+    public function testTranslateVideo() {
+        $url = parse_url('http://www.liveleak.com/view?i=8ed_1220480664');
+        $this->assertTrue(LiveLeak::translatable($url));
+        $this->assertEquals(LiveLeak::translate($url), array(
+			'html' => '<iframe width="640" height="360" src="http://www.liveleak.com/ll_embed?f=8ed_1220480664" frameborder="0" allowfullscreen></iframe>',
+			'width' => 640,
+			'height' => 360,
+		));
     }
 
 }
