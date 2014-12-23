@@ -41,8 +41,8 @@ class LiveLeakTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.liveleak.com/view?i=8ed_1220480664');
-        $this->assertTrue(LiveLeak::translatable($url));
-        $this->assertEquals(LiveLeak::translate($url), array(
+        $this->assertNotFalse($extra = LiveLeak::translatable($url));
+        $this->assertEquals(LiveLeak::translate($url, $extra), array(
 			'html' => '<iframe width="640" height="360" src="http://www.liveleak.com/ll_embed?f=8ed_1220480664" frameborder="0" allowfullscreen></iframe>',
 			'width' => 640,
 			'height' => 360,

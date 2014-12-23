@@ -53,8 +53,15 @@ class Translator {
         foreach (self::$sites as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
-                if (call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'), $url_parsed)) {
-                    return call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'), $url_parsed);
+                if (($extra = call_user_func(
+                        array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'),
+                        $url_parsed
+                        )) !== FALSE) {
+                    // if translatable
+                    return call_user_func(
+                        array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'),
+                        $url_parsed, $extra
+                    );
                 }
             }
         }

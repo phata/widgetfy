@@ -41,8 +41,8 @@ class DailymotionTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.dailymotion.com/video/x4rj9p_tron_creation');
-        $this->assertTrue(Dailymotion::translatable($url));
-        $this->assertEquals(Dailymotion::translate($url), array(
+        $this->assertNotFalse($extra = Dailymotion::translatable($url));
+        $this->assertEquals(Dailymotion::translate($url, $extra), array(
 			'html' => '<iframe frameborder="0" width="560" height="315" src="//www.dailymotion.com/embed/video/x4rj9p" allowfullscreen></iframe>',
 			'width' => 560,
 			'height' => 315,

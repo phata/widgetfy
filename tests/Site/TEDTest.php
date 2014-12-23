@@ -41,8 +41,8 @@ class TEDTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense');
-        $this->assertTrue(TED::translatable($url));
-        $this->assertEquals(TED::translate($url), array(
+        $this->assertNotFalse($extra = TED::translatable($url));
+        $this->assertEquals(TED::translate($url, $extra), array(
 			'html' => '<iframe width="640" height="360" src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
 			'width' => 640,
 			'height' => 360,

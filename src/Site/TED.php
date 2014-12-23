@@ -41,7 +41,7 @@ namespace Widgetarian\Widgetfy\Site;
 class TED implements Common {
 
     /**
-     * Implements Widgetarian\Widgetfy\SiteCommon::translate
+     * Implements Widgetarian\Widgetfy\Site\Common::translate
      *
      * determine if the URL is translatable
      * by this site adapter
@@ -53,14 +53,15 @@ class TED implements Common {
     }
 
     /**
-     * Implements Widgetarian\Widgetfy\SiteCommon::translate
+     * Implements Widgetarian\Widgetfy\Site\Common::translate
      *
      * translate the provided URL into
      * HTML embed code of it
      * @param string[] $url_parsed result of parse_url($url)
+     * @param mixed[] $extra array of extra url information
      * @return mixed either embed string or NULL if not applicable
      */
-    public static function translate($url_parsed) {
+    public static function translate($url_parsed, $extra) {
     	preg_match('/^\/talks\/(.+?)$/', $url_parsed['path'], $matches);
     	$vid = $matches[1];
     	$width = 640; $height = 360;
