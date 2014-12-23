@@ -1,0 +1,7 @@
+<phpunit bootstrap="./autoload.php">
+  <testsuites>
+    <testsuite name="Sites">
+      <directory>tests/Site</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
