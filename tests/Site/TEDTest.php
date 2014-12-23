@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Translator
+ * Unit test for Widgetarian\Widgetfy\Site\TED
  * 
  * Licence:
  *
@@ -25,9 +25,8 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Translator
- * which is the main interface to translate url into
- * widget embed code.
+ * This file is a unit test for
+ * - Widgetarian\Widgetfy\Site\TED
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -36,25 +35,18 @@
  * @link      http://github.com/Widgetarian/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy;
+use Widgetarian\Widgetfy\Site\TED as TED;
 
-class Translator {
+class TEDTest extends PHPUnit_Framework_TestCase {
 
-    public static $sites = array(
-        '/^[\w]+\.youtube\.com$/' => 'Youtube',
-        '/^www.ted.com$/' => 'TED',
-    );
-
-    public static function translate($url) {
-        $url_parsed = parse_url($url);
-        foreach (self::$sites as $regex => $class) {
-            // if host matches
-            if (preg_match($regex, $url_parsed['host'])) {
-                if (call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'), $url_parsed)) {
-                    return call_user_func(array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'), $url_parsed);
-                }
-            }
-        }
+    public function testTranslateVideo() {
+        $url = parse_url('http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense');
+        $this->assertTrue(TED::translatable($url));
+        $this->assertEquals(TED::translate($url), array(
+			'html' => '<iframe width="640" height="360" src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
+			'width' => 640,
+			'height' => 360,
+		));
     }
 
 }
