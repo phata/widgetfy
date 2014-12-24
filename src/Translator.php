@@ -56,6 +56,7 @@ class Translator {
         '/^www\.facebook\.com$/' => 'Facebook',
         '/^www\.56\.com$/' => 'V56',
         '/^store\.steampowered\.com$/' => 'SteamStore',
+        '/^\w+\.ku6\.com$/' => 'Ku6',
     );
 
     public static function translate($url) {
