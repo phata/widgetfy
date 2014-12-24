@@ -49,6 +49,7 @@ class Translator {
         '/^www\.metacafe\.com$/' => 'Metacafe',
         '/^vimeo\.com$/' => 'Vimeo',
         '/^(\w+\.|)nicovideo\.jp$/' => 'NicoNico',
+        '/^www\.kickstarter\.com$/' => 'Kickstarter',
     );
 
     public static function translate($url) {
