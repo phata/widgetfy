@@ -52,6 +52,7 @@ class Translator {
         '/^www\.kickstarter\.com$/' => 'Kickstarter',
         '/^\w+\.collegehumor\.com$/' => 'CollegeHumor',
         '/^vlog\.xuite\.net$/' => 'Xuite',
+        '/^www\.dorkly\.com$/' => 'Dorkly',
     );
 
     public static function translate($url) {
