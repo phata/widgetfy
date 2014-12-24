@@ -55,6 +55,7 @@ class Translator {
         '/^www\.dorkly\.com$/' => 'Dorkly',
         '/^www\.facebook\.com$/' => 'Facebook',
         '/^www\.56\.com$/' => 'V56',
+        '/^store\.steampowered\.com$/' => 'SteamStore',
     );
 
     public static function translate($url) {
