@@ -59,6 +59,7 @@ class Translator {
         '/^\w+\.ku6\.com$/' => 'Ku6',
         '/^\w+\.youku\.com$/' => 'Youku',
         '/^(\w+\.|)tudou\.com$/' => 'Tudou',
+        '/^tv\.on\.cc/' => 'OnCc',
     );
 
     public static function translate($url) {
