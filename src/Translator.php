@@ -48,6 +48,7 @@ class Translator {
         '/^www\.dailymotion\.com$/' => 'Dailymotion',
         '/^www\.metacafe\.com$/' => 'Metacafe',
         '/^vimeo\.com$/' => 'Vimeo',
+        '/^(\w+\.|)nicovideo\.jp$/' => 'NicoNico',
     );
 
     public static function translate($url) {
