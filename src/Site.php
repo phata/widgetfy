@@ -60,6 +60,7 @@ class Site {
         '/^\w+\.youku\.com$/' => 'Youku',
         '/^(\w+\.|)tudou\.com$/' => 'Tudou',
         '/^tv\.on\.cc/' => 'OnCc',
+        '/^www\.ign\.com$/' => 'IGN',
     );
 
     public static function translate($url) {
