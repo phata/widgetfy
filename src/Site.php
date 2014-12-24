@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Translator
+ * class Widgetarian\Widgetfy\Site
  * 
  * Licence:
  *
@@ -25,7 +25,7 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Translator
+ * This file defines Widgetarian\Widgetfy\Site
  * which is the main interface to translate url into
  * widget embed code.
  *
@@ -38,7 +38,7 @@
 
 namespace Widgetarian\Widgetfy;
 
-class Translator {
+class Site {
 
     public static $sites = array(
         '/^[\w]+\.youtube\.com$/' => 'Youtube',
