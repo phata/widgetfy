@@ -41,7 +41,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1a() {
         $url = parse_url('http://www.collegehumor.com/video:1817806');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url));
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
         $this->assertEquals(CollegeHumor::translate($url, $extra), array(
             'html' => '<object type="application/x-shockwave-flash" '.
                 'data="http://www.collegehumor.com/moogaloop/'.
@@ -57,7 +57,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1b() {
         $url = parse_url('http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=1817806');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url));
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
         $this->assertEquals(CollegeHumor::translate($url, $extra), array(
             'html' => '<object type="application/x-shockwave-flash" '.
                 'data="http://www.collegehumor.com/moogaloop/'.
@@ -73,7 +73,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo2() {
         $url = parse_url('http://www.collegehumor.com/video/6926235/batman-and-superman-team-up');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url));
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
         $this->assertEquals(CollegeHumor::translate($url, $extra), array(
             'html' => '<iframe src="http://www.collegehumor.com/e/6926235'.
                 '" width="610" height="343" '.

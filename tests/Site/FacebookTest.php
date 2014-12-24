@@ -41,7 +41,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1() {
         $url = parse_url('https://www.facebook.com/video.php?v=10152802584496147');
-        $this->assertNotFalse($extra = Facebook::translatable($url));
+        $this->assertNotFalse($extra = Facebook::translatable($url, ''));
         $this->assertEquals(Facebook::translate($url, $extra), array(
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
                 'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -59,7 +59,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo2() {
         $url = parse_url('https://www.facebook.com/#!/video.php?v=10152802584496147');
-        $this->assertNotFalse($extra = Facebook::translatable($url));
+        $this->assertNotFalse($extra = Facebook::translatable($url, ''));
         $this->assertEquals(Facebook::translate($url, $extra), array(
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
                 'var js, fjs = d.getElementsByTagName(s)[0]; '.

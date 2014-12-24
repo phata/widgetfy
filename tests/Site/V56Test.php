@@ -41,7 +41,7 @@ class V56Test extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.56.com/u74/v_MTI4MDY5MDE1.html');
-        $this->assertNotFalse($extra = V56::translatable($url));
+        $this->assertNotFalse($extra = V56::translatable($url, ''));
         $this->assertEquals(V56::translate($url, $extra), array(
             'html' => '<iframe src="http://www.56.com/iframe/MTI4MDY5MDE1" '.
                 'width="560" height="470" frameborder="0" '.

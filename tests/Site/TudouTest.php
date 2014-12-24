@@ -41,7 +41,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1() {
         $url = parse_url('http://www.tudou.com/programs/view/VJlCrFBCh0s/');
-        $this->assertNotFalse($extra = Tudou::translatable($url));
+        $this->assertNotFalse($extra = Tudou::translatable($url, ''));
         $this->assertEquals(Tudou::translate($url, $extra), array(
             'html' => '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
                 'type=0&code=VJlCrFBCh0s&lcode=&resourceId=0_06_05_99" '.
@@ -55,7 +55,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo2() {
         $url = parse_url('http://www.tudou.com/albumplay/92J2xqpSxWY/PbNLkw0cgtI.html');
-        $this->assertNotFalse($extra = Tudou::translatable($url));
+        $this->assertNotFalse($extra = Tudou::translatable($url, ''));
         $this->assertEquals(Tudou::translate($url, $extra), array(
             'html' => '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
                 'type=2&code=PbNLkw0cgtI&lcode=92J2xqpSxWY&resourceId=0_06_05_99" '.

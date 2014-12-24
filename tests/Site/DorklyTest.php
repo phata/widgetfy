@@ -41,7 +41,7 @@ class DorklyTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.dorkly.com/video/6441/angry-birds-peace-treaty');
-        $this->assertNotFalse($extra = Dorkly::translatable($url));
+        $this->assertNotFalse($extra = Dorkly::translatable($url, ''));
         $this->assertEquals(Dorkly::translate($url, $extra), array(
             'html' => '<iframe src="//www.dorkly.com/e/6441'.
                 '" width="610" height="343" '.

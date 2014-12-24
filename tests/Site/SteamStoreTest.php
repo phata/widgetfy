@@ -41,7 +41,7 @@ class SteamStoreTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://store.steampowered.com/app/252530/');
-        $this->assertNotFalse($extra = SteamStore::translatable($url));
+        $this->assertNotFalse($extra = SteamStore::translatable($url, ''));
         $this->assertEquals(SteamStore::translate($url, $extra), array(
             'html' => '<iframe src="//store.steampowered.com/widget/252530/" '.
                 'width="646" height="190" frameborder="0"></iframe>',

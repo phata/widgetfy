@@ -41,7 +41,7 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://www.metacafe.com/watch/11395429/arma_iii_altis_life_honest_farmers_lan_party/');
-        $this->assertNotFalse($extra = Metacafe::translatable($url));
+        $this->assertNotFalse($extra = Metacafe::translatable($url, ''));
 
         // Note: Metacafe only support HTTP. Not HTTPS
         $this->assertEquals(Metacafe::translate($url, $extra), array(

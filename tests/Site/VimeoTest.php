@@ -41,7 +41,7 @@ class VimeoTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://vimeo.com/97875604');
-        $this->assertNotFalse($extra = Vimeo::translatable($url));
+        $this->assertNotFalse($extra = Vimeo::translatable($url, ''));
         $this->assertEquals(Vimeo::translate($url, $extra), array (
             'html' => '<iframe src="//player.vimeo.com/video/97875604" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
             'width' => 800,

@@ -63,12 +63,15 @@ class Translator {
 
     public static function translate($url) {
         $url_parsed = parse_url($url);
+        if (isset($url_parsed['query'])) {
+            $url_parsed['query'] = htmlspecialchars_decode($url_parsed['query']);
+        }
         foreach (self::$sites as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
                 if (($extra = call_user_func(
                         array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'),
-                        $url_parsed
+                        $url_parsed, $url
                         )) !== FALSE) {
                     // if translatable
                     return call_user_func(

@@ -41,7 +41,7 @@ class XuiteTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $url = parse_url('http://vlog.xuite.net/play/czRuNEo0LTIwOTE5OTkzLmZsdg==');
-        $this->assertNotFalse($extra = Xuite::translatable($url));
+        $this->assertNotFalse($extra = Xuite::translatable($url, ''));
         $this->assertEquals(Xuite::translate($url, $extra), array(
             'html' => '<iframe marginwidth="0" marginheight="0" '.
                 'src="//vlog.xuite.net/embed/czRuNEo0LTIwOTE5OTkzLmZsdg=='.
