@@ -48,7 +48,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
                 'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
                 'width="610" height="343" >'.
                 '<param name="allowfullscreen" value="true" />'.
-                '<param name="movie" quality="best" value="//www.collegehumor.com/'.
+                '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
                 'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>',
             'width' => 610,
             'height' => 343,

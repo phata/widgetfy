@@ -105,7 +105,7 @@ class CollegeHumor implements Common {
                 );
             case 2:
                 return array(
-                    'html' => '<iframe src="//www.collegehumor.com/e/'.$extra['vid'].
+                    'html' => '<iframe src="http://www.collegehumor.com/e/'.$extra['vid'].
                         '" width="'.$width.'" height="'.$height.'" '.
                         'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
                     'width' => $width,
