@@ -53,6 +53,7 @@ class Translator {
         '/^\w+\.collegehumor\.com$/' => 'CollegeHumor',
         '/^vlog\.xuite\.net$/' => 'Xuite',
         '/^www\.dorkly\.com$/' => 'Dorkly',
+        '/^www\.facebook\.com$/' => 'Facebook',
     );
 
     public static function translate($url) {
