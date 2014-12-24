@@ -58,6 +58,7 @@ class Translator {
         '/^store\.steampowered\.com$/' => 'SteamStore',
         '/^\w+\.ku6\.com$/' => 'Ku6',
         '/^\w+\.youku\.com$/' => 'Youku',
+        '/^(\w+\.|)tudou\.com$/' => 'Tudou',
     );
 
     public static function translate($url) {
