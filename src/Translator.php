@@ -54,6 +54,7 @@ class Translator {
         '/^vlog\.xuite\.net$/' => 'Xuite',
         '/^www\.dorkly\.com$/' => 'Dorkly',
         '/^www\.facebook\.com$/' => 'Facebook',
+        '/^www\.56\.com$/' => 'V56',
     );
 
     public static function translate($url) {
