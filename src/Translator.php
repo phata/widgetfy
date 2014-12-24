@@ -51,6 +51,7 @@ class Translator {
         '/^(\w+\.|)nicovideo\.jp$/' => 'NicoNico',
         '/^www\.kickstarter\.com$/' => 'Kickstarter',
         '/^\w+\.collegehumor\.com$/' => 'CollegeHumor',
+        '/^vlog\.xuite\.net$/' => 'Xuite',
     );
 
     public static function translate($url) {
