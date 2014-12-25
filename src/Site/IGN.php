@@ -77,7 +77,7 @@ class IGN implements Common {
                 'scrolling="no" allowfullscreen="" frameborder="0" '.
                 'width="'.$width.'" height="'.$height.'"></iframe>',
 	        'width' => $width,
-	        'height' => $height,
+	        'height' => $height + 8, // add padding
 	    );
 	}
 }

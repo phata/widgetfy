@@ -50,7 +50,7 @@ class IGNTest extends PHPUnit_Framework_TestCase {
 				'scrolling="no" allowfullscreen="" frameborder="0" '.
 				'width="480" height="270"></iframe>',
 			'width' => 480,
-			'height' => 270,
+			'height' => 270 + 8,
 		));
     }
 
