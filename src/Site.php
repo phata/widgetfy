@@ -65,9 +65,6 @@ class Site {
 
     public static function translate($url) {
         $url_parsed = parse_url($url);
-        if (isset($url_parsed['query'])) {
-            $url_parsed['query'] = htmlspecialchars_decode($url_parsed['query']);
-        }
         foreach (self::$sites as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
