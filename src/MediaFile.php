@@ -42,6 +42,7 @@ class MediaFile {
 
     public static $filetypes = array(
         '/\.(ogg|mp4|webm)$/i' => 'HTML5Video',
+        '/\.(wmv|avi|asx|mpg|mpeg)$/i' => 'ClassicVideo',
     );
 
     public static function translate($url) {
