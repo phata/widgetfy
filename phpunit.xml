@@ -3,5 +3,8 @@
     <testsuite name="Sites">
       <directory>tests/Site</directory>
     </testsuite>
+    <testsuite name="MediaFiles">
+      <directory>tests/MediaFile</directory>
+    </testsuite>
   </testsuites>
 </phpunit>
