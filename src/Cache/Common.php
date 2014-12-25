@@ -1,7 +1,7 @@
 <?php
 
 /**
- * interface Widgetarian\Widgetfy\Cache\Common
+ * interface Phata\Widgetfy\Cache\Common
  * 
  * Licence:
  *
@@ -25,17 +25,17 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Cache\Common
+ * This file defines Phata\Widgetfy\Cache\Common
  * which is the common cache definition.
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy\Cache;
+namespace Phata\Widgetfy\Cache;
 
 /**
  * Common cache interface to be used

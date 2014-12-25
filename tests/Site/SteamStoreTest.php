@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\SteamStore
+ * Unit test for Phata\Widgetfy\Site\SteamStore
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\SteamStore
+ * - Phata\Widgetfy\Site\SteamStore
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\SteamStore as SteamStore;
+use Phata\Widgetfy\Site\SteamStore as SteamStore;
 
 class SteamStoreTest extends PHPUnit_Framework_TestCase {
 

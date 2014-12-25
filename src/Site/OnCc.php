@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Site\OnCc
+ * class Phata\Widgetfy\Site\OnCc
  *
  * Licence:
  *
@@ -25,23 +25,23 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Site\Youtube
+ * This file defines Phata\Widgetfy\Site\Youtube
  * which is a site definition that implements
- * Widgetarian\Widgetfy\Site\Common
+ * Phata\Widgetfy\Site\Common
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy\Site;
+namespace Phata\Widgetfy\Site;
 
 class OnCc implements Common {
 
     /**
-     * Implements Widgetarian\Widgetfy\Site\Common::translate
+     * Implements Phata\Widgetfy\Site\Common::translate
      *
      * determine if the URL is translatable
      * by this site adapter
@@ -61,7 +61,7 @@ class OnCc implements Common {
     }
 
     /**
-     * Implements Widgetarian\Widgetfy\Site\Common::translate
+     * Implements Phata\Widgetfy\Site\Common::translate
      *
      * translate the provided URL into
      * HTML embed code of it

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\OnCc
+ * Unit test for Phata\Widgetfy\Site\OnCc
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\OnCc
+ * - Phata\Widgetfy\Site\OnCc
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\OnCc as OnCc;
+use Phata\Widgetfy\Site\OnCc as OnCc;
 
 class OnCcTest extends PHPUnit_Framework_TestCase {
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Cache\FileCache
+ * class Phata\Widgetfy\Cache\FileCache
  * 
  * Licence:
  *
@@ -25,18 +25,18 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Cache\FileCache
+ * This file defines Phata\Widgetfy\Cache\FileCache
  * which is the default implementation of
- * Widgetarian\Widgetfy\Cache\Common
+ * Phata\Widgetfy\Cache\Common
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy\Cache;
+namespace Phata\Widgetfy\Cache;
 
 class FileCache implements Common {
 

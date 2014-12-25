@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\Dailymotion
+ * Unit test for Phata\Widgetfy\Site\Dailymotion
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\Dailymotion
+ * - Phata\Widgetfy\Site\Dailymotion
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\Dailymotion as Dailymotion;
+use Phata\Widgetfy\Site\Dailymotion as Dailymotion;
 
 class DailymotionTest extends PHPUnit_Framework_TestCase {
 

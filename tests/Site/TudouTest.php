@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\Tudou
+ * Unit test for Phata\Widgetfy\Site\Tudou
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\Tudou
+ * - Phata\Widgetfy\Site\Tudou
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\Tudou as Tudou;
+use Phata\Widgetfy\Site\Tudou as Tudou;
 
 class TudouTest extends PHPUnit_Framework_TestCase {
 

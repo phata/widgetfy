@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\MySpace
+ * Unit test for Phata\Widgetfy\Site\MySpace
  * 
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\MySpace
+ * - Phata\Widgetfy\Site\MySpace
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\MySpace as MySpace;
+use Phata\Widgetfy\Site\MySpace as MySpace;
 
 class MySpaceTest extends PHPUnit_Framework_TestCase {
 

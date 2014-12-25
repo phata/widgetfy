@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\CollegeHumor
+ * Unit test for Phata\Widgetfy\Site\CollegeHumor
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\CollegeHumor
+ * - Phata\Widgetfy\Site\CollegeHumor
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\CollegeHumor as CollegeHumor;
+use Phata\Widgetfy\Site\CollegeHumor as CollegeHumor;
 
 class CollegeHumorTest extends PHPUnit_Framework_TestCase {
 

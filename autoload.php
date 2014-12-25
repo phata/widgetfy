@@ -33,13 +33,13 @@
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetify
+ * @link      http://github.com/Phata/Widgetify
  */
 
 spl_autoload_register(function ($class) {
 
     // project-specific namespace prefix
-    $prefix = 'Widgetarian\\Widgetfy';
+    $prefix = 'Phata\\Widgetfy';
 
     // base directory for the namespace prefix
     $base_dir = __DIR__ . '/src/';

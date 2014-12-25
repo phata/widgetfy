@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Site
+ * class Phata\Widgetfy\Site
  * 
  * Licence:
  *
@@ -25,7 +25,7 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Site
+ * This file defines Phata\Widgetfy\Site
  * which is the main interface to translate url into
  * widget embed code.
  *
@@ -33,10 +33,10 @@
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy;
+namespace Phata\Widgetfy;
 
 class Site {
 
@@ -72,12 +72,12 @@ class Site {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
                 if (($extra = call_user_func(
-                        array('Widgetarian\Widgetfy\Site\\'.$class, 'translatable'),
+                        array('Phata\Widgetfy\Site\\'.$class, 'translatable'),
                         $url_parsed, $url
                         )) !== FALSE) {
                     // if translatable
                     return call_user_func(
-                        array('Widgetarian\Widgetfy\Site\\'.$class, 'translate'),
+                        array('Phata\Widgetfy\Site\\'.$class, 'translate'),
                         $url_parsed, $extra
                     );
                 }

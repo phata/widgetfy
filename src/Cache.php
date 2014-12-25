@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Widgetarian\Widgetfy\Cache
+ * class Phata\Widgetfy\Cache
  * 
  * Licence:
  *
@@ -25,7 +25,7 @@
  *
  * Description:
  *
- * This file defines Widgetarian\Widgetfy\Cache
+ * This file defines Phata\Widgetfy\Cache
  * which is a Proxy to Cache implementation
  *
  *
@@ -33,13 +33,13 @@
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Widgetarian\Widgetfy;
+namespace Phata\Widgetfy;
 
 // use FileCache as default
-use Widgetarian\Widgetfy\Cache\FileCache as DefaultCache;
+use Phata\Widgetfy\Cache\FileCache as DefaultCache;
 
 class Cache {
 
@@ -52,11 +52,11 @@ class Cache {
     }
 
     /**
-     * @param object $handler cache hander that implements Widgetarian\Widgetfy\Cache\Common
+     * @param object $handler cache hander that implements Phata\Widgetfy\Cache\Common
      */
     public static function setHandler($handler) {
-        if (!is_subclass_of(self::$handler, 'Widgetarian\Widgetfy\Cache\Common')) {
-            throw new Exception('Cache handler must implement the Widgetarian\Widgetfy\Cache\Common interface');
+        if (!is_subclass_of(self::$handler, 'Phata\Widgetfy\Cache\Common')) {
+            throw new Exception('Cache handler must implement the Phata\Widgetfy\Cache\Common interface');
         }
         self::$handler = $handler;
     }

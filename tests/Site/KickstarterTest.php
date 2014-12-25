@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\Kickstarter
+ * Unit test for Phata\Widgetfy\Site\Kickstarter
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\Kickstarter
+ * - Phata\Widgetfy\Site\Kickstarter
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\Kickstarter as Kickstarter;
+use Phata\Widgetfy\Site\Kickstarter as Kickstarter;
 
 class KickstarterTest extends PHPUnit_Framework_TestCase {
 

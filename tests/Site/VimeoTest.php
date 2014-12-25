@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\Vimeo
+ * Unit test for Phata\Widgetfy\Site\Vimeo
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\Vimeo
+ * - Phata\Widgetfy\Site\Vimeo
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\Vimeo as Vimeo;
+use Phata\Widgetfy\Site\Vimeo as Vimeo;
 
 class VimeoTest extends PHPUnit_Framework_TestCase {
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Widgetarian\Widgetfy\Site\NicoNico
+ * Unit test for Phata\Widgetfy\Site\NicoNico
  *
  * Licence:
  *
@@ -26,16 +26,16 @@
  * Description:
  *
  * This file is a unit test for
- * - Widgetarian\Widgetfy\Site\NicoNico
+ * - Phata\Widgetfy\Site\NicoNico
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
  * @copyright 2014 Koala Yeung
  * @licence   http://www.gnu.org/licenses/lgpl.html
- * @link      http://github.com/Widgetarian/Widgetfy
+ * @link      http://github.com/Phata/Widgetfy
  */
 
-use Widgetarian\Widgetfy\Site\NicoNico as NicoNico;
+use Phata\Widgetfy\Site\NicoNico as NicoNico;
 
 class NicoNicoTest extends PHPUnit_Framework_TestCase {
 
