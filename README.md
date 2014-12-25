@@ -4,6 +4,21 @@ Widgetfy
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
 
+
+Example Code
+------------
+
+    <?php
+
+    require 'PATH/TO/Widgetfy/autoload.php';
+    if (($embed = Phata\Widgetfy\Site::translate($link)) != NULL) {
+        $code = $embed['html'];
+        // display the embed code the way you like
+    }
+
+    ?>
+
+
 Licence
 -----------
 This file is part of Widgetfy.
