@@ -1,5 +1,8 @@
 <phpunit bootstrap="./autoload.php">
   <testsuites>
+    <testsuite name="Utilities">
+      <directory>tests/Utils</directory>
+    </testsuite>
     <testsuite name="Sites">
       <directory>tests/Site</directory>
     </testsuite>
