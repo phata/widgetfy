@@ -63,20 +63,25 @@ class Site {
         '/^www\.ign\.com$/' => 'IGN',
     );
 
-    public static function translate($url) {
+    public static function translate($url, $options=array()) {
         $url_parsed = parse_url($url);
         foreach (self::$sites as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
-                if (($info = call_user_func(
-                        array('Phata\Widgetfy\Site\\'.$class, 'preprocess'),
-                        $url_parsed
-                        )) !== FALSE) {
-                    // if preprocess
-                    return call_user_func(
-                        array('Phata\Widgetfy\Site\\'.$class, 'translate'),
-                        $info
-                    );
+
+                // callbacks
+                $cb_preprocess = array(
+                    'Phata\Widgetfy\Site\\'.$class, 'preprocess');
+                $cb_translate  = array(
+                    'Phata\Widgetfy\Site\\'.$class, 'translate');
+
+                // preprocess
+                $info = call_user_func(
+                        $cb_preprocess, $url_parsed, $options);
+
+                // if translatable
+                if ($info !== FALSE) {
+                    return call_user_func($cb_translate, $info);
                 }
             }
         }

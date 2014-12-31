@@ -40,26 +40,31 @@ namespace Phata\Widgetfy;
 
 class MediaFile {
 
-    public static $filetypes = array(
+    public static $paths = array(
         '/\.(ogg|mp4|webm)$/i' => 'HTML5Video',
         '/\.(wmv|avi|asx|mpg|mpeg)$/i' => 'ClassicVideo',
         '/\.(rm|rmvb)$/i' => 'RealMediaVideo',
     );
 
-    public static function translate($url) {
+    public static function translate($url, $options=array()) {
         $url_parsed = parse_url($url);
-        foreach (self::$filetypes as $regex => $class) {
-            // if host matches
+        foreach (self::$paths as $regex => $class) {
+            // if path matches
             if (preg_match($regex, $url_parsed['path'])) {
-                if (($info = call_user_func(
-                        array('Phata\Widgetfy\MediaFile\\'.$class, 'preprocess'),
-                        $url_parsed
-                        )) !== FALSE) {
-                    // if preprocess
-                    return call_user_func(
-                        array('Phata\Widgetfy\MediaFile\\'.$class, 'translate'),
-                        $info
-                    );
+
+                // callbacks
+                $cb_preprocess = array(
+                    'Phata\Widgetfy\MediaFile\\'.$class, 'preprocess');
+                $cb_translate  = array(
+                    'Phata\Widgetfy\MediaFile\\'.$class, 'translate');
+
+                // preprocess
+                $info = call_user_func(
+                        $cb_preprocess, $url_parsed, $options);
+
+                // if translatable
+                if ($info !== FALSE) {
+                    return call_user_func($cb_translate, $info);
                 }
             }
         }
