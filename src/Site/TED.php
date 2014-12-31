@@ -50,7 +50,12 @@ class TED implements Common {
      * @return boolean whether the url is translatable
      */
     public static function translatable($url_parsed, $url) {
-    	return preg_match('/^\/talks\/(.+?)$/', $url_parsed['path']) == 1;
+        if (preg_match('/^\/talks\/(.+?)(|\.html)$/', $url_parsed['path'], $matches) == 1) {
+            return array(
+                'id' => $matches[1],
+            );
+        }
+        return FALSE;
     }
 
     /**
@@ -63,16 +68,15 @@ class TED implements Common {
      * @return mixed either embed string or NULL if not applicable
      */
     public static function translate($url_parsed, $extra) {
-    	preg_match('/^\/talks\/(.+?)$/', $url_parsed['path'], $matches);
-    	$vid = $matches[1];
-    	$width = 640; $height = 360;
-		return array(
-			'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-	            'src="//embed.ted.com/talks/'.$vid.'.html" '.
-	            'frameborder="0" scrolling="no" '.
-	            'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-	        'width' => $width,
-	        'height' => $height,
-	    );
-	}
+        $vid = $extra['id'];
+        $width = 640; $height = 360;
+        return array(
+            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+                'src="//embed.ted.com/talks/'.$vid.'.html" '.
+                'frameborder="0" scrolling="no" '.
+                'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
+            'width' => $width,
+            'height' => $height,
+        );
+    }
 }
