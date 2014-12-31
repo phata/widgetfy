@@ -42,7 +42,7 @@ class V56Test extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://www.56.com/u74/v_MTI4MDY5MDE1.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = V56::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = V56::translatable($url_parsed));
 
         // test returning embed code
         $embed = V56::translate($extra);

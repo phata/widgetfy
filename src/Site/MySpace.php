@@ -46,10 +46,9 @@ class MySpace implements Common {
      * determine if the URL is translatable
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @param string $url full url
      * @return mixed array of extra info if translatable; boolean FALSE if not
      */
-    public static function translatable($url_parsed, $url) {
+    public static function translatable($url_parsed) {
         if (preg_match('/^\/(\w+)\/video\/(.+?)\/(\d+)$/',
                 $url_parsed['path'], $matches) == 1) {
             return array(

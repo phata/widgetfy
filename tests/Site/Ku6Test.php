@@ -42,7 +42,7 @@ class Ku6Test extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://v.ku6.com/show/PbIRDjlz7Q18Iikf.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Ku6::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Ku6::translatable($url_parsed));
 
         // test returning embed code
         $embed = Ku6::translate($extra);

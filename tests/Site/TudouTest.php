@@ -42,7 +42,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo1() {
         $url = 'http://www.tudou.com/programs/view/VJlCrFBCh0s/';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Tudou::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Tudou::translatable($url_parsed));
 
         // test returning embed code
         $embed = Tudou::translate($extra);
@@ -58,7 +58,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo2() {
         $url = 'http://www.tudou.com/albumplay/92J2xqpSxWY/PbNLkw0cgtI.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Tudou::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Tudou::translatable($url_parsed));
 
         // test returning embed code
         $embed = Tudou::translate($extra);

@@ -42,7 +42,7 @@ class VimeoTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://vimeo.com/97875604';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Vimeo::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Vimeo::translatable($url_parsed));
 
         // test returning embed code
         $embed = Vimeo::translate($extra);

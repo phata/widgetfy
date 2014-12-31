@@ -42,7 +42,7 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://www.metacafe.com/watch/11395429/arma_iii_altis_life_honest_farmers_lan_party/';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Metacafe::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Metacafe::translatable($url_parsed));
 
         // test returning embed code
         $embed = Metacafe::translate($extra);

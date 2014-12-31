@@ -46,10 +46,9 @@ class TED implements Common {
      * determine if the URL is translatable
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @param string $url full url
      * @return boolean whether the url is translatable
      */
-    public static function translatable($url_parsed, $url) {
+    public static function translatable($url_parsed) {
         if (preg_match('/^\/talks\/(lang\/\w+\/|)(.+?)(|\.html)$/', $url_parsed['path'], $matches) == 1) {
             return array(
                 'id' => $matches[2],

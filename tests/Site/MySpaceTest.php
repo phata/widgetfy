@@ -42,7 +42,7 @@ class MySpaceTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'https://myspace.com/themahoganysessions/video/fink-this-is-the-thing-mahogany-session/109566653';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = MySpace::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = MySpace::translatable($url_parsed));
 
         // test returning embed code
         $embed = MySpace::translate($extra);

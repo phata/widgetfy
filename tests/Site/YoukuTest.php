@@ -42,7 +42,7 @@ class YoukuTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url ='http://v.youku.com/v_show/id_XMjMxOTQzOTI=.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youku::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Youku::translatable($url_parsed));
 
         // test returning embed code
         $embed = Youku::translate($extra);

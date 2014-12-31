@@ -60,7 +60,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo1b() {
         $url = 'http://www.collegehumor.com/video:1817806';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed));
 
         // test returning embed code
         $embed = CollegeHumor::translate($extra);
@@ -78,7 +78,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo2() {
         $url = 'http://www.collegehumor.com/video/6926235/batman-and-superman-team-up';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed));
 
         // test returning embed code
         $embed = CollegeHumor::translate($extra);

@@ -43,7 +43,7 @@ class IGNTest extends PHPUnit_Framework_TestCase {
         $url = 'http://www.ign.com/videos/2011/05/19/'.
             'call-of-duty-black-ops-kills-commentary-jungle-not-camping-monitoring?objectid=14349501';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = IGN::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = IGN::translatable($url_parsed));
 
         // test returning embed code
         $embed = IGN::translate($extra);

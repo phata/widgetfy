@@ -42,7 +42,7 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://tv.on.cc/hk/index.html?s=201&i=OCM141221-13212-201M&d=1419092839';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = OnCc::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = OnCc::translatable($url_parsed));
 
         // test returning embed code
         $embed = OnCc::translate($extra);

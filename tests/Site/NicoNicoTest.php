@@ -42,7 +42,7 @@ class NicoNicoTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://www.nicovideo.jp/watch/sm4772361';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = NicoNico::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = NicoNico::translatable($url_parsed));
 
         // test returning embed code
         $embed = NicoNico::translate($extra);

@@ -43,7 +43,7 @@ class KickstarterTest extends PHPUnit_Framework_TestCase {
         $name = 'trammel/the-official-settlers-of-catan-gaming-board';
         $url = 'http://www.kickstarter.com/projects/'.$name;
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Kickstarter::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Kickstarter::translatable($url_parsed));
 
         // test returning embed code
         $embed = Kickstarter::translate($extra);

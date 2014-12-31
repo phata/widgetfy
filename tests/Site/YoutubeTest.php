@@ -42,7 +42,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoRoot() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
 
         // test returning embed code
         $embed = Youtube::translate($extra);
@@ -55,7 +55,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'https://www.youtube.com/watch?v=PBLuP2JZcEg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
 
         // test returning embed code
         $embed = Youtube::translate($extra);
@@ -68,7 +68,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslatePlayList() {
         $url = 'https://www.youtube.com/playlist?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
 
         // test returning embed code
         $embed = Youtube::translate($extra);

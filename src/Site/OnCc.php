@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\URL as URL;
+
 class OnCc implements Common {
 
     /**
@@ -48,7 +50,8 @@ class OnCc implements Common {
      * @param string[] $url_parsed result of parse_url($url)
      * @return boolean whether the url is translatable
      */
-    public static function translatable($url_parsed, $url='') {
+    public static function translatable($url_parsed) {
+        $url = URL::build($url_parsed);
         if (preg_match('/^[\w\/]*\/index.html$/', $url_parsed['path']) == 1) {
             parse_str($url_parsed['query'], $args);
             if (isset($args['s']) && isset($args['i'])) {

@@ -42,7 +42,7 @@ class XuiteTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://vlog.xuite.net/play/czRuNEo0LTIwOTE5OTkzLmZsdg==';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Xuite::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Xuite::translatable($url_parsed));
 
         // test returning embed code
         $embed = Xuite::translate($extra);

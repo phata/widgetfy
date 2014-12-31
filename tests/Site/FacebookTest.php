@@ -42,7 +42,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo1() {
         $url = 'https://www.facebook.com/video.php?v=10152802584496147';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Facebook::translatable($url_parsed));
 
         // test returning embed code
         $embed = Facebook::translate($extra);
@@ -62,7 +62,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo2() {
         $url = 'https://www.facebook.com/#!/video.php?v=10152802584496147';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
+        $this->assertNotFalse($extra = Facebook::translatable($url_parsed));
 
         // test returning embed code
         $embed = Facebook::translate($extra);
