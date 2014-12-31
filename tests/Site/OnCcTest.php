@@ -45,7 +45,7 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = OnCc::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = OnCc::translate($url_parsed, $extra);
+        $embed = OnCc::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="'.$url.'" '.
             'allowtransparency="true" allowfullscreen="true" '.

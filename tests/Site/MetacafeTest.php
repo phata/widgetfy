@@ -45,7 +45,7 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Metacafe::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Metacafe::translate($url_parsed, $extra);
+        $embed = Metacafe::translate($extra);
 
         // Note: Metacafe only support HTTP. Not HTTPS
         $this->assertEquals($embed['html'],

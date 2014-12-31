@@ -45,7 +45,7 @@ class DorklyTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Dorkly::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Dorkly::translate($url_parsed, $extra);
+        $embed = Dorkly::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="//www.dorkly.com/e/6441" '.
             'width="610" height="343" '.

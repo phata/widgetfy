@@ -45,7 +45,7 @@ class YoukuTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Youku::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Youku::translate($url_parsed, $extra);
+        $embed = Youku::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="510" height="498" '.
             'src="http://player.youku.com/embed/XMjMxOTQzOTI=" '.

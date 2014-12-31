@@ -46,7 +46,7 @@ class KickstarterTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Kickstarter::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Kickstarter::translate($url_parsed, $extra);
+        $embed = Kickstarter::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="480" '.
             'src="//www.kickstarter.com/projects/'.$name.'/widget/video.html" '.

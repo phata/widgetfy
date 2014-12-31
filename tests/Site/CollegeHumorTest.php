@@ -45,7 +45,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, ''));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $embed = CollegeHumor::translate($extra);
         $this->assertEquals($embed['html'],
             '<object type="application/x-shockwave-flash" '.
             'data="http://www.collegehumor.com/moogaloop/'.
@@ -63,7 +63,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $embed = CollegeHumor::translate($extra);
         $this->assertEquals($embed['html'],
             '<object type="application/x-shockwave-flash" '.
             'data="http://www.collegehumor.com/moogaloop/'.
@@ -81,7 +81,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $embed = CollegeHumor::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.collegehumor.com/e/6926235'.
             '" width="610" height="343" '.

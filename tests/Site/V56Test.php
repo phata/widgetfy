@@ -45,7 +45,7 @@ class V56Test extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = V56::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = V56::translate($url_parsed, $extra);
+        $embed = V56::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.56.com/iframe/MTI4MDY5MDE1" '.
             'width="560" height="470" frameborder="0" '.

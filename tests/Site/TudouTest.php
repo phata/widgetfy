@@ -45,7 +45,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Tudou::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Tudou::translate($url_parsed, $extra);
+        $embed = Tudou::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=0&code=VJlCrFBCh0s&lcode=&resourceId=0_06_05_99" '.
@@ -61,7 +61,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Tudou::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Tudou::translate($url_parsed, $extra);
+        $embed = Tudou::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=2&code=PbNLkw0cgtI&lcode=92J2xqpSxWY&resourceId=0_06_05_99" '.

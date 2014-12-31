@@ -45,7 +45,7 @@ class LiveLeakTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = LiveLeak::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = LiveLeak::translate($url_parsed, $extra);
+        $embed = LiveLeak::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="http://www.liveleak.com/ll_embed?f=8ed_1220480664" '.

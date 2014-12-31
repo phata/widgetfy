@@ -45,7 +45,7 @@ class MySpaceTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = MySpace::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = MySpace::translate($url_parsed, $extra);
+        $embed = MySpace::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="480" height="270" '.
             'src="//media.myspace.com/play/video/fink-this-is-the-thing-mahogany-session-109566653" '.

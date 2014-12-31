@@ -45,7 +45,7 @@ class SteamStoreTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = SteamStore::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = SteamStore::translate($url_parsed, $extra);
+        $embed = SteamStore::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe src="//store.steampowered.com/widget/252530/" '.
             'width="646" height="190" frameborder="0"></iframe>'

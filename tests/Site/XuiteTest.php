@@ -45,7 +45,7 @@ class XuiteTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Xuite::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Xuite::translate($url_parsed, $extra);
+        $embed = Xuite::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe marginwidth="0" marginheight="0" '.
             'src="//vlog.xuite.net/embed/czRuNEo0LTIwOTE5OTkzLmZsdg=='.

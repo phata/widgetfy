@@ -45,7 +45,7 @@ class TEDTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = TED::translate($url_parsed, $extra);
+        $embed = TED::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
@@ -60,7 +60,7 @@ class TEDTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = TED::translate($url_parsed, $extra);
+        $embed = TED::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
@@ -76,7 +76,7 @@ class TEDTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = TED::translate($url_parsed, $extra);
+        $embed = TED::translate($extra);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.

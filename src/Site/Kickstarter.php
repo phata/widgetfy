@@ -63,11 +63,10 @@ class Kickstarter implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param string[] $url_parsed result of parse_url($url)
      * @param mixed[] $extra array of extra url information
      * @return mixed either embed string or NULL if not applicable
      */
-    public static function translate($url_parsed, $extra) {
+    public static function translate($extra) {
         $width1 = 640; $width2 = 220; $height = 480;
 
         // Note: Kickstarter supports HTTP only. No HTTPS.

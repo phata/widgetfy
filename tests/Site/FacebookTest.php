@@ -45,7 +45,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Facebook::translate($url_parsed, $extra);
+        $embed = Facebook::translate($extra);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -65,7 +65,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
 
         // test returning embed code
-        $embed = Facebook::translate($url_parsed, $extra);
+        $embed = Facebook::translate($extra);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.

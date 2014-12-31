@@ -63,11 +63,10 @@ class TED implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param string[] $url_parsed result of parse_url($url)
      * @param mixed[] $extra array of extra url information
      * @return mixed either embed string or NULL if not applicable
      */
-    public static function translate($url_parsed, $extra) {
+    public static function translate($extra) {
         $width = 640; $height = 360;
         return array(
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
