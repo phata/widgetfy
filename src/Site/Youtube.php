@@ -52,9 +52,25 @@ class Youtube implements Common {
      * @return boolean whether the url is translatable
      */
     public static function translatable($url_parsed, $url) {
-        if (preg_match('/^\/watch$/', $url_parsed['path'])) return TRUE;
-        if (preg_match('/^\/view_play_list$/', $url_parsed['path'])) return TRUE;
-        if (preg_match('/^\/playlist$/', $url_parsed['path'])) return TRUE;
+        if (preg_match('/^\/watch$/', $url_parsed['path'])) {
+            $params = self::parseParams($url_parsed);
+            if ($params == FALSE) return FALSE;
+            if (!isset($params['vid']) || ($params['vid'] == FALSE)) return FALSE;
+            return array(
+                'path_type' => 'video',
+                'params' => &$params,
+            );
+        } elseif ((preg_match('/^\/view_play_list$/', $url_parsed['path'])) ||
+            (preg_match('/^\/playlist$/', $url_parsed['path']))) {
+            parse_str($url_parsed["query"], $query);
+            $location = preg_replace('/([a-z]+?)\.youtube\.com/', '$1', strtolower($url_parsed["host"]));
+            return array(
+                'path' => $url_parsed['path'],
+                'path_type' => 'playlist',
+                'query' => &$query,
+                'location' => $location,
+            );
+        }
         return FALSE;
     }
 
@@ -69,17 +85,13 @@ class Youtube implements Common {
      */
     public static function translate($url_parsed, $extra) {
 
-        if (preg_match('/^\/watch$/', $url_parsed['path'])) {
+        if ($extra['path_type'] == 'video') {
 
             $width = 576; $height = 354; // temp default
 
-            if (($params = self::parseParams($url_parsed)) != FALSE) {
-                $vid           = $params['vid'];
-                $url_seperator = $params['url_seperator'];
-                $location      = $params['location'];
-                $string        = $params['string'];
-                $query_params  = array();
-            }
+            $params       = &$extra['params'];
+            $query_params = array();
+            $query_str    = '';
 
             // calculating start time with "t" parameter
             if (!empty($params["t"])) {
@@ -87,62 +99,54 @@ class Youtube implements Common {
                 if ($start != 0) $query_params['start'] = $start;
             }
 
+            // build query string
+            if (!empty($query_params)) {
+                $query_str = '?' . http_build_query($query_params);
+            }
+
             // if vid exists in the link, and
             // the video can be embeded
-            if (($vid !== FALSE) && self::canEmbed($vid)) {
-
-                // default query string and video dimension
-                $query_str = http_build_query($query_params);
-                if (!empty($query_str)) $query_str = '?'.$query_str;
-
-
+            if (self::canEmbed($params['vid'])) {
                 return array(
                     'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-                        'src="//www.youtube.com/embed/'.$vid.$query_str.'" '.
+                        'src="//www.youtube.com/embed/'.
+                        $params['vid'].$query_str.'" '.
                         'frameborder="0" allowfullscreen></iframe>',
                     'width' => $width,
                     'height' => $height,
                 );
-
             } else {
-
                 $width = 576; $height = 432; // temp default
-
                 return array(
                     'html' => '<a target="_blank" '.
-                        'href="http://www.youtube.com/watch?v='.$vid.'">'.
-                        '<img src="//img.youtube.com/vi/'.$vid.'/0.jpg" '.
+                        'href="http://www.youtube.com/watch?v='.$params['vid'].'">'.
+                        '<img src="//img.youtube.com/vi/'.$params['vid'].'/0.jpg" '.
                         'style="width: '.$width.'px"/></a>',
                     'width' => $width,
                     'height' => $height,
                 );
             }
 
-        } elseif ((preg_match('/^\/view_play_list$/', $url_parsed["path"])) or
-                (preg_match('/^\/playlist$/', $url_parsed["path"]))) {
-
-            parse_str($url_parsed["query"], $args);
+        } elseif ($extra['path_type'] == 'playlist') {
+            $args = &$extra['query'];
             $width = 640; $height = 360; // temp default
-            $query_str="&version=3&fs=1";
-
-            if (isset($args["loop"])) $query_str.=sprintf("&loop=%d", $args["loop"]);
-            $location = preg_replace('/([a-z]+?)\.youtube\.com/', '$1', strtolower($url_parsed["host"]));
+            $location = $extra['location'];
 
             if (isset($args['p'])) {
                 $lid = $args['p'];
-                $string = '//'.$location.'.youtube.com'.$url_parsed['path'].'?p='.$lid;
+                $string = '//'.$location.'.youtube.com'.$extra['path'].'?p='.$lid;
             } elseif (isset($args['list']) and preg_match('/^PL/', $args['list'])) {
                 $lid = $args['list'];
-                $string = '//'.$location.'.youtube.com'.$url_parsed['path'].'?list='.$args['list'];
+                $string = '//'.$location.'.youtube.com'.$extra['path'].'?list='.$args['list'];
             }
 
             return array(
-                    'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-                        'src="https://www.youtube.com/embed/videoseries?list='.$lid.'" '.
-                        'frameborder="0" allowfullscreen></iframe>',
-                    'width' => $width,
-                    'height' => $height,
-                );
+                'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+                    'src="https://www.youtube.com/embed/videoseries?list='.$lid.'" '.
+                    'frameborder="0" allowfullscreen></iframe>',
+                'width' => $width,
+                'height' => $height,
+            );
 
         }
         return NULL;

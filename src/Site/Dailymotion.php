@@ -40,8 +40,6 @@ namespace Phata\Widgetfy\Site;
 
 class Dailymotion implements Common {
 
-    private static $regex = '/^\/video\/([^_]+)_(.+?)$/';
-
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
@@ -52,7 +50,12 @@ class Dailymotion implements Common {
      * @return boolean whether the url is translatable
      */
     public static function translatable($url_parsed, $url) {
-    	return preg_match(self::$regex, $url_parsed['path']) == 1;
+        if (preg_match('/^\/video\/([^_]+)_(.+?)$/', $url_parsed['path'], $matches) == 1) {
+            return array(
+                'id' => $matches[1],
+            );
+        }
+        return FALSE;
     }
 
     /**
@@ -65,17 +68,16 @@ class Dailymotion implements Common {
      * @return mixed either embed string or NULL if not applicable
      */
     public static function translate($url_parsed, $extra) {
-        preg_match(self::$regex, $url_parsed['path'], $matches);
-    	$width = 560; $height = 315;
+        $width = 560; $height = 315;
 
         // Note: Dailymotion supports HTTP only. No HTTPS.
-		return array(
+        return array(
             'html' => '<iframe frameborder="0" '.
                 'width="'.$width.'" height="'.$height.'" '.
-                'src="//www.dailymotion.com/embed/video/'.$matches[1].'" '.
+                'src="//www.dailymotion.com/embed/video/'.$extra['id'].'" '.
                 'allowfullscreen></iframe>',
             'width' => $width,
-	        'height' => $height,
-	    );
-	}
+            'height' => $height,
+        );
+    }
 }

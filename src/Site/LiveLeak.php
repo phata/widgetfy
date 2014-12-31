@@ -40,8 +40,6 @@ namespace Phata\Widgetfy\Site;
 
 class LiveLeak implements Common {
 
-    private static $regex = '/^\/view$/';
-
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
@@ -52,7 +50,13 @@ class LiveLeak implements Common {
      * @return boolean whether the url is translatable
      */
     public static function translatable($url_parsed, $url) {
-    	return preg_match(self::$regex, $url_parsed['path']) == 1;
+        if (preg_match('/^\/view$/', $url_parsed['path']) == 1) {
+            parse_str($url_parsed['query'], $args);
+            return array(
+                'id' => $args['i'],
+            );
+        }
+        return FALSE;
     }
 
     /**
@@ -65,17 +69,15 @@ class LiveLeak implements Common {
      * @return mixed either embed string or NULL if not applicable
      */
     public static function translate($url_parsed, $extra) {
-
-        parse_str($url_parsed['query'], $args);
-    	$width = 640; $height = 360;
+        $width = 640; $height = 360;
 
         // Note: LiveLeak supports HTTP only. No HTTPS.
-		return array(
+        return array(
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-                'src="http://www.liveleak.com/ll_embed?f='.$args['i'].'" '.
+                'src="http://www.liveleak.com/ll_embed?f='.$extra['id'].'" '.
                 'frameborder="0" allowfullscreen></iframe>',
             'width' => $width,
-	        'height' => $height,
-	    );
-	}
+            'height' => $height,
+        );
+    }
 }

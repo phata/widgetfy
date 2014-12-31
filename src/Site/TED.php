@@ -68,11 +68,10 @@ class TED implements Common {
      * @return mixed either embed string or NULL if not applicable
      */
     public static function translate($url_parsed, $extra) {
-        $vid = $extra['id'];
         $width = 640; $height = 360;
         return array(
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-                'src="//embed.ted.com/talks/'.$vid.'.html" '.
+                'src="//embed.ted.com/talks/'.$extra['id'].'.html" '.
                 'frameborder="0" scrolling="no" '.
                 'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
             'width' => $width,

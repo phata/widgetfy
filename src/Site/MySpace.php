@@ -40,8 +40,6 @@ namespace Phata\Widgetfy\Site;
 
 class MySpace implements Common {
 
-    private static $regex = '/^\/(\w+)\/video\/(.+?)\/(\d+)$/';
-
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
@@ -52,7 +50,14 @@ class MySpace implements Common {
      * @return mixed array of extra info if translatable; boolean FALSE if not
      */
     public static function translatable($url_parsed, $url) {
-    	return preg_match(self::$regex, $url_parsed['path']) == 1;
+        if (preg_match('/^\/(\w+)\/video\/(.+?)\/(\d+)$/',
+                $url_parsed['path'], $matches) == 1) {
+            return array(
+                'vname' => $matches[2],
+                'vid' => $matches[3],
+            );
+        }
+        return FALSE;
     }
 
     /**
@@ -65,20 +70,16 @@ class MySpace implements Common {
      * @return mixed either embed string or NULL if not applicable
      */
     public static function translate($url_parsed, $extra) {
-    	preg_match(self::$regex, $url_parsed['path'], $matches);
+        $width = 480; $height = 270;
 
-        $vname = $matches[2];
-        $vid = $matches[3];
-    	$width = 480; $height = 270;
-
-		return array(
-			'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+        return array(
+            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="//media.myspace.com/play/video/'.
-                $vname.'-'.$vid.'" '.
+                $extra['vname'].'-'.$extra['vid'].'" '.
                 'frameborder="0" allowtransparency="true" '.
                 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
             'width' => $width,
-	        'height' => $height,
-	    );
-	}
+            'height' => $height,
+        );
+    }
 }
