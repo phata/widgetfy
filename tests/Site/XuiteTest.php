@@ -40,15 +40,17 @@ use Phata\Widgetfy\Site\Xuite as Xuite;
 class XuiteTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
-        $url = parse_url('http://vlog.xuite.net/play/czRuNEo0LTIwOTE5OTkzLmZsdg==');
-        $this->assertNotFalse($extra = Xuite::translatable($url, ''));
-        $this->assertEquals(Xuite::translate($url, $extra), array(
-            'html' => '<iframe marginwidth="0" marginheight="0" '.
-                'src="//vlog.xuite.net/embed/czRuNEo0LTIwOTE5OTkzLmZsdg=='.
-                '?ar=0&as=0" width="640" height="360" scrolling="no" frameborder="0"></iframe>',
-            'width' => 640,
-            'height' => 360,
-        ));
+        $url = 'http://vlog.xuite.net/play/czRuNEo0LTIwOTE5OTkzLmZsdg==';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Xuite::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Xuite::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe marginwidth="0" marginheight="0" '.
+            'src="//vlog.xuite.net/embed/czRuNEo0LTIwOTE5OTkzLmZsdg=='.
+            '?ar=0&as=0" width="640" height="360" scrolling="no" frameborder="0"></iframe>'
+        );
     }
 
 }

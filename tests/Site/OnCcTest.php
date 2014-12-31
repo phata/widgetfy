@@ -43,14 +43,15 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
         $url = 'http://tv.on.cc/hk/index.html?s=201&i=OCM141221-13212-201M&d=1419092839';
         $url_parsed = parse_url($url);
         $this->assertNotFalse($extra = OnCc::translatable($url_parsed, $url));
-        $this->assertEquals(OnCc::translate($url_parsed, $extra), array(
-            'html' => '<iframe src="'.$url.'" '.
-                'allowtransparency="true" allowfullscreen="true" '.
-                'scrolling="no" border="0" frameborder="0" '.
-                'width="680" height="383" ></iframe>',
-            'width' => 680,
-            'height' => 383,
-        ));
+
+        // test returning embed code
+        $embed = OnCc::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe src="'.$url.'" '.
+            'allowtransparency="true" allowfullscreen="true" '.
+            'scrolling="no" border="0" frameborder="0" '.
+            'width="680" height="383" ></iframe>'
+        );
     }
 
 }

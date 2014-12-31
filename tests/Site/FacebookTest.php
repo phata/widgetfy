@@ -40,39 +40,43 @@ use Phata\Widgetfy\Site\Facebook as Facebook;
 class FacebookTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1() {
-        $url = parse_url('https://www.facebook.com/video.php?v=10152802584496147');
-        $this->assertNotFalse($extra = Facebook::translatable($url, ''));
-        $this->assertEquals(Facebook::translate($url, $extra), array(
-            'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-                'var js, fjs = d.getElementsByTagName(s)[0]; '.
-                'if (d.getElementById(id)) return; js = d.createElement(s); '.
-                'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-                'fjs.parentNode.insertBefore(js, fjs); }'.
-                '(document, \'script\', \'facebook-jssdk\'));</script>'.
-                '<div class="fb-post" '.
-                'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
-                'data-width="600"></div>',
-            'width' => 600,
-            'height' => FALSE,
-        ));
+        $url = 'https://www.facebook.com/video.php?v=10152802584496147';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Facebook::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<div id="fb-root"></div> <script>(function(d, s, id) { '.
+            'var js, fjs = d.getElementsByTagName(s)[0]; '.
+            'if (d.getElementById(id)) return; js = d.createElement(s); '.
+            'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
+            'fjs.parentNode.insertBefore(js, fjs); }'.
+            '(document, \'script\', \'facebook-jssdk\'));</script>'.
+            '<div class="fb-post" '.
+            'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
+            'data-width="600"></div>'
+        );
     }
 
     public function testTranslateVideo2() {
-        $url = parse_url('https://www.facebook.com/#!/video.php?v=10152802584496147');
-        $this->assertNotFalse($extra = Facebook::translatable($url, ''));
-        $this->assertEquals(Facebook::translate($url, $extra), array(
-            'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-                'var js, fjs = d.getElementsByTagName(s)[0]; '.
-                'if (d.getElementById(id)) return; js = d.createElement(s); '.
-                'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-                'fjs.parentNode.insertBefore(js, fjs); }'.
-                '(document, \'script\', \'facebook-jssdk\'));</script>'.
-                '<div class="fb-post" '.
-                'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
-                'data-width="600"></div>',
-            'width' => 600,
-            'height' => FALSE,
-        ));
+        $url = 'https://www.facebook.com/#!/video.php?v=10152802584496147';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Facebook::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Facebook::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<div id="fb-root"></div> <script>(function(d, s, id) { '.
+            'var js, fjs = d.getElementsByTagName(s)[0]; '.
+            'if (d.getElementById(id)) return; js = d.createElement(s); '.
+            'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
+            'fjs.parentNode.insertBefore(js, fjs); }'.
+            '(document, \'script\', \'facebook-jssdk\'));</script>'.
+            '<div class="fb-post" '.
+            'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
+            'data-width="600"></div>'
+        );
     }
 
 }

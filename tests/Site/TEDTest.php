@@ -40,34 +40,49 @@ use Phata\Widgetfy\Site\TED as TED;
 class TEDTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideoOld() {
-        $url = parse_url('http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense.html');
-        $this->assertNotFalse($extra = TED::translatable($url, ''));
-        $this->assertEquals(TED::translate($url, $extra), array(
-			'html' => '<iframe width="640" height="360" src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-			'width' => 640,
-			'height' => 360,
-		));
+        $url = 'http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense.html';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = TED::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
+            'frameborder="0" scrolling="no" '.
+            'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
+        );
     }
 
     public function testTranslateVideoOld2() {
-        $url = parse_url('http://www.ted.com/talks/lang/eng/pattie_maes_demos_the_sixth_sense.html');
-        $this->assertNotFalse($extra = TED::translatable($url, ''));
-        $this->assertEquals(TED::translate($url, $extra), array(
-			'html' => '<iframe width="640" height="360" src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-			'width' => 640,
-			'height' => 360,
-		));
+        $url = 'http://www.ted.com/talks/lang/eng/pattie_maes_demos_the_sixth_sense.html';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = TED::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
+            'frameborder="0" scrolling="no" '.
+            'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
+        );
     }
 
 
     public function testTranslateVideo() {
-        $url = parse_url('http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense');
-        $this->assertNotFalse($extra = TED::translatable($url, ''));
-        $this->assertEquals(TED::translate($url, $extra), array(
-			'html' => '<iframe width="640" height="360" src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-			'width' => 640,
-			'height' => 360,
-		));
+        $url = 'http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = TED::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = TED::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
+            'frameborder="0" scrolling="no" '.
+            'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
+        );
     }
 
 }

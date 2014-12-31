@@ -40,15 +40,18 @@ use Phata\Widgetfy\Site\Metacafe as Metacafe;
 class MetacafeTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
-        $url = parse_url('http://www.metacafe.com/watch/11395429/arma_iii_altis_life_honest_farmers_lan_party/');
-        $this->assertNotFalse($extra = Metacafe::translatable($url, ''));
+        $url = 'http://www.metacafe.com/watch/11395429/arma_iii_altis_life_honest_farmers_lan_party/';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Metacafe::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Metacafe::translate($url_parsed, $extra);
 
         // Note: Metacafe only support HTTP. Not HTTPS
-        $this->assertEquals(Metacafe::translate($url, $extra), array(
-			'html' => '<iframe src="http//www.metacafe.com/embed/11395429/" width="600" height="338" allowFullScreen frameborder=0></iframe>',
-			'width' => 600,
-			'height' => 338,
-		));
+        $this->assertEquals($embed['html'],
+            '<iframe src="http//www.metacafe.com/embed/11395429/" '.
+            'width="600" height="338" allowFullScreen frameborder=0></iframe>'
+        );
     }
 
 }

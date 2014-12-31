@@ -40,47 +40,53 @@ use Phata\Widgetfy\Site\CollegeHumor as CollegeHumor;
 class CollegeHumorTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo1a() {
-        $url = parse_url('http://www.collegehumor.com/video:1817806');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
-        $this->assertEquals(CollegeHumor::translate($url, $extra), array(
-            'html' => '<object type="application/x-shockwave-flash" '.
-                'data="http://www.collegehumor.com/moogaloop/'.
-                'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
-                'width="610" height="343" >'.
-                '<param name="allowfullscreen" value="true" />'.
-                '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
-                'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>',
-            'width' => 610,
-            'height' => 343,
-        ));
+        $url = 'http://www.collegehumor.com/video:1817806';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, ''));
+
+        // test returning embed code
+        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<object type="application/x-shockwave-flash" '.
+            'data="http://www.collegehumor.com/moogaloop/'.
+            'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
+            'width="610" height="343" >'.
+            '<param name="allowfullscreen" value="true" />'.
+            '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
+            'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>'
+        );
     }
 
     public function testTranslateVideo1b() {
-        $url = parse_url('http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=1817806');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
-        $this->assertEquals(CollegeHumor::translate($url, $extra), array(
-            'html' => '<object type="application/x-shockwave-flash" '.
-                'data="http://www.collegehumor.com/moogaloop/'.
-                'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
-                'width="610" height="343" >'.
-                '<param name="allowfullscreen" value="true" />'.
-                '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
-                'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>',
-            'width' => 610,
-            'height' => 343,
-        ));
+        $url = 'http://www.collegehumor.com/video:1817806';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<object type="application/x-shockwave-flash" '.
+            'data="http://www.collegehumor.com/moogaloop/'.
+            'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
+            'width="610" height="343" >'.
+            '<param name="allowfullscreen" value="true" />'.
+            '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
+            'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>'
+        );
     }
 
     public function testTranslateVideo2() {
-        $url = parse_url('http://www.collegehumor.com/video/6926235/batman-and-superman-team-up');
-        $this->assertNotFalse($extra = CollegeHumor::translatable($url, ''));
-        $this->assertEquals(CollegeHumor::translate($url, $extra), array(
-            'html' => '<iframe src="http://www.collegehumor.com/e/6926235'.
-                '" width="610" height="343" '.
-                'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
-            'width' => 610,
-            'height' => 343,
-        ));
+        $url = 'http://www.collegehumor.com/video/6926235/batman-and-superman-team-up';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = CollegeHumor::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = CollegeHumor::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe src="http://www.collegehumor.com/e/6926235'.
+            '" width="610" height="343" '.
+            'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>'
+        );
     }
 
 }

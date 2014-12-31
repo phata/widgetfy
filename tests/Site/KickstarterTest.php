@@ -41,18 +41,20 @@ class KickstarterTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
         $name = 'trammel/the-official-settlers-of-catan-gaming-board';
-        $url = parse_url('http://www.kickstarter.com/projects/'.$name);
-        $this->assertNotFalse($extra = Kickstarter::translatable($url, ''));
-        $this->assertEquals(Kickstarter::translate($url, $extra), array(
-            'html' => '<iframe width="640" height="480" '.
-                'src="//www.kickstarter.com/projects/'.$name.'/widget/video.html" '.
-                'frameborder="0" scrolling="no"> </iframe> '.
-                '<iframe width="220" height="480" '.
-                'src="//www.kickstarter.com/projects/'.$name.'/widget/card.html" '.
-                'frameborder="0" scrolling="no"> </iframe>',
-            'width' => 860 + 6,
-            'height' => 480 + 2,
-        ));
+        $url = 'http://www.kickstarter.com/projects/'.$name;
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Kickstarter::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Kickstarter::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="480" '.
+            'src="//www.kickstarter.com/projects/'.$name.'/widget/video.html" '.
+            'frameborder="0" scrolling="no"> </iframe> '.
+            '<iframe width="220" height="480" '.
+            'src="//www.kickstarter.com/projects/'.$name.'/widget/card.html" '.
+            'frameborder="0" scrolling="no"> </iframe>'
+        );
     }
 
 }

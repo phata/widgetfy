@@ -40,14 +40,16 @@ use Phata\Widgetfy\Site\NicoNico as NicoNico;
 class NicoNicoTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
-        $url = parse_url('http://www.nicovideo.jp/watch/sm4772361');
-        $this->assertNotFalse($extra = NicoNico::translatable($url, ''));
-        $this->assertEquals(NicoNico::translate($url, $extra), array(
-			'html' => '<script type="text/javascript" '.
-                'src="http://ext.nicovideo.jp/thumb_watch/sm4772361"></script>',
-			'width' => 485,
-			'height' => FALSE,
-		));
+        $url = 'http://www.nicovideo.jp/watch/sm4772361';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = NicoNico::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = NicoNico::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<script type="text/javascript" '.
+            'src="http://ext.nicovideo.jp/thumb_watch/sm4772361"></script>'
+        );
     }
 
 }

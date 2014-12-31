@@ -40,15 +40,17 @@ use Phata\Widgetfy\Site\Ku6 as Ku6;
 class Ku6Test extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
-        $url = parse_url('http://v.ku6.com/show/PbIRDjlz7Q18Iikf.html');
-        $this->assertNotFalse($extra = Ku6::translatable($url, ''));
-        $this->assertEquals(Ku6::translate($url, $extra), array(
-            'html' => '<embed src="//player.ku6.com/refer/PbIRDjlz7Q18Iikf/v.swf" '.
-                'width="480" height="400" allowscriptaccess="always" allowfullscreen="true" '.
-                'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>',
-            'width' => 480,
-            'height' => 400,
-        ));
+        $url = 'http://v.ku6.com/show/PbIRDjlz7Q18Iikf.html';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Ku6::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Ku6::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<embed src="//player.ku6.com/refer/PbIRDjlz7Q18Iikf/v.swf" '.
+            'width="480" height="400" allowscriptaccess="always" allowfullscreen="true" '.
+            'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>'
+        );
     }
 
 }

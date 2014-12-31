@@ -40,15 +40,17 @@ use Phata\Widgetfy\Site\Youku as Youku;
 class YoukuTest extends PHPUnit_Framework_TestCase {
 
     public function testTranslateVideo() {
-        $url = parse_url('http://v.youku.com/v_show/id_XMjMxOTQzOTI=.html');
-        $this->assertNotFalse($extra = Youku::translatable($url, ''));
-        $this->assertEquals(Youku::translate($url, $extra), array(
-            'html' => '<iframe width="510" height="498" '.
-                'src="http://player.youku.com/embed/XMjMxOTQzOTI=" '.
-                'frameborder="0" allowfullscreen></iframe>',
-            'width' => 510,
-            'height' => 498,
-        ));
+        $url ='http://v.youku.com/v_show/id_XMjMxOTQzOTI=.html';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($extra = Youku::translatable($url_parsed, $url));
+
+        // test returning embed code
+        $embed = Youku::translate($url_parsed, $extra);
+        $this->assertEquals($embed['html'],
+            '<iframe width="510" height="498" '.
+            'src="http://player.youku.com/embed/XMjMxOTQzOTI=" '.
+            'frameborder="0" allowfullscreen></iframe>'
+        );
     }
 
 }
