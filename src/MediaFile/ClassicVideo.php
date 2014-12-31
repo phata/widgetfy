@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\MediaFile;
 
+use Phata\Widgetfy\Utils\URL as URL;
+
 class ClassicVideo implements Common {
 
     /**
@@ -46,10 +48,9 @@ class ClassicVideo implements Common {
      * determine if the URL is translatable
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @param string $url full url
      * @return boolean whether the url is translatable
      */
-    public static function translatable($url_parsed, $url) {
+    public static function translatable($url_parsed) {
         if (preg_match('/\/([^\/]+)\.(\w+)$/i', $url_parsed['path'], $matches) == 1) {
             $filename = htmlspecialchars($matches[1] . '.' . $matches[2]);
             $extension = strtolower($matches[2]);
@@ -57,7 +58,7 @@ class ClassicVideo implements Common {
             return array(
                 'filename' => $filename,
                 'filetype' => $extension,
-                'url' => $url,
+                'url' => URL::build($url_parsed),
             );
         }
         return FALSE;
@@ -68,11 +69,10 @@ class ClassicVideo implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param string[] $url_parsed result of parse_url($url)
      * @param mixed[] $extra array of extra url information
      * @return mixed either embed string or NULL if not applicable
      */
-    public static function translate($url_parsed, $extra) {
+    public static function translate($extra) {
     	$width = 480; $height = 290;
         return array(
             'html' => '<object id="mediaplayer" width="'.$width.'" height="'.$height.'" '.

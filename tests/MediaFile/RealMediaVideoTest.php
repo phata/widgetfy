@@ -42,8 +42,8 @@ class RealMediaVideoTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoMpg() {
         $url = 'http://foobar.com/video.rmvb';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = RealMediaVideo::translatable($url_parsed, $url));
-        $this->assertEquals(RealMediaVideo::translate($url, $extra), array(
+        $this->assertNotFalse($extra = RealMediaVideo::translatable($url_parsed));
+        $this->assertEquals(RealMediaVideo::translate($extra), array(
             'html' => '<embed type="audio/x-pn-realaudio-plugin" '.
                 'src="http://foobar.com/video.rmvb" '.
                 'width="400" height="300" autostart="false" '.

@@ -42,8 +42,8 @@ class HTML5VideoTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoOgg() {
         $url = 'http://foobar.com/video.ogg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed, $url));
-        $this->assertEquals(HTML5Video::translate($url, $extra), array(
+        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed));
+        $this->assertEquals(HTML5Video::translate($extra), array(
             'html' => '<video width="640" controls="true" preload="metadata">'.
                 '<source src="http://foobar.com/video.ogg" type="video/ogg" />'.
                 'Sorry, your browser has the following problem(s):
@@ -59,8 +59,8 @@ href="http://www.getfirefox.com" target="_blank">Firefox</a>.'.
     public function testTranslateVideoMp4() {
         $url = 'http://foobar.com/video.mp4';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed, $url));
-        $this->assertEquals(HTML5Video::translate($url, $extra), array(
+        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed));
+        $this->assertEquals(HTML5Video::translate($extra), array(
             'html' => '<video width="640" controls="true" preload="metadata">'.
                 '<source src="http://foobar.com/video.mp4" type="video/mp4" />'.
                 'Sorry, your browser has the following problem(s):
@@ -76,8 +76,8 @@ href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.'.
     public function testTranslateVideoWebM() {
         $url = 'http://foobar.com/video.webm';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed, $url));
-        $this->assertEquals(HTML5Video::translate($url, $extra), array(
+        $this->assertNotFalse($extra = HTML5Video::translatable($url_parsed));
+        $this->assertEquals(HTML5Video::translate($extra), array(
             'html' => '<video width="640" controls="true" preload="metadata">'.
                 '<source src="http://foobar.com/video.webm" type="video/webm" />'.
                 'Sorry, your browser has the following problem(s):
