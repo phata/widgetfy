@@ -42,10 +42,10 @@ class TEDTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoOld() {
         $url = 'http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = TED::translatable($url_parsed));
+        $this->assertNotFalse($info = TED::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = TED::translate($extra);
+        $embed = TED::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
@@ -57,10 +57,10 @@ class TEDTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoOld2() {
         $url = 'http://www.ted.com/talks/lang/eng/pattie_maes_demos_the_sixth_sense.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = TED::translatable($url_parsed));
+        $this->assertNotFalse($info = TED::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = TED::translate($extra);
+        $embed = TED::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
@@ -73,10 +73,10 @@ class TEDTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = TED::translatable($url_parsed));
+        $this->assertNotFalse($info = TED::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = TED::translate($extra);
+        $embed = TED::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.

@@ -45,12 +45,12 @@ class ClassicVideo implements Common {
     /**
      * Implements Phata\Widgetfy\MediaFile\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/\/([^\/]+)\.(\w+)$/i', $url_parsed['path'], $matches) == 1) {
             $filename = htmlspecialchars($matches[1] . '.' . $matches[2]);
             $extension = strtolower($matches[2]);
@@ -69,23 +69,23 @@ class ClassicVideo implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
     	$width = 480; $height = 290;
         return array(
             'html' => '<object id="mediaplayer" width="'.$width.'" height="'.$height.'" '.
                 'classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" '.
                 'standby="loading windows media player components..." '.
                 'type="application/x-oleobject">'.
-                '<param name="FileName" value="'.$extra['filename'].'" />'.
+                '<param name="FileName" value="'.$info['filename'].'" />'.
                 '<param name="autostart" value="false" />'.
                 '<param name="ShowControls" value="true" />'.
                 '<param name="ShowStatusBar" value="false" />'.
                 '<param name="ShowDisplay" value="false" />'.
                 '<embed type="application/x-mplayer2" '.
-                'src="'.$extra['url'].'" '.
+                'src="'.$info['url'].'" '.
                 'name="mediaplayer" width="'.$width.'" height="'.$height.'" '.
                 'ShowControls="1" ShowStatusBar="1" ShowDisplay="0" '.
                 'autostart="0"></embed>'.

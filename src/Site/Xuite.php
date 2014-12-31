@@ -43,12 +43,12 @@ class Xuite implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/^\/play\/(\w+\=\=)$/', $url_parsed['path'], $matches) == 1) {
             return array(
                 'vid' => $matches[1],
@@ -62,14 +62,14 @@ class Xuite implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         $width = 640; $height = 360;
         return array(
             'html' => '<iframe marginwidth="0" marginheight="0" '.
-                'src="//vlog.xuite.net/embed/'.$extra['vid'].
+                'src="//vlog.xuite.net/embed/'.$info['vid'].
                 '?ar=0&as=0" width="'.$width.'" height="'.$height.'" '.
                 'scrolling="no" frameborder="0"></iframe>',
             'width' => $width,

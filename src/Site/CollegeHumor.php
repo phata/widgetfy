@@ -43,12 +43,12 @@ class CollegeHumor implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
 
         // new links
         if (preg_match('/^\/video\/(\d+)\/([^\/]+)$/', $url_parsed['path'], $matches) == 1) {
@@ -82,29 +82,29 @@ class CollegeHumor implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         $width = 610; $height = 343;
 
         // Note: CollegeHumor supports HTTP only. No HTTPS.
-        switch ($extra['version']) {
+        switch ($info['version']) {
             case 1:
                 return array(
                     'html' => '<object type="application/x-shockwave-flash" '.
                         'data="http://www.collegehumor.com/moogaloop/'.
-                        'moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" '.
+                        'moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" '.
                         'width="'.$width.'" height="'.$height.'" >'.
                         '<param name="allowfullscreen" value="true" />'.
                         '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
-                        'moogaloop/moogaloop.swf?clip_id='.$extra['vid'].'&fullscreen=1" /></object>',
+                        'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>',
                     'width' => $width,
                     'height' => $height,
                 );
             case 2:
                 return array(
-                    'html' => '<iframe src="http://www.collegehumor.com/e/'.$extra['vid'].
+                    'html' => '<iframe src="http://www.collegehumor.com/e/'.$info['vid'].
                         '" width="'.$width.'" height="'.$height.'" '.
                         'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
                     'width' => $width,

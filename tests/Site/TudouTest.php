@@ -42,10 +42,10 @@ class TudouTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo1() {
         $url = 'http://www.tudou.com/programs/view/VJlCrFBCh0s/';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Tudou::translatable($url_parsed));
+        $this->assertNotFalse($info = Tudou::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Tudou::translate($extra);
+        $embed = Tudou::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=0&code=VJlCrFBCh0s&lcode=&resourceId=0_06_05_99" '.
@@ -58,10 +58,10 @@ class TudouTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo2() {
         $url = 'http://www.tudou.com/albumplay/92J2xqpSxWY/PbNLkw0cgtI.html';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Tudou::translatable($url_parsed));
+        $this->assertNotFalse($info = Tudou::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Tudou::translate($extra);
+        $embed = Tudou::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=2&code=PbNLkw0cgtI&lcode=92J2xqpSxWY&resourceId=0_06_05_99" '.

@@ -46,12 +46,12 @@ class RealMediaVideo implements Common {
     /**
      * Implements Phata\Widgetfy\MediaFile\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/\/([^\/]+)\.(rm|rmvb)$/i', $url_parsed['path'], $matches) == 1) {
             $filename = htmlspecialchars($matches[1] . '.' . $matches[2]);
             $extension = strtolower($matches[2]);
@@ -69,13 +69,13 @@ class RealMediaVideo implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param string[] $url_parsed result of parse_url($url)
-     * @return mixed either embed string or NULL if not applicable
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
     	$width = 400; $height = 300; $height_ctrl = 26;
         return array(
             'html' => '<embed type="audio/x-pn-realaudio-plugin" '.
-                'src="'.$extra['url'].'" '.
+                'src="'.$info['url'].'" '.
                 'width="'.$width.'" height="'.$height.'" autostart="false" '.
                 'controls="imagewindow" nojava="true" '.
                 'console="video" '.

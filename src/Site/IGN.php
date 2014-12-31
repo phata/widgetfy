@@ -43,12 +43,12 @@ class IGN implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
     	if (preg_match('/^\/videos\/(\d\d\d\d\/\d\d\/\d\d)\/(.+?)$/',
                 $url_parsed['path'], $matches) == 1){
             return array(
@@ -64,14 +64,14 @@ class IGN implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
     	$width = 480; $height = 270;
 		return array(
 			'html' => '<iframe src="http://widgets.ign.com/video/embed/content.html?'.
-                'slug='.$extra['slug'].'" '.
+                'slug='.$info['slug'].'" '.
                 'scrolling="no" allowfullscreen="" frameborder="0" '.
                 'width="'.$width.'" height="'.$height.'"></iframe>',
 	        'width' => $width,

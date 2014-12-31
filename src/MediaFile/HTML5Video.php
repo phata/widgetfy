@@ -45,13 +45,13 @@ class HTML5Video implements Common {
     /**
      * Implements Phata\Widgetfy\MediaFile\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
      * @param string $url full url
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/\.(\w+)$/i', $url_parsed['path'], $matches) == 1) {
             $extension = strtolower($matches[1]);
             if ($extension == 'ogv') $extension = 'ogg';
@@ -68,14 +68,14 @@ class HTML5Video implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
 
         // determine fallback message by filetype
         $message = '';
-        switch($extra['filetype']) {
+        switch($info['filetype']) {
             case 'ogg':
                 $message = 'Sorry, your browser has the following problem(s):
 <ul><li>It does not support playing <a href="http://www.theora.org/" target="_blank">OGG Theora</a>; or</li>
@@ -100,7 +100,7 @@ href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.';
     	$width = 640; $height = FALSE;
         return array(
             'html' => '<video width="'.$width.'" controls="true" preload="metadata">'.
-                '<source src="'.$extra['url'].'" type="video/'.$extra['filetype'].'" />'.
+                '<source src="'.$info['url'].'" type="video/'.$info['filetype'].'" />'.
                 $message.
                 '</video>',
             'width' => $width,

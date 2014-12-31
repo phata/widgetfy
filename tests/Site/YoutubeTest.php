@@ -42,10 +42,10 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoRoot() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($extra);
+        $embed = Youtube::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="576" height="354" '.
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
@@ -55,10 +55,10 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo() {
         $url = 'https://www.youtube.com/watch?v=PBLuP2JZcEg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($extra);
+        $embed = Youtube::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="576" height="354" '.
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
@@ -68,10 +68,10 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
     public function testTranslatePlayList() {
         $url = 'https://www.youtube.com/playlist?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Youtube::translatable($url_parsed));
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($extra);
+        $embed = Youtube::translate($info);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="https://www.youtube.com/embed/videoseries?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z" '.

@@ -45,12 +45,12 @@ class Vimeo implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/^\/([\d]+)$/',
             $url_parsed['path'], $matches) == 1) {
             return array(
@@ -65,13 +65,13 @@ class Vimeo implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         Cache::init();
         $cache_group = 'vimeo';
-        $vid = $extra['vid'];
+        $vid = $info['vid'];
 
         // try to retrieve api respond with the help of cache
         if (Cache::exists($cache_group, $vid)) {

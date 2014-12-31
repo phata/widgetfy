@@ -45,12 +45,12 @@ class Youtube implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/^\/watch$/', $url_parsed['path'])) {
             $params = self::parseParams($url_parsed);
             if ($params == FALSE) return FALSE;
@@ -78,16 +78,16 @@ class Youtube implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
 
-        if ($extra['path_type'] == 'video') {
+        if ($info['path_type'] == 'video') {
 
             $width = 576; $height = 354; // temp default
 
-            $params       = &$extra['params'];
+            $params       = &$info['params'];
             $query_params = array();
             $query_str    = '';
 
@@ -125,17 +125,17 @@ class Youtube implements Common {
                 );
             }
 
-        } elseif ($extra['path_type'] == 'playlist') {
-            $args = &$extra['query'];
+        } elseif ($info['path_type'] == 'playlist') {
+            $args = &$info['query'];
             $width = 640; $height = 360; // temp default
-            $location = $extra['location'];
+            $location = $info['location'];
 
             if (isset($args['p'])) {
                 $lid = $args['p'];
-                $string = '//'.$location.'.youtube.com'.$extra['path'].'?p='.$lid;
+                $string = '//'.$location.'.youtube.com'.$info['path'].'?p='.$lid;
             } elseif (isset($args['list']) and preg_match('/^PL/', $args['list'])) {
                 $lid = $args['list'];
-                $string = '//'.$location.'.youtube.com'.$extra['path'].'?list='.$args['list'];
+                $string = '//'.$location.'.youtube.com'.$info['path'].'?list='.$args['list'];
             }
 
             return array(

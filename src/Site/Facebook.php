@@ -43,12 +43,12 @@ class Facebook implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
 
         // replace current path with fragment
         // that starts with '!' mark
@@ -59,7 +59,7 @@ class Facebook implements Common {
             $url_parsed = parse_url($url);
         }
 
-        // test if the path is translatable
+        // test if the path is preprocess
         if (in_array($url_parsed['path'],
                 array('/video/video.php', '/video.php', '/photo.php'))) {
             // find parameter 'v' if exists
@@ -79,10 +79,10 @@ class Facebook implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         $width = 600; $height = FALSE;
         return array(
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
@@ -92,7 +92,7 @@ class Facebook implements Common {
                 'fjs.parentNode.insertBefore(js, fjs); }'.
                 '(document, \'script\', \'facebook-jssdk\'));</script>'.
                 '<div class="fb-post" '.
-                'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
+                'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
                 'data-width="'.$width.'"></div>',
             'width' => $width,
             'height' => $height,

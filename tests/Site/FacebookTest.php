@@ -42,10 +42,10 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo1() {
         $url = 'https://www.facebook.com/video.php?v=10152802584496147';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Facebook::translatable($url_parsed));
+        $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Facebook::translate($extra);
+        $embed = Facebook::translate($info);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -54,7 +54,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             'fjs.parentNode.insertBefore(js, fjs); }'.
             '(document, \'script\', \'facebook-jssdk\'));</script>'.
             '<div class="fb-post" '.
-            'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
+            'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
             'data-width="600"></div>'
         );
     }
@@ -62,10 +62,10 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideo2() {
         $url = 'https://www.facebook.com/#!/video.php?v=10152802584496147';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = Facebook::translatable($url_parsed));
+        $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Facebook::translate($extra);
+        $embed = Facebook::translate($info);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -74,7 +74,7 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             'fjs.parentNode.insertBefore(js, fjs); }'.
             '(document, \'script\', \'facebook-jssdk\'));</script>'.
             '<div class="fb-post" '.
-            'data-href="https://www.facebook.com/video.php?v='.$extra['vid'].'" '.
+            'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
             'data-width="600"></div>'
         );
     }

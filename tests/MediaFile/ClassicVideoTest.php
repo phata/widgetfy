@@ -42,8 +42,8 @@ class ClassicVideoTest extends PHPUnit_Framework_TestCase {
     public function testTranslateVideoMpg() {
         $url = 'http://foobar.com/video.mpg';
         $url_parsed = parse_url($url);
-        $this->assertNotFalse($extra = ClassicVideo::translatable($url_parsed));
-        $this->assertEquals(ClassicVideo::translate($extra), array(
+        $this->assertNotFalse($info = ClassicVideo::preprocess($url_parsed));
+        $this->assertEquals(ClassicVideo::translate($info), array(
             'html' => '<object id="mediaplayer" width="480" height="290" '.
             'classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" '.
             'standby="loading windows media player components..." '.

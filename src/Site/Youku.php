@@ -43,12 +43,12 @@ class Youku implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return boolean whether the url is translatable
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
 
         // different path for different domain
         if (strtolower($url_parsed['host'])=='player.youku.com') {
@@ -72,14 +72,14 @@ class Youku implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         $width = 510; $height = 498;
         return array(
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
-                'src="http://player.youku.com/embed/'.$extra['sid'].'=" '.
+                'src="http://player.youku.com/embed/'.$info['sid'].'=" '.
                 'frameborder="0" allowfullscreen></iframe>',
             'width' => $width,
             'height' => $height,

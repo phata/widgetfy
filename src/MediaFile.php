@@ -51,14 +51,14 @@ class MediaFile {
         foreach (self::$filetypes as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['path'])) {
-                if (($extra = call_user_func(
-                        array('Phata\Widgetfy\MediaFile\\'.$class, 'translatable'),
-                        $url_parsed, $url
+                if (($info = call_user_func(
+                        array('Phata\Widgetfy\MediaFile\\'.$class, 'preprocess'),
+                        $url_parsed
                         )) !== FALSE) {
-                    // if translatable
+                    // if preprocess
                     return call_user_func(
                         array('Phata\Widgetfy\MediaFile\\'.$class, 'translate'),
-                        $url_parsed, $extra
+                        $info
                     );
                 }
             }

@@ -43,12 +43,12 @@ class MySpace implements Common {
     /**
      * Implements Phata\Widgetfy\Site\Common::translate
      *
-     * determine if the URL is translatable
+     * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @return mixed array of extra info if translatable; boolean FALSE if not
+     * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
-    public static function translatable($url_parsed) {
+    public static function preprocess($url_parsed) {
         if (preg_match('/^\/(\w+)\/video\/(.+?)\/(\d+)$/',
                 $url_parsed['path'], $matches) == 1) {
             return array(
@@ -64,16 +64,16 @@ class MySpace implements Common {
      *
      * translate the provided URL into
      * HTML embed code of it
-     * @param mixed[] $extra array of extra url information
-     * @return mixed either embed string or NULL if not applicable
+     * @param mixed[] $info array of preprocessed url information
+     * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($extra) {
+    public static function translate($info) {
         $width = 480; $height = 270;
 
         return array(
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="//media.myspace.com/play/video/'.
-                $extra['vname'].'-'.$extra['vid'].'" '.
+                $info['vname'].'-'.$info['vid'].'" '.
                 'frameborder="0" allowtransparency="true" '.
                 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
             'width' => $width,
