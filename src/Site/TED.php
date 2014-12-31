@@ -50,9 +50,9 @@ class TED implements Common {
      * @return boolean whether the url is translatable
      */
     public static function translatable($url_parsed, $url) {
-        if (preg_match('/^\/talks\/(.+?)(|\.html)$/', $url_parsed['path'], $matches) == 1) {
+        if (preg_match('/^\/talks\/(lang\/\w+\/|)(.+?)(|\.html)$/', $url_parsed['path'], $matches) == 1) {
             return array(
-                'id' => $matches[1],
+                'id' => $matches[2],
             );
         }
         return FALSE;
