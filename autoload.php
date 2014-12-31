@@ -41,6 +41,12 @@ spl_autoload_register(function ($class) {
     // project-specific namespace prefix
     $prefix = 'Phata\\Widgetfy';
 
+    // shortcut to simlified interface
+    if ($class == $prefix) {
+        require __DIR__ . '/Widgetfy.php';
+	return;
+    }
+
     // base directory for the namespace prefix
     $base_dir = __DIR__ . '/src/';
 
