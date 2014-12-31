@@ -41,7 +41,7 @@ namespace Phata\Widgetfy;
 class Site {
 
     public static $sites = array(
-        '/^[\w]+\.youtube\.com$/' => 'Youtube',
+        '/^(\w+\.|)youtube\.com$/' => 'Youtube',
         '/^www\.ted\.com$/' => 'TED',
         '/^myspace\.com$/' => 'MySpace',
         '/^[\w]+\.liveleak\.com$/' => 'LiveLeak',

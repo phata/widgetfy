@@ -39,6 +39,17 @@ use Phata\Widgetfy\Site\Youtube as Youtube;
 
 class YoutubeTest extends PHPUnit_Framework_TestCase {
 
+    public function testTranslateVideoRoot() {
+        $url = parse_url('https://youtube.com/watch?v=PBLuP2JZcEg');
+        $this->assertNotFalse($extra = Youtube::translatable($url, ''));
+        $this->assertEquals(Youtube::translate($url, $extra), array (
+          'html' => '<iframe width="576" height="354" '.
+            'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>',
+          'width' => 576,
+          'height' => 354,
+      ));
+    }
+
     public function testTranslateVideo() {
         $url = parse_url('https://www.youtube.com/watch?v=PBLuP2JZcEg');
         $this->assertNotFalse($extra = Youtube::translatable($url, ''));
