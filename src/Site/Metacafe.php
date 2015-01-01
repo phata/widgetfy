@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Metacafe implements Common {
 
     /**
@@ -72,18 +74,25 @@ class Metacafe implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-    	$width = 600; $height = 338;
+    public static function translate($info, $options=array()) {
+
+        // default dimension is 600 x 338
+        $width = isset($options['width']) ? $options['width'] : 600;
+        $factor = 0.5633; // 16:9
+        $height = Calc::retHeight($width, $factor);
 
 		return array(
+            'type' => 'iframe',
             'html' => '<iframe '.
                 'src="http//www.metacafe.com/embed/'.$info['vid'].'/" '.
                 'width="'.$width.'" height="'.$height.'" '.
                 'allowFullScreen frameborder=0></iframe>',
             'width' => $width,
 	        'height' => $height,
+            'factor' => $factor,
 	    );
 	}
 }

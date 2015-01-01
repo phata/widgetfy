@@ -51,8 +51,9 @@ interface Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info);
+    public static function translate($info, $options=array());
 
 }

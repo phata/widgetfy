@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class CollegeHumor implements Common {
 
     /**
@@ -83,15 +85,21 @@ class CollegeHumor implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 610; $height = 343;
+    public static function translate($info, $options=array()) {
+
+        // default dimension is 610 x 343
+        $width = isset($options['width']) ? $options['width'] : 610;
+        $factor = 0.5622; // approx. 16:9
+        $height = Calc::retHeight($width, $factor);
 
         // Note: CollegeHumor supports HTTP only. No HTTPS.
         switch ($info['version']) {
             case 1:
                 return array(
+                    'type' => 'flash_object',
                     'html' => '<object type="application/x-shockwave-flash" '.
                         'data="http://www.collegehumor.com/moogaloop/'.
                         'moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" '.
@@ -101,14 +109,17 @@ class CollegeHumor implements Common {
                         'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>',
                     'width' => $width,
                     'height' => $height,
+                    'factor' => $factor,
                 );
             case 2:
                 return array(
+                    'type' => 'iframe',
                     'html' => '<iframe src="http://www.collegehumor.com/e/'.$info['vid'].
                         '" width="'.$width.'" height="'.$height.'" '.
                         'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
                     'width' => $width,
                     'height' => $height,
+                    'factor' => $factor,
                 );
         }
     }

@@ -45,12 +45,15 @@ class DorklyTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Dorkly::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Dorkly::translate($info);
+        $options = array('width'=>640);
+        $embed = Dorkly::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="//www.dorkly.com/e/6441" '.
-            'width="610" height="343" '.
+            'width="640" height="360" '.
             'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5622);
     }
 
 }

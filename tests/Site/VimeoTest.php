@@ -45,12 +45,15 @@ class VimeoTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Vimeo::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Vimeo::translate($info);
+        $options = array('width'=>640);
+        $embed = Vimeo::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="//player.vimeo.com/video/97875604" '.
-            'width="800" height="450" frameborder="0" '.
+            'width="640" height="360" frameborder="0" '.
             'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Ku6 implements Common {
 
     /**
@@ -64,17 +66,25 @@ class Ku6 implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 480; $height = 400;
+    public static function translate($info, $options=array()) {
+
+        // default dimension is 480 x 400
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.8332;
+        $height = Calc::retHeight($width, $factor);
+
         return array(
+            'type' => 'flash_embed',
             'html' => '<embed src="//player.ku6.com/refer/'.$info['vid'].'/v.swf" '.
                 'width="'.$width.'" height="'.$height.'" '.
                 'allowscriptaccess="always" allowfullscreen="true" '.
                 'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

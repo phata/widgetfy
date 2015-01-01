@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Dorkly implements Common {
 
     /**
@@ -64,16 +66,23 @@ class Dorkly implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 610; $height = 343;
+    public static function translate($info, $options=array()) {
+
+        // default dimension is 610 x 343
+        $width = isset($options['width']) ? $options['width'] : 610;
+        $factor = 0.5622; // approx. 16:9
+        $height = Calc::retHeight($width, $factor);
         return array(
+            'type' => 'iframe',
             'html' => '<iframe src="//www.dorkly.com/e/'.$info['vid'].
                 '" width="'.$width.'" height="'.$height.'" '.
                 'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

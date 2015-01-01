@@ -39,6 +39,7 @@
 namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Cache as Cache;
+use Phata\Widgetfy\Utils\Calc as Calc;
 
 class Vimeo implements Common {
 
@@ -66,9 +67,10 @@ class Vimeo implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
+    public static function translate($info, $options=array()) {
         Cache::init();
         $cache_group = 'vimeo';
         $vid = $info['vid'];
@@ -76,29 +78,40 @@ class Vimeo implements Common {
         // try to retrieve api respond with the help of cache
         if (Cache::exists($cache_group, $vid)) {
             $cache = Cache::get($cache_group, $vid);
-            $api_respond = $cache["value"];
+            $api_respond = $cache['value'];
         } else {
-            $api_respond = file_get_contents("https://vimeo.com/api/v2/video/$vid.php");
+            $api_respond = file_get_contents('https://vimeo.com/api/v2/video/'.$vid.'.php');
             $api_respond = unserialize($api_respond);
             Cache::set($cache_group, $vid, $api_respond);
         }
 
         if (($api_respond !== FALSE) && !empty($api_respond)) {
-            $width  = !empty($api_respond[0]["width"]) ? $api_respond[0]["width"] : 600;
-            $height = !empty($api_respond[0]["height"]) ? $api_respond[0]["height"] : 340;
-            if ($width > 800) {
-                $height = ceil((800 / $width) * $height);
-                $width = 800;
+
+            // read width, height from API
+            $width  = !empty($api_respond[0]['width']) ? $api_respond[0]['width'] : 640;
+            $height = !empty($api_respond[0]['height']) ? $api_respond[0]['height'] : 320;
+
+            // calculate the factor from API results
+            $factor = round($height / $width, 4);
+
+            // if needed, calculate the width and height
+            if (isset($options['width'])) {
+                $width = (int) $options['width'];
+                $height = Calc::retHeight($width, $factor);
             }
 
             return array(
+                'type' => 'iframe',
                 'html' => '<iframe src="//player.vimeo.com/video/'.$vid.'" '.
                     'width="'.$width.'" height="'.$height.'" '.
                     'frameborder="0" webkitallowfullscreen '.
                     'mozallowfullscreen allowfullscreen></iframe>',
                 'width' => $width,
                 'height' => $height,
+                'factor' => $factor,
             );
         }
+
+        return NULL;
 	}
 }

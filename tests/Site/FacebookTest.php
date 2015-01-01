@@ -45,7 +45,8 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Facebook::translate($info);
+        $options = array('width'=>640);
+        $embed = Facebook::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -55,8 +56,17 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             '(document, \'script\', \'facebook-jssdk\'));</script>'.
             '<div class="fb-post" '.
             'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-            'data-width="600"></div>'
+            'data-width="640"></div>'
         );
+        $this->assertEquals($embed['type'], 'javascript');
+        $this->assertEquals($embed['width'], 640);
+        $this->assertEquals(
+            $embed['special']['javascript_type'],
+            'div');
+        $this->assertEquals(
+            $embed['special']['unknown_height'],
+            TRUE);
+        $this->assertFalse($embed['factor']);
     }
 
     public function testTranslateVideo2() {
@@ -65,7 +75,8 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Facebook::translate($info);
+        $options = array('width'=>640);
+        $embed = Facebook::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<div id="fb-root"></div> <script>(function(d, s, id) { '.
             'var js, fjs = d.getElementsByTagName(s)[0]; '.
@@ -75,8 +86,17 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             '(document, \'script\', \'facebook-jssdk\'));</script>'.
             '<div class="fb-post" '.
             'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-            'data-width="600"></div>'
+            'data-width="640"></div>'
         );
+        $this->assertEquals($embed['type'], 'javascript');
+        $this->assertEquals($embed['width'], 640);
+        $this->assertEquals(
+            $embed['special']['javascript_type'],
+            'div');
+        $this->assertEquals(
+            $embed['special']['unknown_height'],
+            TRUE);
+        $this->assertFalse($embed['factor']);
     }
 
 }

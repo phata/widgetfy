@@ -80,11 +80,14 @@ class Facebook implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 600; $height = FALSE;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $height = FALSE;
         return array(
+            'type' => 'javascript',
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
                 'var js, fjs = d.getElementsByTagName(s)[0]; '.
                 'if (d.getElementById(id)) return; js = d.createElement(s); '.
@@ -96,6 +99,11 @@ class Facebook implements Common {
                 'data-width="'.$width.'"></div>',
             'width' => $width,
             'height' => $height,
+            'factor' => FALSE,
+            'special' => array(
+                'javascript_type' => 'div',
+                'unknown_height' => TRUE,
+            ),
         );
     }
 }

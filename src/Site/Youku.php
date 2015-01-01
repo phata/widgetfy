@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Youku implements Common {
 
     /**
@@ -73,16 +75,22 @@ class Youku implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 510; $height = 498;
+    public static function translate($info, $options=array()) {
+        // default size 510 x 498
+        $width = isset($options['width']) ? (int) $options['width'] : 510;
+        $factor = 0.9764;
+        $height = Calc::retHeight($width, $factor);
         return array(
+            'type' => 'iframe',
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="http://player.youku.com/embed/'.$info['sid'].'=" '.
                 'frameborder="0" allowfullscreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

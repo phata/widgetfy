@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Tudou implements Common {
 
     /**
@@ -74,14 +76,14 @@ class Tudou implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 480; $height = 400;
-
-        // parse the CSS output
-        $width_css = is_numeric($width) ? $width.'px' : $width;
-        $height_css = is_numeric($height) ? $height.'px' : $height;
+    public static function translate($info, $options=array()) {
+        // default dimension is 480 x 400
+        $width = isset($options['width']) ? $options['width'] : 480;
+        $factor = 0.8332;
+        $height = Calc::retHeight($width, $factor);
 
         // build http query
         $http_query = http_build_query(array(
@@ -92,13 +94,15 @@ class Tudou implements Common {
         ));
 
         return array(
-            'html' => '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
-                $http_query.'" '.
+            'type' => 'iframe',
+            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+                'src="http://www.tudou.com/programs/view/'.
+                'html5embed.action?'.$http_query.'" '.
                 'allowtransparency="true" allowfullscreen="true" '.
-                'scrolling="no" border="0" frameborder="0" '.
-                'style="width:'.$width_css.';height:'.$height_css.';"></iframe>',
+                'scrolling="no" border="0" frameborder="0"></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

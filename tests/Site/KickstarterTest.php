@@ -46,15 +46,15 @@ class KickstarterTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Kickstarter::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Kickstarter::translate($info);
+        $options = array('width'=>640);
+        $embed = Kickstarter::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="480" '.
             'src="//www.kickstarter.com/projects/'.$name.'/widget/video.html" '.
-            'frameborder="0" scrolling="no"> </iframe> '.
-            '<iframe width="220" height="480" '.
-            'src="//www.kickstarter.com/projects/'.$name.'/widget/card.html" '.
-            'frameborder="0" scrolling="no"> </iframe>'
+            'frameborder="0" scrolling="no"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.75);
     }
 
 }

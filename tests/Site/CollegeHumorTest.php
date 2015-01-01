@@ -45,16 +45,19 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = CollegeHumor::preprocess($url_parsed, ''));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($info);
+        $options = array('width'=>640);
+        $embed = CollegeHumor::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<object type="application/x-shockwave-flash" '.
             'data="http://www.collegehumor.com/moogaloop/'.
             'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
-            'width="610" height="343" >'.
+            'width="640" height="360" >'.
             '<param name="allowfullscreen" value="true" />'.
             '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
             'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>'
         );
+        $this->assertEquals($embed['type'], 'flash_object');
+        $this->assertEquals($embed['factor'], 0.5622);
     }
 
     public function testTranslateVideo1b() {
@@ -63,16 +66,19 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = CollegeHumor::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($info);
+        $options = array('width'=>640);
+        $embed = CollegeHumor::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<object type="application/x-shockwave-flash" '.
             'data="http://www.collegehumor.com/moogaloop/'.
             'moogaloop.swf?clip_id=1817806&fullscreen=1" '.
-            'width="610" height="343" >'.
+            'width="640" height="360" >'.
             '<param name="allowfullscreen" value="true" />'.
             '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
             'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>'
         );
+        $this->assertEquals($embed['type'], 'flash_object');
+        $this->assertEquals($embed['factor'], 0.5622);
     }
 
     public function testTranslateVideo2() {
@@ -81,12 +87,15 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = CollegeHumor::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = CollegeHumor::translate($info);
+        $options = array('width'=>640);
+        $embed = CollegeHumor::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.collegehumor.com/e/6926235'.
-            '" width="610" height="343" '.
+            '" width="640" height="360" '.
             'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5622);
     }
 
 }

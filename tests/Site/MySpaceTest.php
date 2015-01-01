@@ -45,13 +45,16 @@ class MySpaceTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = MySpace::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = MySpace::translate($info);
+        $options = array('width'=>640);
+        $embed = MySpace::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe width="480" height="270" '.
+            '<iframe width="640" height="360" '.
             'src="//media.myspace.com/play/video/fink-this-is-the-thing-mahogany-session-109566653" '.
             'frameborder="0" allowtransparency="true" '.
             'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

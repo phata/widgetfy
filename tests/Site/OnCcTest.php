@@ -45,13 +45,17 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = OnCc::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = OnCc::translate($info);
+        $options = array('width'=>640);
+        $embed = OnCc::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="'.$url.'" '.
             'allowtransparency="true" allowfullscreen="true" '.
             'scrolling="no" border="0" frameborder="0" '.
-            'width="680" height="383" ></iframe>'
+            'width="640" height="361" ></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5632);
+        $this->assertEquals($embed['special']['max_width'], 960);
     }
 
 }

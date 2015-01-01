@@ -45,12 +45,15 @@ class V56Test extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = V56::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = V56::translate($info);
+        $options = array('width'=>640);
+        $embed = V56::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="http://www.56.com/iframe/MTI4MDY5MDE1" '.
-            'width="560" height="470" frameborder="0" '.
+            'width="640" height="538" frameborder="0" '.
             'allowfullscreen scrolling="no"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.8392);
     }
 
 }

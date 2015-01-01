@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class MySpace implements Common {
 
     /**
@@ -65,12 +67,18 @@ class MySpace implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 480; $height = 270;
+    public static function translate($info, $options=array()) {
+
+        // default dimension 480 x 270
+        $width = isset($options['width']) ? $options['width'] : 480;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
 
         return array(
+            'type' => 'iframe',
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="//media.myspace.com/play/video/'.
                 $info['vname'].'-'.$info['vid'].'" '.
@@ -78,6 +86,7 @@ class MySpace implements Common {
                 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

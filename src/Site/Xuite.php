@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Xuite implements Common {
 
     /**
@@ -63,17 +65,22 @@ class Xuite implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 640; $height = 360;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
         return array(
+            'type' => 'iframe',
             'html' => '<iframe marginwidth="0" marginheight="0" '.
                 'src="//vlog.xuite.net/embed/'.$info['vid'].
                 '?ar=0&as=0" width="'.$width.'" height="'.$height.'" '.
                 'scrolling="no" frameborder="0"></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

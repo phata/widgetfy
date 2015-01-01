@@ -45,11 +45,14 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($info);
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe width="576" height="354" '.
+            '<iframe width="640" height="360" '.
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
     public function testTranslateVideo() {
@@ -58,11 +61,14 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($info);
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe width="576" height="354" '.
+            '<iframe width="640" height="360" '.
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
     public function testTranslatePlayList() {
@@ -71,12 +77,15 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youtube::translate($info);
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="https://www.youtube.com/embed/videoseries?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z" '.
             'frameborder="0" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

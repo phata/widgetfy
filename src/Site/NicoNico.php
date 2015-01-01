@@ -63,17 +63,27 @@ class NicoNico implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 485; $height = FALSE;
+    public static function translate($info, $options=array()) {
+        $width = 485;
+        $height = 385;
+        $factor = 0.7938;
 
         // Note: NicoNico supports HTTP only. No HTTPS.
 		return array(
+            'type' => 'javascript',
             'html' => '<script type="text/javascript" '.
                 'src="http://ext.nicovideo.jp/thumb_watch/sm'.$info['vid'].'"></script>',
             'width' => $width,
 	        'height' => $height,
+            'factor' => $factor,
+            'special' => array(
+                'javascript_result' => 'flash_embed',
+                'fixed_width' => TRUE,
+                'fixed_height' => TRUE,
+            ),
 	    );
 	}
 }

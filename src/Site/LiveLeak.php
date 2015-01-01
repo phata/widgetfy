@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class LiveLeak implements Common {
 
     /**
@@ -64,18 +66,23 @@ class LiveLeak implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 640; $height = 360;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
 
         // Note: LiveLeak supports HTTP only. No HTTPS.
         return array(
+            'type' => 'iframe',
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="http://www.liveleak.com/ll_embed?f='.$info['id'].'" '.
                 'frameborder="0" allowfullscreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

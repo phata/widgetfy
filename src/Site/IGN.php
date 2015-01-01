@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class IGN implements Common {
 
     /**
@@ -46,10 +48,11 @@ class IGN implements Common {
      * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
+     * @param mixed[] $options array of options
      * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
     public static function preprocess($url_parsed) {
-    	if (preg_match('/^\/videos\/(\d\d\d\d\/\d\d\/\d\d)\/(.+?)$/',
+        if (preg_match('/^\/videos\/(\d\d\d\d\/\d\d\/\d\d)\/(.+?)$/',
                 $url_parsed['path'], $matches) == 1){
             return array(
                 'date' => $matches[1],
@@ -67,15 +70,23 @@ class IGN implements Common {
      * @param mixed[] $info array of preprocessed url information
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-    	$width = 480; $height = 270;
-		return array(
-			'html' => '<iframe src="http://widgets.ign.com/video/embed/content.html?'.
+    public static function translate($info, $options=array()) {
+        // default dimension is 480 x 270
+        $width = isset($options['width']) ? $options['width'] : 480;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
+        return array(
+            'type' => 'iframe',
+            'html' => '<iframe src="http://widgets.ign.com/video/embed/content.html?'.
                 'slug='.$info['slug'].'" '.
                 'scrolling="no" allowfullscreen="" frameborder="0" '.
                 'width="'.$width.'" height="'.$height.'"></iframe>',
-	        'width' => $width,
-	        'height' => $height + 8, // add padding
-	    );
-	}
+            'width' => $width,
+            'height' => $height,
+            'factor' => $factor,
+            'special' => array(
+                'wrapper_padding_bottom' => 8,
+            ),
+        );
+    }
 }

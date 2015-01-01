@@ -76,13 +76,16 @@ class TEDTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = TED::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = TED::translate($info);
+        $options = array('width'=>640);
+        $embed = TED::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//embed.ted.com/talks/pattie_maes_demos_the_sixth_sense.html" '.
             'frameborder="0" scrolling="no" '.
             'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

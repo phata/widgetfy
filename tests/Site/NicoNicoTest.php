@@ -45,11 +45,21 @@ class NicoNicoTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = NicoNico::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = NicoNico::translate($info);
+        $options = array('width'=>640);
+        $embed = NicoNico::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<script type="text/javascript" '.
             'src="http://ext.nicovideo.jp/thumb_watch/sm4772361"></script>'
         );
+        $this->assertEquals($embed['type'], 'javascript');
+        $this->assertEquals($embed['width'], 485);
+        $this->assertEquals($embed['height'], 385);
+        $this->assertEquals($embed['factor'], 0.7938);
+        $this->assertEquals(
+            $embed['special']['javascript_result'],
+            'flash_embed');
+        $this->assertTrue($embed['special']['fixed_width']);
+        $this->assertTrue($embed['special']['fixed_height']);
     }
 
 }

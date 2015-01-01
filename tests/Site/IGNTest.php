@@ -46,13 +46,16 @@ class IGNTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = IGN::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = IGN::translate($info);
+        $options = array('width'=>640);
+        $embed = IGN::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="http://widgets.ign.com/video/embed/content.html?'.
             'slug=call-of-duty-black-ops-kills-commentary-jungle-not-camping-monitoring" '.
             'scrolling="no" allowfullscreen="" frameborder="0" '.
-            'width="480" height="270"></iframe>'
+            'width="640" height="360"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

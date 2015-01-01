@@ -45,14 +45,16 @@ class TudouTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Tudou::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Tudou::translate($info);
+        $options = array('width'=>640);
+        $embed = Tudou::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
+            '<iframe width="640" height="534" src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=0&code=VJlCrFBCh0s&lcode=&resourceId=0_06_05_99" '.
             'allowtransparency="true" allowfullscreen="true" '.
-            'scrolling="no" border="0" frameborder="0" '.
-            'style="width:480px;height:400px;"></iframe>'
+            'scrolling="no" border="0" frameborder="0"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.8332);
     }
 
     public function testTranslateVideo2() {
@@ -61,14 +63,16 @@ class TudouTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Tudou::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Tudou::translate($info);
+        $options = array('width'=>640);
+        $embed = Tudou::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe src="http://www.tudou.com/programs/view/html5embed.action?'.
+            '<iframe width="640" height="534" src="http://www.tudou.com/programs/view/html5embed.action?'.
             'type=2&code=PbNLkw0cgtI&lcode=92J2xqpSxWY&resourceId=0_06_05_99" '.
             'allowtransparency="true" allowfullscreen="true" '.
-            'scrolling="no" border="0" frameborder="0" '.
-            'style="width:480px;height:400px;"></iframe>'
+            'scrolling="no" border="0" frameborder="0"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.8332);
     }
 
 }

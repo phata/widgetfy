@@ -45,12 +45,15 @@ class Ku6Test extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Ku6::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Ku6::translate($info);
+        $options = array('width'=>640);
+        $embed = Ku6::translate($info, $options=array());
         $this->assertEquals($embed['html'],
             '<embed src="//player.ku6.com/refer/PbIRDjlz7Q18Iikf/v.swf" '.
-            'width="480" height="400" allowscriptaccess="always" allowfullscreen="true" '.
+            'width="640" height="534" allowscriptaccess="always" allowfullscreen="true" '.
             'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>'
         );
+        $this->assertEquals($embed['type'], 'flash_embed');
+        $this->assertEquals($embed['factor'], 0.8332);
     }
 
 }

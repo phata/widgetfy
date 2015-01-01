@@ -45,13 +45,16 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Metacafe::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Metacafe::translate($info);
+        $options = array('width'=>640);
+        $embed = Metacafe::translate($info, $options);
 
         // Note: Metacafe only support HTTP. Not HTTPS
         $this->assertEquals($embed['html'],
             '<iframe src="http//www.metacafe.com/embed/11395429/" '.
-            'width="600" height="338" allowFullScreen frameborder=0></iframe>'
+            'width="640" height="361" allowFullScreen frameborder=0></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5633);
     }
 
 }

@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Dailymotion implements Common {
 
     /**
@@ -63,19 +65,26 @@ class Dailymotion implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 560; $height = 315;
+    public static function translate($info, $options=array()) {
+
+        // default dimension 560 x 315
+        $width = isset($options['width']) ? $options['width'] : 560;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
 
         // Note: Dailymotion supports HTTP only. No HTTPS.
         return array(
+            'type' => 'iframe',
             'html' => '<iframe frameborder="0" '.
                 'width="'.$width.'" height="'.$height.'" '.
                 'src="//www.dailymotion.com/embed/video/'.$info['id'].'" '.
                 'allowfullscreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

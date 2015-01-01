@@ -45,12 +45,15 @@ class LiveLeakTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = LiveLeak::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = LiveLeak::translate($info);
+        $options = array('width'=>640);
+        $embed = LiveLeak::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="http://www.liveleak.com/ll_embed?f=8ed_1220480664" '.
             'frameborder="0" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

@@ -45,12 +45,15 @@ class YoukuTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Youku::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Youku::translate($info);
+        $options = array('width' => 640);
+        $embed = Youku::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe width="510" height="498" '.
+            '<iframe width="640" height="625" '.
             'src="http://player.youku.com/embed/XMjMxOTQzOTI=" '.
             'frameborder="0" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.9764);
     }
 
 }

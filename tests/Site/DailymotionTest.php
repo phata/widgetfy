@@ -45,11 +45,14 @@ class DailymotionTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Dailymotion::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Dailymotion::translate($info);
+        $options = array('width'=>640);
+        $embed = Dailymotion::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe frameborder="0" width="560" height="315" '.
+            '<iframe frameborder="0" width="640" height="360" '.
             'src="//www.dailymotion.com/embed/video/x4rj9p" allowfullscreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

@@ -64,15 +64,23 @@ class SteamStore implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 646; $height = 190;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? (int) $options['width'] : 646;
+        $height = 190; // fixed height
+        $factor = round($height/$width, 4); // calculate factor
         return array(
+            'type' => 'iframe',
             'html' => '<iframe src="//store.steampowered.com/widget/'.$info['id'].'/" '.
                 'width="'.$width.'" height="'.$height.'" frameborder="0"></iframe>',
             'width' => $width,
-            'height' => FALSE,
+            'height' => $height,
+            'factor' => $factor,
+            'special' => array(
+                'fixed_height' => TRUE,
+            ),
         );
     }
 }

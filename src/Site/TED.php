@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class TED implements Common {
 
     /**
@@ -63,17 +65,22 @@ class TED implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width = 640; $height = 360;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
         return array(
+            'type' => 'iframe',
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="//embed.ted.com/talks/'.$info['id'].'.html" '.
                 'frameborder="0" scrolling="no" '.
                 'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
             'width' => $width,
             'height' => $height,
+            'factor' => $factor,
         );
     }
 }

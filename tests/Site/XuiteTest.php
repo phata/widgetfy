@@ -45,12 +45,15 @@ class XuiteTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = Xuite::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = Xuite::translate($info);
+        $options = array('width'=>640);
+        $embed = Xuite::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe marginwidth="0" marginheight="0" '.
             'src="//vlog.xuite.net/embed/czRuNEo0LTIwOTE5OTkzLmZsdg=='.
             '?ar=0&as=0" width="640" height="360" scrolling="no" frameborder="0"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.5625);
     }
 
 }

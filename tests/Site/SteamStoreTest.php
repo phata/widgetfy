@@ -45,11 +45,16 @@ class SteamStoreTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse($info = SteamStore::preprocess($url_parsed));
 
         // test returning embed code
-        $embed = SteamStore::translate($info);
+        $options = array('width'=>640);
+        $embed = SteamStore::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<iframe src="//store.steampowered.com/widget/252530/" '.
-            'width="646" height="190" frameborder="0"></iframe>'
+            'width="640" height="190" frameborder="0"></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['factor'], 0.2969);
+        $this->assertEquals($embed['height'], 190); // fixed height
+        $this->assertTrue($embed['special']['fixed_height']); // fixed height
     }
 
 }

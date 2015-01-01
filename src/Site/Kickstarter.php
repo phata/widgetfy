@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Calc as Calc;
+
 class Kickstarter implements Common {
 
     /**
@@ -63,21 +65,30 @@ class Kickstarter implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-        $width1 = 640; $width2 = 220; $height = 480;
+    public static function translate($info, $options=array()) {
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.75; // 4:3
+        $height = Calc::retHeight($width, $factor);
 
         // Note: Kickstarter supports HTTP only. No HTTPS.
         return array(
-            'html' => '<iframe width="'.$width1.'" height="'.$height.'" '.
+            'type' => 'iframe',
+            'html' =>
+                '<iframe width="'.$width.'" height="'.$height.'" '.
                 'src="//www.kickstarter.com/projects/'.$info['id'].'/widget/video.html" '.
-                'frameborder="0" scrolling="no"> </iframe> '.
-                '<iframe width="'.$width2.'" height="'.$height.'" '.
-                'src="//www.kickstarter.com/projects/'.$info['id'].'/widget/card.html" '.
-                'frameborder="0" scrolling="no"> </iframe>',
-            'width' => $width1 + $width2 + 6,
-            'height' => $height + 2,
+                'frameborder="0" scrolling="no"></iframe>',
+            'width' => $width,
+            'height' => $height,
+            'factor' => $factor,
+            'special' => array(
+                'other_html' =>
+                    '<iframe  width="220" height="'.$height.'" '.
+                    'src="https://www.kickstarter.com/projects/'.$info['id'].'/widget/card.html?v=2" '.
+                    'frameborder="0" scrolling="no"></iframe>',
+            ),
         );
     }
 }

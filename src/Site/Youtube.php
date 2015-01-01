@@ -39,6 +39,7 @@
 namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Cache as Cache;
+use Phata\Widgetfy\Utils\Calc as Calc;
 
 class Youtube implements Common {
 
@@ -79,13 +80,16 @@ class Youtube implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
+    public static function translate($info, $options=array()) {
+
+        $width = isset($options['width']) ? $options['width'] : 640;
+        $factor = 0.5625; // 16:9
+        $height = Calc::retHeight($width, $factor);
 
         if ($info['path_type'] == 'video') {
-
-            $width = 576; $height = 354; // temp default
 
             $params       = &$info['params'];
             $query_params = array();
@@ -106,28 +110,35 @@ class Youtube implements Common {
             // the video can be embeded
             if (self::canEmbed($params['vid'])) {
                 return array(
+                    'type' => 'iframe',
                     'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                         'src="//www.youtube.com/embed/'.
                         $params['vid'].$query_str.'" '.
                         'frameborder="0" allowfullscreen></iframe>',
                     'width' => $width,
                     'height' => $height,
+                    'factor' => $factor,
                 );
             } else {
-                $width = 576; $height = 432; // temp default
+                // size of default thumbnail is 480x320
+                // aspect ratio is 4:3, different from video (16:9)
+                $width = isset($options['width']) ? $options['width'] : 480;
+                $factor = 0.75;
+                $height = Calc::retHeight($width, $factor);
                 return array(
+                    'type' => 'link_image',
                     'html' => '<a target="_blank" '.
                         'href="http://www.youtube.com/watch?v='.$params['vid'].'">'.
                         '<img src="//img.youtube.com/vi/'.$params['vid'].'/0.jpg" '.
                         'style="width: '.$width.'px"/></a>',
                     'width' => $width,
                     'height' => $height,
+                    'factor' => $factor,
                 );
             }
 
         } elseif ($info['path_type'] == 'playlist') {
             $args = &$info['query'];
-            $width = 640; $height = 360; // temp default
             $location = $info['location'];
 
             if (isset($args['p'])) {
@@ -139,11 +150,13 @@ class Youtube implements Common {
             }
 
             return array(
+                'type' => 'iframe',
                 'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
                     'src="https://www.youtube.com/embed/videoseries?list='.$lid.'" '.
                     'frameborder="0" allowfullscreen></iframe>',
                 'width' => $width,
                 'height' => $height,
+                'factor' => $factor,
             );
 
         }
