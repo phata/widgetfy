@@ -230,23 +230,23 @@ class Youtube implements Common {
 
             } else {
 
-              // parse fragment parameters into query string
-              if (!empty($url_parsed['fragment'])) {
-                  if (!empty($url_parsed['query'])) {
-                      $url_parsed['query'] = $url_parsed['query'].'&'.$url_parsed['fragment'];
-                  } else {
-                      $url_parsed['query'] = $url_parsed['fragment'];
-                  }
-              }
+                // parse fragment parameters into query string
+                if (!empty($url_parsed['fragment'])) {
+                    if (!empty($url_parsed['query'])) {
+                        $url_parsed['query'] = $url_parsed['query'].'&'.$url_parsed['fragment'];
+                    } else {
+                        $url_parsed['query'] = $url_parsed['fragment'];
+                    }
+                }
 
-              // backward compatibility
-              parse_str($url_parsed['query'], $args);
-              if (isset($args['v'])) {
-                  $vid = $args['v'];
-                  $t = isset($args['t']) ? $args['t'] : '';
-                  $t_fragment = !empty($t) ? '&t='.$t : '';
-                  $url_seperator = '?';
-              }
+                // backward compatibility
+                parse_str($url_parsed['query'], $args);
+                if (isset($args['v'])) {
+                    $vid = $args['v'];
+                    $t = isset($args['t']) ? $args['t'] : '';
+                    $t_fragment = !empty($t) ? '&t='.$t : '';
+                    $url_seperator = '?';
+                }
 
             }
 
