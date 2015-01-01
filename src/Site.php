@@ -77,11 +77,11 @@ class Site {
 
                 // preprocess
                 $info = call_user_func(
-                        $cb_preprocess, $url_parsed, $options);
+                        $cb_preprocess, $url_parsed);
 
                 // if translatable
                 if ($info !== FALSE) {
-                    return call_user_func($cb_translate, $info);
+                    return call_user_func($cb_translate, $info, $options);
                 }
             }
         }
