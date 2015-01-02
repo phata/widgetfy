@@ -50,7 +50,7 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
 
         // Note: Metacafe only support HTTP. Not HTTPS
         $this->assertEquals($embed['html'],
-            '<iframe src="http//www.metacafe.com/embed/11395429/" '.
+            '<iframe src="http://www.metacafe.com/embed/11395429/" '.
             'width="640" height="361" allowFullScreen frameborder=0></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');

@@ -87,7 +87,7 @@ class Metacafe implements Common {
 		return array(
             'type' => 'iframe',
             'html' => '<iframe '.
-                'src="http//www.metacafe.com/embed/'.$info['vid'].'/" '.
+                'src="http://www.metacafe.com/embed/'.$info['vid'].'/" '.
                 $d->toAttr().' '.
                 'allowFullScreen frameborder=0></iframe>',
             'dimension' => $d,
