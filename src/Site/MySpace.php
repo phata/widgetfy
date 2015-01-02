@@ -76,7 +76,7 @@ class MySpace implements Common {
         $d = Dimension::fromOptions($options, array(
             'factor' => 0.5625, // 16:9
             'default_width'=> 480,
-        ), 'iframe video');
+        ));
         return array(
             'type' => 'iframe',
             'html' => '<iframe '.$d->toAttr().' '.
