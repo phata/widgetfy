@@ -55,7 +55,7 @@ class Dimension {
      * @return rendered dimension
      */
     public static function &fromOptions($options,
-            $scale_spec=array(), $scale_model='scale-to-dimension') {
+            $scale_spec=array(), $scale_model='scale-width-height') {
 
         // render Dimension according to scale model
         switch ($scale_model) {
