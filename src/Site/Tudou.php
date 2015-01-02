@@ -83,7 +83,7 @@ class Tudou implements Common {
         // default dimension is 480 x 400
         $width = isset($options['width']) ? $options['width'] : 480;
         $factor = 0.8332;
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         // build http query
         $http_query = http_build_query(array(

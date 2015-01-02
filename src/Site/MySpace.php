@@ -75,7 +75,7 @@ class MySpace implements Common {
         // default dimension 480 x 270
         $width = isset($options['width']) ? $options['width'] : 480;
         $factor = 0.5625; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         return array(
             'type' => 'iframe',

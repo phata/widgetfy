@@ -72,7 +72,7 @@ class LiveLeak implements Common {
     public static function translate($info, $options=array()) {
         $width = isset($options['width']) ? $options['width'] : 640;
         $factor = 0.5625; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         // Note: LiveLeak supports HTTP only. No HTTPS.
         return array(

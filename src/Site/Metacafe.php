@@ -82,7 +82,7 @@ class Metacafe implements Common {
         // default dimension is 600 x 338
         $width = isset($options['width']) ? $options['width'] : 600;
         $factor = 0.5633; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
 		return array(
             'type' => 'iframe',

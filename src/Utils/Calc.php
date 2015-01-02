@@ -49,7 +49,7 @@ class Calc{
      *        default to be ratio of a 16:9 rectangle
      * @return int round up result of height
      */
-    public static function retHeight($width, $aspect_factor=0.5625) {
+    public static function rectHeight($width, $aspect_factor=0.5625) {
         return ceil($width * $aspect_factor);
     }
 

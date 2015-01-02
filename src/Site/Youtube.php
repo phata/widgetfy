@@ -87,7 +87,7 @@ class Youtube implements Common {
 
         $width = isset($options['width']) ? $options['width'] : 640;
         $factor = 0.5625; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         if ($info['path_type'] == 'video') {
 
@@ -124,7 +124,7 @@ class Youtube implements Common {
                 // aspect ratio is 4:3, different from video (16:9)
                 $width = isset($options['width']) ? $options['width'] : 480;
                 $factor = 0.75;
-                $height = Calc::retHeight($width, $factor);
+                $height = Calc::rectHeight($width, $factor);
                 return array(
                     'type' => 'link_image',
                     'html' => '<a target="_blank" '.

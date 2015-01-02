@@ -74,7 +74,7 @@ class IGN implements Common {
         // default dimension is 480 x 270
         $width = isset($options['width']) ? $options['width'] : 480;
         $factor = 0.5625; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="http://widgets.ign.com/video/embed/content.html?'.

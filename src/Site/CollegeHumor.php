@@ -93,7 +93,7 @@ class CollegeHumor implements Common {
         // default dimension is 610 x 343
         $width = isset($options['width']) ? $options['width'] : 610;
         $factor = 0.5622; // approx. 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         // Note: CollegeHumor supports HTTP only. No HTTPS.
         switch ($info['version']) {

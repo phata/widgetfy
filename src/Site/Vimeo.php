@@ -97,7 +97,7 @@ class Vimeo implements Common {
             // if needed, calculate the width and height
             if (isset($options['width'])) {
                 $width = (int) $options['width'];
-                $height = Calc::retHeight($width, $factor);
+                $height = Calc::rectHeight($width, $factor);
             }
 
             return array(

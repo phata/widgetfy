@@ -73,7 +73,7 @@ class V56 implements Common {
         // default size (biggest) is 560 x 470
         $width = isset($options['width']) ? $options['width'] : 560;
         $factor = 0.8392;
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="http://www.56.com/iframe/'.$info['vid'].'" '.

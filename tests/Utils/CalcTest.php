@@ -41,17 +41,17 @@ class CalcTest extends PHPUnit_Framework_TestCase {
 
     public function testCalc_default() {
         $width = 640;
-        $this->assertEquals(360, Calc::retHeight($width));
+        $this->assertEquals(360, Calc::rectHeight($width));
     }
 
     public function testCalc_16_9() {
         $width = 640;
-        $this->assertEquals(360, Calc::retHeight($width, 0.5625));
+        $this->assertEquals(360, Calc::rectHeight($width, 0.5625));
     }
 
     public function testCalc_4_3() {
         $width = 640;
-        $this->assertEquals(480, Calc::retHeight($width, 0.75));
+        $this->assertEquals(480, Calc::rectHeight($width, 0.75));
     }
 
 }

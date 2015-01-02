@@ -77,7 +77,7 @@ class OnCc implements Common {
         // default dimension is 680 x 383
         $width = isset($options['width']) ? $options['width'] : 680;
         $factor = 0.5632;
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="'.$info['url'].'" '.

@@ -74,7 +74,7 @@ class Ku6 implements Common {
         // default dimension is 480 x 400
         $width = isset($options['width']) ? $options['width'] : 640;
         $factor = 0.8332;
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         return array(
             'type' => 'flash_embed',

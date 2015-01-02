@@ -68,7 +68,7 @@ class Dimension {
     	$d = new Dimension;
     	$d->width = $width;
     	if ($factor !== FALSE) {
-    		$d->height = Calc::retHeight($width, $factor);
+    		$d->height = Calc::rectHeight($width, $factor);
     	}
     	return $d;
     }

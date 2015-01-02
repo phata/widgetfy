@@ -73,7 +73,7 @@ class Dailymotion implements Common {
         // default dimension 560 x 315
         $width = isset($options['width']) ? $options['width'] : 560;
         $factor = 0.5625; // 16:9
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         // Note: Dailymotion supports HTTP only. No HTTPS.
         return array(

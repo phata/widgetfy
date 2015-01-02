@@ -82,7 +82,7 @@ class Youku implements Common {
         // default size 510 x 498
         $width = isset($options['width']) ? (int) $options['width'] : 510;
         $factor = 0.9764;
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
         return array(
             'type' => 'iframe',
             'html' => '<iframe width="'.$width.'" height="'.$height.'" '.

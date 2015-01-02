@@ -71,7 +71,7 @@ class Kickstarter implements Common {
     public static function translate($info, $options=array()) {
         $width = isset($options['width']) ? $options['width'] : 640;
         $factor = 0.75; // 4:3
-        $height = Calc::retHeight($width, $factor);
+        $height = Calc::rectHeight($width, $factor);
 
         // Note: Kickstarter supports HTTP only. No HTTPS.
         return array(
