@@ -124,10 +124,14 @@ class Dimension {
 
                 return $d;
 
-            case 'iframe fixed-height':
+            case 'fixed-height':
+
+                // width of the element can vary
+                // content will adapt automatically
+                // height always stay the same
 
                 /* Note:
-                 * 'iframe fixed-height' requires these fields in $scale_spec:
+                 * 'fixed-height' requires these fields in $scale_spec:
                  * - 'default_width' mixed width to use if no option provided
                  * - 'default_height' int the fixed height value
                  */
