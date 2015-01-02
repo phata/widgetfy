@@ -79,7 +79,7 @@ class RealMediaVideo implements Common {
         $height_ctrl = 26;
         $d = Dimension::fromOptions($options, array(
             'default_width' => 400,
-        ), 'auto-height');
+        ), 'scale-width');
 
         return array(
             'html' => '<embed type="audio/x-pn-realaudio-plugin" '.

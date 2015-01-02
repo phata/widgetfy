@@ -121,7 +121,7 @@ class Youtube implements Common {
                 // aspect ratio is 4:3, different from video (16:9)
                 $d = Dimension::fromOptions($options, array(
                     'default_width'=> 480,
-                ), 'auto-height');
+                ), 'scale-width');
                 return array(
                     'type' => 'link_image',
                     'html' => '<a target="_blank" '.

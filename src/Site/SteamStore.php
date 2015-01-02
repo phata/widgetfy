@@ -75,7 +75,7 @@ class SteamStore implements Common {
         $d = Dimension::fromOptions($options, array(
             'default_width'=> 610,
             'default_height' => 190,
-        ), 'fixed-height');
+        ), 'scale-width');
 
         return array(
             'type' => 'iframe',

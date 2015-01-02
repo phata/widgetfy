@@ -60,29 +60,6 @@ class Dimension {
         // render Dimension according to scale model
         switch ($scale_model) {
 
-            case 'auto-height':
-
-                /* Note:
-                 * 'auto-height' requires these fields in $scale_spec:
-                 * - 'default_width' int the fixed width value
-                 */
-
-                // default spec
-                $scale_spec = (array) $scale_spec + array(
-                    'default_width' => 640,
-                );
-
-                $d = new Dimension;
-
-                // determine width
-                $d->width = isset($options['width']) ? 
-                    $options['width'] : $scale_spec['default_width'];
-
-                // note scale model
-                $d->scale_model = $scale_model;
-
-                return $d;
-
             case 'fixed-width-height':
 
                 /* Note:
@@ -124,17 +101,21 @@ class Dimension {
 
                 return $d;
 
-            case 'fixed-height':
+            case 'scale-width':
 
-                // width of the element can vary
-                // content will adapt automatically
-                // height always stay the same
+                // Width of the element varies with definition
+                // Height scales to width automatically, or fixed
 
                 /* Note:
-                 * 'fixed-height' requires these fields in $scale_spec:
+                 * 'scale-width' accepts these fields in $scale_spec:
                  * - 'default_width' mixed width to use if no option provided
-                 * - 'default_height' int the fixed height value
+                 * - 'default_height' (optional) int the fixed height value
                  */
+
+                // default spec
+                $scale_spec = (array) $scale_spec + array(
+                    'default_width' => 640,
+                );
 
                 $d = new Dimension;
 
@@ -142,23 +123,27 @@ class Dimension {
                 $d->width = isset($options['width']) ? 
                     $options['width'] : $scale_spec['default_width'];
 
-                // use default height
-                $d->height = $scale_spec['default_height'];
+                if (isset($scale_spec['default_height'])) {
+                    // if default height is defined
+                    // treated as fixed height
+                    // otherwise presume height to be automatically scaled
+                    $d->height = $scale_spec['default_height'];
+                }
 
                 // note scale model
                 $d->scale_model = $scale_model;
 
                 return $d;
 
-            case 'scale-to-dimension':
+            case 'scale-width-height':
             default:
 
-                // represents normal iframe video embed
-                // adapts to whatever width and height of the iframe
-                // defining width doesn't hint the browser how height it is
+                // Represents normal iframe video embed
+                // Adapts width and height by given values
+                // Defining width doesn't hint the browser how height it is
 
                 /* Note:
-                 * 'scale-to-dimension' accepts these fields in $scale_spec:
+                 * 'scale-width-height' accepts these fields in $scale_spec:
                  * - 'factor' float factor height / width
                  * - 'default_width' mixed width to use if no option provided
                  * - 'max_width' int width to use if there is a maximum width
