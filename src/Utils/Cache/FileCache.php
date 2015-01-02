@@ -44,7 +44,7 @@ class FileCache implements Common {
 
     public function __construct($base_dir=FALSE) {
         if (($base_dir == FALSE)) {
-            $base_dir = '/tmp/widgetfy';
+            $base_dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'widgetfy';
         }
         if (!is_dir($base_dir)) {
             // create the directory recursively
@@ -56,11 +56,11 @@ class FileCache implements Common {
     }
 
     public function filename($group, $key) {
-        return str_replace('/', '', $group.'_'.md5($key));
+        return str_replace(array('/', '\\'), '_', $group.'_'.md5($key));
     }
 
     public function fullpath($filename) {
-        return $this->base_dir.'/'.$filename;
+        return $this->base_dir.DIRECTORY_SEPARATOR.$filename;
     }
 
     public function exists($group, $key) {
