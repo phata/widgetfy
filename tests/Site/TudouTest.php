@@ -54,7 +54,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
             'scrolling="no" border="0" frameborder="0"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.8332);
+        $this->assertEquals($embed['dimension']->factor, 0.8332);
     }
 
     public function testTranslateVideo2() {
@@ -72,7 +72,7 @@ class TudouTest extends PHPUnit_Framework_TestCase {
             'scrolling="no" border="0" frameborder="0"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.8332);
+        $this->assertEquals($embed['dimension']->factor, 0.8332);
     }
 
 }

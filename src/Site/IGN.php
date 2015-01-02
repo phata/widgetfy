@@ -82,9 +82,7 @@ class IGN implements Common {
                 'slug='.$info['slug'].'" '.
                 'scrolling="no" allowfullscreen="" frameborder="0" '.
                 $d->toAttr().'></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

@@ -40,6 +40,7 @@ namespace Phata\Widgetfy\Utils;
 
 class Dimension {
 
+    public $scale_model = FALSE;
     public $width = FALSE;
     public $height = FALSE;
     public $factor = FALSE;
@@ -48,9 +49,9 @@ class Dimension {
      * translate from width and ratio to dimension
      *
      * @param mixed[] $options array of options in link translation
-     * @param string $scale_model model of scaling property
      * @param mixed[] $scale_spec specification of scaling property
      *        specific to a video / widget source
+     * @param string $scale_model model of scaling property
      * @return rendered dimension
      */
     public static function &fromOptions($options,
@@ -76,6 +77,9 @@ class Dimension {
                 // determine width
                 $d->width = isset($options['width']) ? 
                     $options['width'] : $scale_spec['default_width'];
+
+                // note scale model
+                $d->scale_model = $scale_model;
 
                 return $d;
 
@@ -115,6 +119,9 @@ class Dimension {
                 $d->width = $scale_spec['default_width'];
                 $d->height = $scale_spec['default_height'];
 
+                // note scale model
+                $d->scale_model = $scale_model;
+
                 return $d;
 
             case 'iframe fixed-height':
@@ -133,6 +140,9 @@ class Dimension {
 
                 // use default height
                 $d->height = $scale_spec['default_height'];
+
+                // note scale model
+                $d->scale_model = $scale_model;
 
                 return $d;
 
@@ -156,7 +166,8 @@ class Dimension {
 
                 // TODO: for responsive display, use 100% as both
                 //       width and height and let wrapper decide the size
-                return self::fromWidth($width, $scale_spec['factor']);
+                return self::fromWidth($width,
+                    $scale_spec['factor'], $scale_model);
 
             case 'iframe video':
             default:
@@ -190,7 +201,8 @@ class Dimension {
                     ($scale_spec['max_width'] < $width) ?
                     $scale_spec['max_width'] : $width;
 
-                return self::fromWidth($width, $scale_spec['factor']);
+                return self::fromWidth($width,
+                    $scale_spec['factor'], $scale_model);
 
         }
 
@@ -202,9 +214,11 @@ class Dimension {
      * @param int $width width of the rectangular dimension
      * @param float $factor a factor to determine height.
      *        bool False to omit height
+     * @param string $scale_model model of scaling property
      * @return rendered dimension
      */
-    public static function &fromWidth($width, $factor=FALSE) {
+    public static function &fromWidth($width,
+        $factor=FALSE, $scale_model=FALSE) {
 
     	// validate parameter
     	if (!self::isInt($width)) {
@@ -224,6 +238,7 @@ class Dimension {
     		$d->height = Calc::rectHeight($width, $factor);
     	}
         $d->factor = $factor;
+        $d->scale_model = $scale_model;
     	return $d;
     }
 

@@ -53,7 +53,7 @@ class DorklyTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5622);
+        $this->assertEquals($embed['dimension']->factor, 0.5622);
     }
 
 }

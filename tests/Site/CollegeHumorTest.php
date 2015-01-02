@@ -57,7 +57,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
             'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>'
         );
         $this->assertEquals($embed['type'], 'flash_object');
-        $this->assertEquals($embed['factor'], 0.5622);
+        $this->assertEquals($embed['dimension']->factor, 0.5622);
     }
 
     public function testTranslateVideo1b() {
@@ -78,7 +78,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
             'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>'
         );
         $this->assertEquals($embed['type'], 'flash_object');
-        $this->assertEquals($embed['factor'], 0.5622);
+        $this->assertEquals($embed['dimension']->factor, 0.5622);
     }
 
     public function testTranslateVideo2() {
@@ -95,7 +95,7 @@ class CollegeHumorTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5622);
+        $this->assertEquals($embed['dimension']->factor, 0.5622);
     }
 
 }

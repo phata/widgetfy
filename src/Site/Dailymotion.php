@@ -83,9 +83,7 @@ class Dailymotion implements Common {
                 $d->toAttr().' '.
                 'src="//www.dailymotion.com/embed/video/'.$info['id'].'" '.
                 'allowfullscreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

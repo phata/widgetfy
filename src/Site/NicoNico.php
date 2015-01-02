@@ -79,12 +79,10 @@ class NicoNico implements Common {
         // Note: NicoNico supports HTTP only. No HTTPS.
 		return array(
             'type' => 'javascript',
+            'javascript' => 'flash_embed',
             'html' => '<script type="text/javascript" '.
                 'src="http://ext.nicovideo.jp/thumb_watch/sm'.$info['vid'].'"></script>',
-            'width' => $d->width,
-	        'height' => $d->height,
-            'factor' => $d->factor,
-            'javascript' => 'flash_embed',
+            'dimension' => $d,
 	    );
 	}
 }

@@ -59,8 +59,8 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             'data-width="640"></div>'
         );
         $this->assertEquals($embed['type'], 'javascript');
-        $this->assertEquals($embed['width'], 640);
-        $this->assertFalse($embed['factor']);
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertFalse($embed['dimension']->factor);
     }
 
     public function testTranslateVideo2() {
@@ -83,8 +83,8 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
             'data-width="640"></div>'
         );
         $this->assertEquals($embed['type'], 'javascript');
-        $this->assertEquals($embed['width'], 640);
-        $this->assertFalse($embed['factor']);
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertFalse($embed['dimension']->factor);
     }
 
 }

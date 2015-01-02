@@ -90,18 +90,16 @@ class Kickstarter implements Common {
                 '<iframe '.$d->toAttr().' '.
                 'src="//www.kickstarter.com/projects/'.$info['id'].'/widget/video.html" '.
                 'frameborder="0" scrolling="no"></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
 
             // don't know if this will be useful
             // keep it for now
             'other' => array(
+                'type' => 'iframe',
                 'html' => '<iframe '.$d2->toAttr().' '.
                     'src="https://www.kickstarter.com/projects/'.$info['id'].'/widget/card.html?v=2" '.
                     'frameborder="0" scrolling="no"></iframe>',
-                'width' => $d2->width,
-                'height' => $d2->height,
+                'dimension' => $d2,
             ),
         );
     }

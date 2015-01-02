@@ -53,7 +53,7 @@ class Ku6Test extends PHPUnit_Framework_TestCase {
             'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>'
         );
         $this->assertEquals($embed['type'], 'flash_embed');
-        $this->assertEquals($embed['factor'], 0.8332);
+        $this->assertEquals($embed['dimension']->factor, 0.8332);
     }
 
 }

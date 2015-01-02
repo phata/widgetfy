@@ -54,7 +54,7 @@ class MetacafeTest extends PHPUnit_Framework_TestCase {
             'width="640" height="361" allowFullScreen frameborder=0></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5633);
+        $this->assertEquals($embed['dimension']->factor, 0.5633);
     }
 
 }

@@ -53,7 +53,7 @@ class V56Test extends PHPUnit_Framework_TestCase {
             'allowfullscreen scrolling="no"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.8392);
+        $this->assertEquals($embed['dimension']->factor, 0.8392);
     }
 
 }

@@ -86,9 +86,7 @@ class OnCc implements Common {
                 'allowtransparency="true" allowfullscreen="true" '.
                 'scrolling="no" border="0" frameborder="0" '.
                 $d->toAttr().' ></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

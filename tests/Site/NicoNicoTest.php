@@ -52,9 +52,9 @@ class NicoNicoTest extends PHPUnit_Framework_TestCase {
             'src="http://ext.nicovideo.jp/thumb_watch/sm4772361"></script>'
         );
         $this->assertEquals($embed['type'], 'javascript');
-        $this->assertEquals($embed['width'], 485);
-        $this->assertEquals($embed['height'], 385);
-        $this->assertEquals($embed['factor'], FALSE);
+        $this->assertEquals($embed['dimension']->width, 485);
+        $this->assertEquals($embed['dimension']->height, 385);
+        $this->assertEquals($embed['dimension']->factor, FALSE);
         $this->assertEquals($embed['javascript'], 'flash_embed');
     }
 

@@ -108,9 +108,7 @@ class CollegeHumor implements Common {
                         '<param name="allowfullscreen" value="true" />'.
                         '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
                         'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>',
-                    'width' => $d->width,
-                    'height' => $d->height,
-                    'factor' => $d->factor,
+                    'dimension' => $d,
                 );
             case 2:
                 return array(
@@ -118,9 +116,7 @@ class CollegeHumor implements Common {
                     'html' => '<iframe src="http://www.collegehumor.com/e/'.$info['vid'].'" '.
                         $d->toAttr().' '.
                         'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
-                    'width' => $d->width,
-                    'height' => $d->height,
-                    'factor' => $d->factor,
+                    'dimension' => $d,
                 );
         }
     }

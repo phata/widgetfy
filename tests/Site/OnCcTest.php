@@ -54,7 +54,27 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
             'width="640" height="361" ></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5632);
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertEquals($embed['dimension']->factor, 0.5632);
+    }
+
+    public function testTranslateVideoMaxWidth() {
+        $url = 'http://tv.on.cc/hk/index.html?s=201&i=OCM141221-13212-201M&d=1419092839';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = OnCc::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>970); // bigger than max width
+        $embed = OnCc::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<iframe src="'.$url.'" '.
+            'allowtransparency="true" allowfullscreen="true" '.
+            'scrolling="no" border="0" frameborder="0" '.
+            'width="960" height="541" ></iframe>'
+        );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->width, 960);
+        $this->assertEquals($embed['dimension']->factor, 0.5632);
     }
 
 }

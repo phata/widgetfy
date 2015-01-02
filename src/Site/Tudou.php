@@ -102,9 +102,7 @@ class Tudou implements Common {
                 'html5embed.action?'.$http_query.'" '.
                 'allowtransparency="true" allowfullscreen="true" '.
                 'scrolling="no" border="0" frameborder="0"></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

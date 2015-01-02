@@ -53,7 +53,7 @@ class XuiteTest extends PHPUnit_Framework_TestCase {
             '?ar=0&as=0" width="640" height="360" scrolling="no" frameborder="0"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 }

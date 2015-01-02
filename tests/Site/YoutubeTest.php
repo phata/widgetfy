@@ -52,7 +52,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
     public function testTranslateVideo() {
@@ -68,7 +68,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
     public function testTranslatePlayList() {
@@ -85,7 +85,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 }

@@ -53,7 +53,7 @@ class YoukuTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.9764);
+        $this->assertEquals($embed['dimension']->factor, 0.9764);
     }
 
 }

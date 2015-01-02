@@ -81,9 +81,7 @@ class SteamStore implements Common {
             'type' => 'iframe',
             'html' => '<iframe src="//store.steampowered.com/widget/'.$info['id'].'/" '.
                 $d->toAttr().' frameborder="0"></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

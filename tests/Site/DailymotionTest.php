@@ -52,7 +52,7 @@ class DailymotionTest extends PHPUnit_Framework_TestCase {
             'src="//www.dailymotion.com/embed/video/x4rj9p" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 }

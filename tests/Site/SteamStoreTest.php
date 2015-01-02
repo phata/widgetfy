@@ -52,8 +52,8 @@ class SteamStoreTest extends PHPUnit_Framework_TestCase {
             'width="640" height="190" frameborder="0"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertFalse($embed['factor']);
-        $this->assertEquals($embed['height'], 190); // fixed height
+        $this->assertFalse($embed['dimension']->factor);
+        $this->assertEquals($embed['dimension']->height, 190); // fixed height
     }
 
 }

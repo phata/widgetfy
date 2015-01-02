@@ -52,6 +52,8 @@ class TEDTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" scrolling="no" '.
             'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
     public function testTranslateVideoOld2() {
@@ -67,6 +69,8 @@ class TEDTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" scrolling="no" '.
             'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
         );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 
@@ -85,7 +89,7 @@ class TEDTest extends PHPUnit_Framework_TestCase {
             'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 }

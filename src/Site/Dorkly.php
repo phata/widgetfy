@@ -81,9 +81,7 @@ class Dorkly implements Common {
             'html' => '<iframe src="//www.dorkly.com/e/'.$info['vid'].
                 '" '.$d->toAttr().' '.
                 'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

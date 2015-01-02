@@ -93,6 +93,7 @@ class Facebook implements Common {
         ), 'auto-height');
         return array(
             'type' => 'javascript',
+            'javascript' => 'div',
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
                 'var js, fjs = d.getElementsByTagName(s)[0]; '.
                 'if (d.getElementById(id)) return; js = d.createElement(s); '.
@@ -102,10 +103,7 @@ class Facebook implements Common {
                 '<div class="fb-post" '.
                 'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
                 'data-width="'.$d->width.'"></div>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
-            'javascript' => 'div',
+            'dimension' => $d,
         );
     }
 }

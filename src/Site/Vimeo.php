@@ -106,9 +106,7 @@ class Vimeo implements Common {
                     $d->toAttr().' '.
                     'frameborder="0" webkitallowfullscreen '.
                     'mozallowfullscreen allowfullscreen></iframe>',
-                'width' => $d->width,
-                'height' => $d->height,
-                'factor' => $d->factor,
+                'dimension' => $d,
             );
         }
 

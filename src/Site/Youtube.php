@@ -114,25 +114,21 @@ class Youtube implements Common {
                         'src="//www.youtube.com/embed/'.
                         $params['vid'].$query_str.'" '.
                         'frameborder="0" allowfullscreen></iframe>',
-                    'width' => $d->width,
-                    'height' => $d->height,
-                    'factor' => $d->factor,
+                    'dimension' => $d,
                 );
             } else {
                 // size of default thumbnail is 480x320
                 // aspect ratio is 4:3, different from video (16:9)
-                $d = Dimension::fromOptions($options, 'auto-height', array(
+                $d = Dimension::fromOptions($options, array(
                     'default_width'=> 480,
-                ));
+                ), 'auto-height');
                 return array(
                     'type' => 'link_image',
                     'html' => '<a target="_blank" '.
                         'href="http://www.youtube.com/watch?v='.$params['vid'].'">'.
                         '<img src="//img.youtube.com/vi/'.$params['vid'].'/0.jpg" '.
                         'style="'.$d->toCSS().'"/></a>',
-                    'width' => $d->width,
-                    'height' => $d->height,
-                    'factor' => $d->factor,
+                    'dimension' => $d,
                 );
             }
 
@@ -153,9 +149,7 @@ class Youtube implements Common {
                 'html' => '<iframe '.$d->toAttr().' '.
                     'src="https://www.youtube.com/embed/videoseries?list='.$lid.'" '.
                     'frameborder="0" allowfullscreen></iframe>',
-                'width' => $d->width,
-                'height' => $d->height,
-                'factor' => $d->factor,
+                'dimension' => $d,
             );
 
         }

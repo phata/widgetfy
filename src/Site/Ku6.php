@@ -82,9 +82,7 @@ class Ku6 implements Common {
                 $d->toAttr().' '.
                 'allowscriptaccess="always" allowfullscreen="true" '.
                 'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

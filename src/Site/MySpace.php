@@ -84,9 +84,7 @@ class MySpace implements Common {
                 $info['vname'].'-'.$info['vid'].'" '.
                 'frameborder="0" allowtransparency="true" '.
                 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

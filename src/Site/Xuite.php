@@ -80,9 +80,7 @@ class Xuite implements Common {
                 'src="//vlog.xuite.net/embed/'.$info['vid'].
                 '?ar=0&as=0" '.$d->toAttr().' '.
                 'scrolling="no" frameborder="0"></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

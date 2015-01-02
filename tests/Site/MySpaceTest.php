@@ -54,7 +54,7 @@ class MySpaceTest extends PHPUnit_Framework_TestCase {
             'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.5625);
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
 }

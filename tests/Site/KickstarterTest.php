@@ -54,7 +54,7 @@ class KickstarterTest extends PHPUnit_Framework_TestCase {
             'frameborder="0" scrolling="no"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['factor'], 0.75);
+        $this->assertEquals($embed['dimension']->factor, 0.75);
     }
 
 }

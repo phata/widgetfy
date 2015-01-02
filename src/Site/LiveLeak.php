@@ -83,9 +83,7 @@ class LiveLeak implements Common {
             'html' => '<iframe '.$d->toAttr().' '.
                 'src="http://www.liveleak.com/ll_embed?f='.$info['id'].'" '.
                 'frameborder="0" allowfullscreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

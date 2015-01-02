@@ -90,9 +90,7 @@ class Metacafe implements Common {
                 'src="http//www.metacafe.com/embed/'.$info['vid'].'/" '.
                 $d->toAttr().' '.
                 'allowFullScreen frameborder=0></iframe>',
-            'width' => $d->width,
-	        'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
 	    );
 	}
 }

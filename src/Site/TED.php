@@ -82,9 +82,7 @@ class TED implements Common {
                 'src="//embed.ted.com/talks/'.$info['id'].'.html" '.
                 'frameborder="0" scrolling="no" '.
                 'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }

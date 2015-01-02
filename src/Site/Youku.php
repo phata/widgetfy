@@ -89,9 +89,7 @@ class Youku implements Common {
             'html' => '<iframe '.$d->toAttr().' '.
                 'src="http://player.youku.com/embed/'.$info['sid'].'=" '.
                 'frameborder="0" allowfullscreen></iframe>',
-            'width' => $d->width,
-            'height' => $d->height,
-            'factor' => $d->factor,
+            'dimension' => $d,
         );
     }
 }
