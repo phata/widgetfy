@@ -74,7 +74,7 @@ class NicoNico implements Common {
         $d = Dimension::fromOptions($options, array(
             'default_width'=> 485,
             'default_height'=> 385,
-        ), 'fixed-width-height');
+        ), 'no-scale');
 
         // Note: NicoNico supports HTTP only. No HTTPS.
 		return array(

@@ -60,10 +60,13 @@ class Dimension {
         // render Dimension according to scale model
         switch ($scale_model) {
 
-            case 'fixed-width-height':
+            case 'no-scale':
+
+                // 'no-scale' does not scale at all
+                // the size of them are fixed to defaults
 
                 /* Note:
-                 * 'fixed-width-height' requires these fields in $scale_spec:
+                 * 'no-scale' requires these fields in $scale_spec:
                  * - 'default_width' int the fixed width value
                  * - 'default_height' int the fixed height value
                  */
@@ -72,22 +75,22 @@ class Dimension {
 
                 // validate spec
                 if (!isset($scale_spec['default_width'])) {
-                    throw DimensionError('scale model `fixed-width-height` '.
+                    throw DimensionError('scale model `no-scale` '.
                         'requires `default_width`');
                     return;
                 }
                 if (!isset($scale_spec['default_height'])) {
-                    throw DimensionError('scale model `fixed-width-height` '.
+                    throw DimensionError('scale model `no-scale` '.
                         'requires `default_height`');
                     return;
                 }
                 if (!self::isInt($scale_spec['default_width'])) {
-                    throw DimensionError('scale model `fixed-width-height` '.
+                    throw DimensionError('scale model `no-scale` '.
                         'requires integer for `default_width`');
                     return;
                 }
                 if (!self::isInt($scale_spec['default_height'])) {
-                    throw DimensionError('scale model `fixed-width-height` '.
+                    throw DimensionError('scale model `no-scale` '.
                         'requires integer for `default_height`');
                     return;
                 }

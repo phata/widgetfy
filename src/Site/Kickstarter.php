@@ -81,7 +81,7 @@ class Kickstarter implements Common {
             'default_width' => 220,
             'default_height' => ($d->height > 420) ?
                 $d->height : 420,
-        ), 'fixed-width-height');
+        ), 'no-scale');
 
         // Note: Kickstarter supports HTTP only. No HTTPS.
         return array(
