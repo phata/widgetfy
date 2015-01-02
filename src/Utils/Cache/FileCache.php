@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Phata\Widgetfy\Cache\FileCache
+ * class Phata\Widgetfy\Utils\Cache\FileCache
  * 
  * Licence:
  *
@@ -25,9 +25,9 @@
  *
  * Description:
  *
- * This file defines Phata\Widgetfy\Cache\FileCache
+ * This file defines Phata\Widgetfy\Utils\Cache\FileCache
  * which is the default implementation of
- * Phata\Widgetfy\Cache\Common
+ * Phata\Widgetfy\Utils\Cache\Common
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -36,17 +36,30 @@
  * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Phata\Widgetfy\Cache;
+namespace Phata\Widgetfy\Utils\Cache;
 
 class FileCache implements Common {
 
-    public $base_dir = '/tmp';
+    public $base_dir = '';
 
-    private function filename($group, $key) {
-        return 'widgetfy__'.str_replace('/', '', $group.'_'.md5($key));
+    public function __construct($base_dir=FALSE) {
+        if (($base_dir == FALSE)) {
+            $base_dir = '/tmp/widgetfy';
+        }
+        if (!is_dir($base_dir)) {
+            // create the directory recursively
+            if (!mkdir($base_dir, 0777, TRUE)) {
+                throw new Exception('Failed to locate or create base directory for FileCache');
+            }
+        }
+        $this->base_dir = $base_dir;
     }
 
-    private function fullpath($filename) {
+    public function filename($group, $key) {
+        return str_replace('/', '', $group.'_'.md5($key));
+    }
+
+    public function fullpath($filename) {
         return $this->base_dir.'/'.$filename;
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Phata\Widgetfy\Cache
+ * interface Phata\Widgetfy\Utils\Cache\Common
  * 
  * Licence:
  *
@@ -25,9 +25,8 @@
  *
  * Description:
  *
- * This file defines Phata\Widgetfy\Cache
- * which is a Proxy to Cache implementation
- *
+ * This file defines Phata\Widgetfy\Utils\Cache\Common
+ * which is the common cache definition.
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -36,48 +35,26 @@
  * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Phata\Widgetfy;
+namespace Phata\Widgetfy\Utils\Cache;
 
-// use FileCache as default
-use Phata\Widgetfy\Cache\FileCache as DefaultCache;
-
-class Cache {
-
-    public static $handler = FALSE;
-
-    public static function init() {
-        if (self::$handler == FALSE) {
-            self::$handler = new DefaultCache;
-        }
-    }
-
-    /**
-     * @param object $handler cache hander that implements Phata\Widgetfy\Cache\Common
-     */
-    public static function setHandler($handler) {
-        if (!is_subclass_of(self::$handler, 'Phata\Widgetfy\Cache\Common')) {
-            throw new Exception('Cache handler must implement the Phata\Widgetfy\Cache\Common interface');
-        }
-        self::$handler = $handler;
-    }
+/**
+ * Common cache interface to be used
+ */
+interface Common {
 
     /**
      * @param string $group cache group name
      * @param string $key cache key
      * @return boolean the cache exists for the cache key
      */
-    public static function exists($group, $key) {
-        return call_user_func(array(self::$handler, 'exists'), $group, $key);
-    }
+    public function exists($group, $key);
 
     /**
      * @param string $group cache group name
      * @param string $key cache key
      * @return the cached item
      */
-    public static function get($group, $key) {
-        return call_user_func(array(self::$handler, 'exists'), $group, $key);
-    }
+    public function get($group, $key);
 
     /**
      * @param string $group cache group name
@@ -85,8 +62,6 @@ class Cache {
      * @param mixed $value cache value
      * @return boolean the cache set successfully
      */
-    public static function set($group, $key, $value) {
-        return call_user_func(array(self::$handler, 'exists'), $group, $key);
-    }
+    public function set($group, $key, $value);
 
 }

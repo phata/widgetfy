@@ -1,8 +1,8 @@
 <?php
 
 /**
- * interface Phata\Widgetfy\Cache\Common
- * 
+ * Unit test for Phata\Widgetfy\Utils\Cache\FileCache
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -25,8 +25,8 @@
  *
  * Description:
  *
- * This file defines Phata\Widgetfy\Cache\Common
- * which is the common cache definition.
+ * This file is a unit test for
+ * - Phata\Widgetfy\Utils\Cache\FileCache
  *
  * @package   Widgetfy
  * @author    Koala Yeung <koalay@gmail.com>
@@ -35,33 +35,22 @@
  * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Phata\Widgetfy\Cache;
+use Phata\Widgetfy\Utils\Cache\FileCache as FileCache;
 
-/**
- * Common cache interface to be used
- */
-interface Common {
+class FileCacheTest extends PHPUnit_Framework_TestCase {
 
-    /**
-     * @param string $group cache group name
-     * @param string $key cache key
-     * @return boolean the cache exists for the cache key
-     */
-    public function exists($group, $key);
+    public function testFile() {
+        $c = new FileCache;
+        $group = 'test';
+        $key = 'testFile';
+        $value = md5(time() . rand()); // random value
+        $cache_fullpath = $c->fullpath($c->filename($group, $key));
 
-    /**
-     * @param string $group cache group name
-     * @param string $key cache key
-     * @return the cached item
-     */
-    public function get($group, $key);
+        $c->set($group, $key, $value);
+        $value2 = $c->get($group, $key);
 
-    /**
-     * @param string $group cache group name
-     * @param string $key cache key
-     * @param mixed $value cache value
-     * @return boolean the cache set successfully
-     */
-    public function set($group, $key, $value);
+        $this->assertTrue(file_exists($cache_fullpath));
+        $this->assertEquals($value, $value2);
+    }
 
 }

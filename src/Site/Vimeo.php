@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Cache as Cache;
+use Phata\Widgetfy\Utils\Cache as Cache;
 use Phata\Widgetfy\Utils\Calc as Calc;
 
 class Vimeo implements Common {
