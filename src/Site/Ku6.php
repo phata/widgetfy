@@ -75,7 +75,7 @@ class Ku6 implements Common {
         $d = Dimension::fromOptions($options, array(
             'factor' => 0.8332,
             'default_width'=> 480,
-        ), 'flash video');
+        ));
         return array(
             'type' => 'flash_embed',
             'html' => '<embed src="//player.ku6.com/refer/'.$info['vid'].'/v.swf" '.

@@ -94,7 +94,7 @@ class CollegeHumor implements Common {
         $d = Dimension::fromOptions($options, array(
             'factor' => 0.5622,
             'default_width'=> 610,
-        ), ($info['version'] == 1) ? 'iframe video':'flash video');
+        ));
 
         // Note: CollegeHumor supports HTTP only. No HTTPS.
         switch ($info['version']) {

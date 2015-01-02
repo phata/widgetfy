@@ -55,7 +55,7 @@ class Dimension {
      * @return rendered dimension
      */
     public static function &fromOptions($options,
-            $scale_spec=array(), $scale_model='iframe video') {
+            $scale_spec=array(), $scale_model='scale-to-dimension') {
 
         // render Dimension according to scale model
         switch ($scale_model) {
@@ -146,34 +146,15 @@ class Dimension {
 
                 return $d;
 
-            case 'flash video':
-
-                /* Note:
-                 * 'flash video' requires these fields in $scale_spec:
-                 * - 'factor' float factor height / width
-                 * - 'default_width' mixed width to use if no option provided
-                 */
-
-                // default spec
-                $scale_spec = (array) $scale_spec + array(
-                    'factor' => 0.5625,
-                    'default_width' => 640,
-                );
-
-                // determine width
-                $width = isset($options['width']) ? 
-                    $options['width'] : $scale_spec['default_width'];
-
-                // TODO: for responsive display, use 100% as both
-                //       width and height and let wrapper decide the size
-                return self::fromWidth($width,
-                    $scale_spec['factor'], $scale_model);
-
-            case 'iframe video':
+            case 'scale-to-dimension':
             default:
 
+                // represents normal iframe video embed
+                // adapts to whatever width and height of the iframe
+                // defining width doesn't hint the browser how height it is
+
                 /* Note:
-                 * 'iframe video' accepts these fields in $scale_spec:
+                 * 'scale-to-dimension' accepts these fields in $scale_spec:
                  * - 'factor' float factor height / width
                  * - 'default_width' mixed width to use if no option provided
                  * - 'max_width' int width to use if there is a maximum width
