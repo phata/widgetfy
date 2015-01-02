@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Dorkly implements Common {
 
@@ -72,17 +72,18 @@ class Dorkly implements Common {
     public static function translate($info, $options=array()) {
 
         // default dimension is 610 x 343
-        $width = isset($options['width']) ? $options['width'] : 610;
-        $factor = 0.5622; // approx. 16:9
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5622, // approx. 16:9
+            'default_width'=> 610,
+        ));
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="//www.dorkly.com/e/'.$info['vid'].
-                '" width="'.$width.'" height="'.$height.'" '.
+                '" '.$d->toAttr().' '.
                 'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

@@ -39,7 +39,7 @@
 namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Utils\URL as URL;
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class OnCc implements Common {
 
@@ -75,21 +75,20 @@ class OnCc implements Common {
      */
     public static function translate($info, $options=array()) {
         // default dimension is 680 x 383
-        $width = isset($options['width']) ? $options['width'] : 680;
-        $factor = 0.5632;
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5632,
+            'default_width'=> 680,
+            'max_width' => 960,
+        ));
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="'.$info['url'].'" '.
                 'allowtransparency="true" allowfullscreen="true" '.
                 'scrolling="no" border="0" frameborder="0" '.
-                'width="'.$width.'" height="'.$height.'" ></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
-            'special' => array(
-                'max_width' => 960,
-            ),
+                $d->toAttr().' ></iframe>',
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

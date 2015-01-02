@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Tudou implements Common {
 
@@ -80,10 +80,12 @@ class Tudou implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
+
         // default dimension is 480 x 400
-        $width = isset($options['width']) ? $options['width'] : 480;
-        $factor = 0.8332;
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.8332, // approx. 16:9
+            'default_width'=> 480,
+        ));
 
         // build http query
         $http_query = http_build_query(array(
@@ -95,14 +97,14 @@ class Tudou implements Common {
 
         return array(
             'type' => 'iframe',
-            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+            'html' => '<iframe '.$d->toAttr().' '.
                 'src="http://www.tudou.com/programs/view/'.
                 'html5embed.action?'.$http_query.'" '.
                 'allowtransparency="true" allowfullscreen="true" '.
                 'scrolling="no" border="0" frameborder="0"></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

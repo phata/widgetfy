@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class MySpace implements Common {
 
@@ -73,20 +73,20 @@ class MySpace implements Common {
     public static function translate($info, $options=array()) {
 
         // default dimension 480 x 270
-        $width = isset($options['width']) ? $options['width'] : 480;
-        $factor = 0.5625; // 16:9
-        $height = Calc::rectHeight($width, $factor);
-
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5625, // 16:9
+            'default_width'=> 480,
+        ), 'iframe video');
         return array(
             'type' => 'iframe',
-            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+            'html' => '<iframe '.$d->toAttr().' '.
                 'src="//media.myspace.com/play/video/'.
                 $info['vname'].'-'.$info['vid'].'" '.
                 'frameborder="0" allowtransparency="true" '.
                 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

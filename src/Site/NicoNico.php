@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Dimension as Dimension;
+
 class NicoNico implements Common {
 
     /**
@@ -67,23 +69,22 @@ class NicoNico implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-        $width = 485;
-        $height = 385;
-        $factor = 0.7938;
+
+        // fixed dimension to be 485 x 385
+        $d = Dimension::fromOptions($options, array(
+            'default_width'=> 485,
+            'default_height'=> 385,
+        ), 'fixed-width-height');
 
         // Note: NicoNico supports HTTP only. No HTTPS.
 		return array(
             'type' => 'javascript',
             'html' => '<script type="text/javascript" '.
                 'src="http://ext.nicovideo.jp/thumb_watch/sm'.$info['vid'].'"></script>',
-            'width' => $width,
-	        'height' => $height,
-            'factor' => $factor,
-            'special' => array(
-                'javascript_result' => 'flash_embed',
-                'fixed_width' => TRUE,
-                'fixed_height' => TRUE,
-            ),
+            'width' => $d->width,
+	        'height' => $d->height,
+            'factor' => $d->factor,
+            'javascript' => 'flash_embed',
 	    );
 	}
 }

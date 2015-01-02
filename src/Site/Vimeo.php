@@ -39,7 +39,7 @@
 namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Utils\Cache as Cache;
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Vimeo implements Common {
 
@@ -94,21 +94,21 @@ class Vimeo implements Common {
             // calculate the factor from API results
             $factor = round($height / $width, 4);
 
-            // if needed, calculate the width and height
-            if (isset($options['width'])) {
-                $width = (int) $options['width'];
-                $height = Calc::rectHeight($width, $factor);
-            }
+            // default dimension is calculated
+            $d = Dimension::fromOptions($options, array(
+                'factor' => $factor, // calculated
+                'default_width'=> 640,
+            ));
 
             return array(
                 'type' => 'iframe',
                 'html' => '<iframe src="//player.vimeo.com/video/'.$vid.'" '.
-                    'width="'.$width.'" height="'.$height.'" '.
+                    $d->toAttr().' '.
                     'frameborder="0" webkitallowfullscreen '.
                     'mozallowfullscreen allowfullscreen></iframe>',
-                'width' => $width,
-                'height' => $height,
-                'factor' => $factor,
+                'width' => $d->width,
+                'height' => $d->height,
+                'factor' => $d->factor,
             );
         }
 

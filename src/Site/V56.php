@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class V56 implements Common {
 
@@ -71,17 +71,18 @@ class V56 implements Common {
      */
     public static function translate($info, $options=array()) {
         // default size (biggest) is 560 x 470
-        $width = isset($options['width']) ? $options['width'] : 560;
-        $factor = 0.8392;
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.8392,
+            'default_width'=> 560,
+        ));
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="http://www.56.com/iframe/'.$info['vid'].'" '.
-                'width="'.$width.'" height="'.$height.'" '.
+                $d->toAttr().' '.
                 'frameborder="0" allowfullscreen scrolling="no"></iframe>',
-            'width' => $width,
-            'height' => FALSE,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

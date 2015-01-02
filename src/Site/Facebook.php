@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Dimension as Dimension;
+
 class Facebook implements Common {
 
     /**
@@ -84,8 +86,11 @@ class Facebook implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-        $width = isset($options['width']) ? $options['width'] : 640;
-        $height = FALSE;
+
+        // default width is 600
+        $d = Dimension::fromOptions($options, array(
+            'default_width'=> 600,
+        ), 'auto-height');
         return array(
             'type' => 'javascript',
             'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
@@ -96,14 +101,11 @@ class Facebook implements Common {
                 '(document, \'script\', \'facebook-jssdk\'));</script>'.
                 '<div class="fb-post" '.
                 'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-                'data-width="'.$width.'"></div>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => FALSE,
-            'special' => array(
-                'javascript_type' => 'div',
-                'unknown_height' => TRUE,
-            ),
+                'data-width="'.$d->width.'"></div>',
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
+            'javascript' => 'div',
         );
     }
 }

@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Kickstarter implements Common {
 
@@ -69,25 +69,39 @@ class Kickstarter implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-        $width = isset($options['width']) ? $options['width'] : 640;
-        $factor = 0.75; // 4:3
-        $height = Calc::rectHeight($width, $factor);
+
+        // default dimension (medium) is 640 x 480
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.75, // 4:3
+            'default_width'=> 640,
+        ));
+
+        // default dimension of widget is 420 x 220
+        $d2 = Dimension::fromOptions($options, array(
+            'default_width' => 220,
+            'default_height' => ($d->height > 420) ?
+                $d->height : 420,
+        ), 'fixed-width-height');
 
         // Note: Kickstarter supports HTTP only. No HTTPS.
         return array(
             'type' => 'iframe',
             'html' =>
-                '<iframe width="'.$width.'" height="'.$height.'" '.
+                '<iframe '.$d->toAttr().' '.
                 'src="//www.kickstarter.com/projects/'.$info['id'].'/widget/video.html" '.
                 'frameborder="0" scrolling="no"></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
-            'special' => array(
-                'other_html' =>
-                    '<iframe  width="220" height="'.$height.'" '.
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
+
+            // don't know if this will be useful
+            // keep it for now
+            'other' => array(
+                'html' => '<iframe '.$d2->toAttr().' '.
                     'src="https://www.kickstarter.com/projects/'.$info['id'].'/widget/card.html?v=2" '.
                     'frameborder="0" scrolling="no"></iframe>',
+                'width' => $d2->width,
+                'height' => $d2->height,
             ),
         );
     }

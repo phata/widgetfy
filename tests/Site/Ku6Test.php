@@ -46,7 +46,7 @@ class Ku6Test extends PHPUnit_Framework_TestCase {
 
         // test returning embed code
         $options = array('width'=>640);
-        $embed = Ku6::translate($info, $options=array());
+        $embed = Ku6::translate($info, $options);
         $this->assertEquals($embed['html'],
             '<embed src="//player.ku6.com/refer/PbIRDjlz7Q18Iikf/v.swf" '.
             'width="640" height="534" allowscriptaccess="always" allowfullscreen="true" '.

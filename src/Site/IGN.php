@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class IGN implements Common {
 
@@ -72,21 +72,19 @@ class IGN implements Common {
      */
     public static function translate($info, $options=array()) {
         // default dimension is 480 x 270
-        $width = isset($options['width']) ? $options['width'] : 480;
-        $factor = 0.5625; // 16:9
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5625, // 16:9
+            'default_width'=> 480,
+        ));
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="http://widgets.ign.com/video/embed/content.html?'.
                 'slug='.$info['slug'].'" '.
                 'scrolling="no" allowfullscreen="" frameborder="0" '.
-                'width="'.$width.'" height="'.$height.'"></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
-            'special' => array(
-                'wrapper_padding_bottom' => 8,
-            ),
+                $d->toAttr().'></iframe>',
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

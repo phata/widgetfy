@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class TED implements Common {
 
@@ -69,18 +69,22 @@ class TED implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-        $width = isset($options['width']) ? $options['width'] : 640;
-        $factor = 0.5625; // 16:9
-        $height = Calc::rectHeight($width, $factor);
+
+        // default varies, but 640 x 360 (16:9) is usually OK
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5625, // 16:9
+            'default_width'=> 640,
+        ));
+
         return array(
             'type' => 'iframe',
-            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+            'html' => '<iframe '.$d->toAttr().' '.
                 'src="//embed.ted.com/talks/'.$info['id'].'.html" '.
                 'frameborder="0" scrolling="no" '.
                 'webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

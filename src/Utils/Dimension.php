@@ -42,6 +42,159 @@ class Dimension {
 
     public $width = FALSE;
     public $height = FALSE;
+    public $factor = FALSE;
+
+    /**
+     * translate from width and ratio to dimension
+     *
+     * @param mixed[] $options array of options in link translation
+     * @param string $scale_model model of scaling property
+     * @param mixed[] $scale_spec specification of scaling property
+     *        specific to a video / widget source
+     * @return rendered dimension
+     */
+    public static function &fromOptions($options,
+            $scale_spec=array(), $scale_model='iframe video') {
+
+        // render Dimension according to scale model
+        switch ($scale_model) {
+
+            case 'auto-height':
+
+                /* Note:
+                 * 'auto-height' requires these fields in $scale_spec:
+                 * - 'default_width' int the fixed width value
+                 */
+
+                // default spec
+                $scale_spec = (array) $scale_spec + array(
+                    'default_width' => 640,
+                );
+
+                $d = new Dimension;
+
+                // determine width
+                $d->width = isset($options['width']) ? 
+                    $options['width'] : $scale_spec['default_width'];
+
+                return $d;
+
+            case 'fixed-width-height':
+
+                /* Note:
+                 * 'fixed-width-height' requires these fields in $scale_spec:
+                 * - 'default_width' int the fixed width value
+                 * - 'default_height' int the fixed height value
+                 */
+
+                $d = new Dimension;
+
+                // validate spec
+                if (!isset($scale_spec['default_width'])) {
+                    throw DimensionError('scale model `fixed-width-height` '.
+                        'requires `default_width`');
+                    return;
+                }
+                if (!isset($scale_spec['default_height'])) {
+                    throw DimensionError('scale model `fixed-width-height` '.
+                        'requires `default_height`');
+                    return;
+                }
+                if (!self::isInt($scale_spec['default_width'])) {
+                    throw DimensionError('scale model `fixed-width-height` '.
+                        'requires integer for `default_width`');
+                    return;
+                }
+                if (!self::isInt($scale_spec['default_height'])) {
+                    throw DimensionError('scale model `fixed-width-height` '.
+                        'requires integer for `default_height`');
+                    return;
+                }
+
+                // use default width and height
+                $d->width = $scale_spec['default_width'];
+                $d->height = $scale_spec['default_height'];
+
+                return $d;
+
+            case 'iframe fixed-height':
+
+                /* Note:
+                 * 'iframe fixed-height' requires these fields in $scale_spec:
+                 * - 'default_width' mixed width to use if no option provided
+                 * - 'default_height' int the fixed height value
+                 */
+
+                $d = new Dimension;
+
+                // determine width
+                $d->width = isset($options['width']) ? 
+                    $options['width'] : $scale_spec['default_width'];
+
+                // use default height
+                $d->height = $scale_spec['default_height'];
+
+                return $d;
+
+            case 'flash video':
+
+                /* Note:
+                 * 'flash video' requires these fields in $scale_spec:
+                 * - 'factor' float factor height / width
+                 * - 'default_width' mixed width to use if no option provided
+                 */
+
+                // default spec
+                $scale_spec = (array) $scale_spec + array(
+                    'factor' => 0.5625,
+                    'default_width' => 640,
+                );
+
+                // determine width
+                $width = isset($options['width']) ? 
+                    $options['width'] : $scale_spec['default_width'];
+
+                // TODO: for responsive display, use 100% as both
+                //       width and height and let wrapper decide the size
+                return self::fromWidth($width, $scale_spec['factor']);
+
+            case 'iframe video':
+            default:
+
+                /* Note:
+                 * 'iframe video' accepts these fields in $scale_spec:
+                 * - 'factor' float factor height / width
+                 * - 'default_width' mixed width to use if no option provided
+                 * - 'max_width' int width to use if there is a maximum width
+                 */
+
+                // default spec
+                $scale_spec = (array) $scale_spec + array(
+                    'factor' => 0.5625,
+                    'default_width' => 640,
+                    'max_width' => FALSE,
+                );
+
+                // validate spec
+                if (!self::valid($scale_spec['default_width'])) {
+                    throw new DimensionError('default_width in $scale_spec is not valid');
+                }
+
+                // determine width
+                $width = isset($options['width']) ? 
+                    $options['width'] : $scale_spec['default_width'];
+
+                // if max widht presents, use max width
+                $width =
+                    ($scale_spec['max_width'] != FALSE) &&
+                    ($scale_spec['max_width'] < $width) ?
+                    $scale_spec['max_width'] : $width;
+
+                return self::fromWidth($width, $scale_spec['factor']);
+
+        }
+
+    }
 
     /**
      * translate from width and ratio to dimension
@@ -70,6 +223,7 @@ class Dimension {
     	if ($factor !== FALSE) {
     		$d->height = Calc::rectHeight($width, $factor);
     	}
+        $d->factor = $factor;
     	return $d;
     }
 

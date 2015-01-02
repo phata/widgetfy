@@ -38,6 +38,8 @@
 
 namespace Phata\Widgetfy\Site;
 
+use Phata\Widgetfy\Utils\Dimension as Dimension;
+
 class SteamStore implements Common {
 
     /**
@@ -68,19 +70,20 @@ class SteamStore implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-        $width = isset($options['width']) ? (int) $options['width'] : 646;
-        $height = 190; // fixed height
-        $factor = round($height/$width, 4); // calculate factor
+
+        // default dimension is 610 x 190
+        $d = Dimension::fromOptions($options, array(
+            'default_width'=> 610,
+            'default_height' => 190,
+        ), 'iframe fixed-height');
+
         return array(
             'type' => 'iframe',
             'html' => '<iframe src="//store.steampowered.com/widget/'.$info['id'].'/" '.
-                'width="'.$width.'" height="'.$height.'" frameborder="0"></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
-            'special' => array(
-                'fixed_height' => TRUE,
-            ),
+                $d->toAttr().' frameborder="0"></iframe>',
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

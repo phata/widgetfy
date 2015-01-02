@@ -55,7 +55,6 @@ class OnCcTest extends PHPUnit_Framework_TestCase {
         );
         $this->assertEquals($embed['type'], 'iframe');
         $this->assertEquals($embed['factor'], 0.5632);
-        $this->assertEquals($embed['special']['max_width'], 960);
     }
 
 }

@@ -60,12 +60,6 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         );
         $this->assertEquals($embed['type'], 'javascript');
         $this->assertEquals($embed['width'], 640);
-        $this->assertEquals(
-            $embed['special']['javascript_type'],
-            'div');
-        $this->assertEquals(
-            $embed['special']['unknown_height'],
-            TRUE);
         $this->assertFalse($embed['factor']);
     }
 
@@ -90,12 +84,6 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         );
         $this->assertEquals($embed['type'], 'javascript');
         $this->assertEquals($embed['width'], 640);
-        $this->assertEquals(
-            $embed['special']['javascript_type'],
-            'div');
-        $this->assertEquals(
-            $embed['special']['unknown_height'],
-            TRUE);
         $this->assertFalse($embed['factor']);
     }
 

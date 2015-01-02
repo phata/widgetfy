@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Metacafe implements Common {
 
@@ -80,19 +80,19 @@ class Metacafe implements Common {
     public static function translate($info, $options=array()) {
 
         // default dimension is 600 x 338
-        $width = isset($options['width']) ? $options['width'] : 600;
-        $factor = 0.5633; // 16:9
-        $height = Calc::rectHeight($width, $factor);
-
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5633, // approx. 16:9
+            'default_width'=> 600,
+        ));
 		return array(
             'type' => 'iframe',
             'html' => '<iframe '.
                 'src="http//www.metacafe.com/embed/'.$info['vid'].'/" '.
-                'width="'.$width.'" height="'.$height.'" '.
+                $d->toAttr().' '.
                 'allowFullScreen frameborder=0></iframe>',
-            'width' => $width,
-	        'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+	        'height' => $d->height,
+            'factor' => $d->factor,
 	    );
 	}
 }

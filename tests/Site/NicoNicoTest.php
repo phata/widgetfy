@@ -54,12 +54,8 @@ class NicoNicoTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($embed['type'], 'javascript');
         $this->assertEquals($embed['width'], 485);
         $this->assertEquals($embed['height'], 385);
-        $this->assertEquals($embed['factor'], 0.7938);
-        $this->assertEquals(
-            $embed['special']['javascript_result'],
-            'flash_embed');
-        $this->assertTrue($embed['special']['fixed_width']);
-        $this->assertTrue($embed['special']['fixed_height']);
+        $this->assertEquals($embed['factor'], FALSE);
+        $this->assertEquals($embed['javascript'], 'flash_embed');
     }
 
 }

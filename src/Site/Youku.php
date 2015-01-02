@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Youku implements Common {
 
@@ -80,17 +80,18 @@ class Youku implements Common {
      */
     public static function translate($info, $options=array()) {
         // default size 510 x 498
-        $width = isset($options['width']) ? (int) $options['width'] : 510;
-        $factor = 0.9764;
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.9764,
+            'default_width'=> 510,
+        ));
         return array(
             'type' => 'iframe',
-            'html' => '<iframe width="'.$width.'" height="'.$height.'" '.
+            'html' => '<iframe '.$d->toAttr().' '.
                 'src="http://player.youku.com/embed/'.$info['sid'].'=" '.
                 'frameborder="0" allowfullscreen></iframe>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

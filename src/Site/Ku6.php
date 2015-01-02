@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class Ku6 implements Common {
 
@@ -72,19 +72,19 @@ class Ku6 implements Common {
     public static function translate($info, $options=array()) {
 
         // default dimension is 480 x 400
-        $width = isset($options['width']) ? $options['width'] : 640;
-        $factor = 0.8332;
-        $height = Calc::rectHeight($width, $factor);
-
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.8332,
+            'default_width'=> 480,
+        ), 'flash video');
         return array(
             'type' => 'flash_embed',
             'html' => '<embed src="//player.ku6.com/refer/'.$info['vid'].'/v.swf" '.
-                'width="'.$width.'" height="'.$height.'" '.
+                $d->toAttr().' '.
                 'allowscriptaccess="always" allowfullscreen="true" '.
                 'type="application/x-shockwave-flash" flashvars="from=ku6"></embed>',
-            'width' => $width,
-            'height' => $height,
-            'factor' => $factor,
+            'width' => $d->width,
+            'height' => $d->height,
+            'factor' => $d->factor,
         );
     }
 }

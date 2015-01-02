@@ -38,7 +38,7 @@
 
 namespace Phata\Widgetfy\Site;
 
-use Phata\Widgetfy\Utils\Calc as Calc;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class CollegeHumor implements Common {
 
@@ -91,9 +91,10 @@ class CollegeHumor implements Common {
     public static function translate($info, $options=array()) {
 
         // default dimension is 610 x 343
-        $width = isset($options['width']) ? $options['width'] : 610;
-        $factor = 0.5622; // approx. 16:9
-        $height = Calc::rectHeight($width, $factor);
+        $d = Dimension::fromOptions($options, array(
+            'factor' => 0.5622,
+            'default_width'=> 610,
+        ), ($info['version'] == 1) ? 'iframe video':'flash video');
 
         // Note: CollegeHumor supports HTTP only. No HTTPS.
         switch ($info['version']) {
@@ -103,23 +104,23 @@ class CollegeHumor implements Common {
                     'html' => '<object type="application/x-shockwave-flash" '.
                         'data="http://www.collegehumor.com/moogaloop/'.
                         'moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" '.
-                        'width="'.$width.'" height="'.$height.'" >'.
+                        $d->toAttr().' >'.
                         '<param name="allowfullscreen" value="true" />'.
                         '<param name="movie" quality="best" value="http://www.collegehumor.com/'.
                         'moogaloop/moogaloop.swf?clip_id='.$info['vid'].'&fullscreen=1" /></object>',
-                    'width' => $width,
-                    'height' => $height,
-                    'factor' => $factor,
+                    'width' => $d->width,
+                    'height' => $d->height,
+                    'factor' => $d->factor,
                 );
             case 2:
                 return array(
                     'type' => 'iframe',
-                    'html' => '<iframe src="http://www.collegehumor.com/e/'.$info['vid'].
-                        '" width="'.$width.'" height="'.$height.'" '.
+                    'html' => '<iframe src="http://www.collegehumor.com/e/'.$info['vid'].'" '.
+                        $d->toAttr().' '.
                         'frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>',
-                    'width' => $width,
-                    'height' => $height,
-                    'factor' => $factor,
+                    'width' => $d->width,
+                    'height' => $d->height,
+                    'factor' => $d->factor,
                 );
         }
     }
