@@ -43,51 +43,57 @@ class HTML5VideoTest extends PHPUnit_Framework_TestCase {
         $url = 'http://foobar.com/video.ogg';
         $url_parsed = parse_url($url);
         $this->assertNotFalse($info = HTML5Video::preprocess($url_parsed));
-        $this->assertEquals(HTML5Video::translate($info), array(
-            'html' => '<video width="640" controls="true" preload="metadata">'.
-                '<source src="http://foobar.com/video.ogg" type="video/ogg" />'.
-                'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <a href="http://www.theora.org/" target="_blank">OGG Theora</a>; or</li>
-<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.getfirefox.com" target="_blank">Firefox</a>.'.
-                '</video>',
-            'width' => 640,
-            'height' => FALSE,
-        ));
+
+        $options = array('width' => 640);
+        $embed = HTML5Video::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<video width="640" controls="true" preload="metadata">'.
+            '<source src="http://foobar.com/video.ogg" type="video/ogg" />'.
+            'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <a href="http://www.theora.org/" target="_blank">OGG Theora</a>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.getfirefox.com" target="_blank">Firefox</a>.'.
+            '</video>');
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertEquals($embed['dimension']->height, FALSE);
     }
 
     public function testTranslateVideoMp4() {
         $url = 'http://foobar.com/video.mp4';
         $url_parsed = parse_url($url);
         $this->assertNotFalse($info = HTML5Video::preprocess($url_parsed));
-        $this->assertEquals(HTML5Video::translate($info), array(
-            'html' => '<video width="640" controls="true" preload="metadata">'.
-                '<source src="http://foobar.com/video.mp4" type="video/mp4" />'.
-                'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <strong>MP4 Video</strong>; or</li>
-<li>It does not supportthe HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.'.
-                '</video>',
-            'width' => 640,
-            'height' => FALSE,
-        ));
+
+        $options = array('width' => 640);
+        $embed = HTML5Video::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<video width="640" controls="true" preload="metadata">'.
+            '<source src="http://foobar.com/video.mp4" type="video/mp4" />'.
+            'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <strong>MP4 Video</strong>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.'.
+            '</video>');
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertEquals($embed['dimension']->height, FALSE);
     }
 
     public function testTranslateVideoWebM() {
         $url = 'http://foobar.com/video.webm';
         $url_parsed = parse_url($url);
         $this->assertNotFalse($info = HTML5Video::preprocess($url_parsed));
-        $this->assertEquals(HTML5Video::translate($info), array(
-            'html' => '<video width="640" controls="true" preload="metadata">'.
-                '<source src="http://foobar.com/video.webm" type="video/webm" />'.
-                'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <a href="http://www.webmproject.org/" target="_blank">WebM Video</a>; or</li>
-<li>It does not supportthe HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.'.
-                '</video>',
-            'width' => 640,
-            'height' => FALSE,
-        ));
+
+        $options = array('width' => 640);
+        $embed = HTML5Video::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<video width="640" controls="true" preload="metadata">'.
+            '<source src="http://foobar.com/video.webm" type="video/webm" />'.
+            'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <a href="http://www.webmproject.org/" target="_blank">WebM Video</a>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.'.
+            '</video>');
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertEquals($embed['dimension']->height, FALSE);
     }
 
 }

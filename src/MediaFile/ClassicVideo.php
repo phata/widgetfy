@@ -39,6 +39,7 @@
 namespace Phata\Widgetfy\MediaFile;
 
 use Phata\Widgetfy\Utils\URL as URL;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class ClassicVideo implements Common {
 
@@ -70,12 +71,15 @@ class ClassicVideo implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-    	$width = 480; $height = 290;
+    public static function translate($info, $options=array()) {
+        $d = Dimension::fromOptions($options, array(
+            'default_width' => 640,
+        ), 'auto-height');
         return array(
-            'html' => '<object id="mediaplayer" width="'.$width.'" height="'.$height.'" '.
+            'html' => '<object id="mediaplayer" '.$d->toAttr().' '.
                 'classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" '.
                 'standby="loading windows media player components..." '.
                 'type="application/x-oleobject">'.
@@ -86,12 +90,11 @@ class ClassicVideo implements Common {
                 '<param name="ShowDisplay" value="false" />'.
                 '<embed type="application/x-mplayer2" '.
                 'src="'.$info['url'].'" '.
-                'name="mediaplayer" width="'.$width.'" height="'.$height.'" '.
+                'name="mediaplayer" '.$d->toAttr().' '.
                 'ShowControls="1" ShowStatusBar="1" ShowDisplay="0" '.
                 'autostart="0"></embed>'.
                 '</object>',
-            'width' => $width,
-            'height' => $height,
+            'dimension' => $d,
         );
 	}
 }

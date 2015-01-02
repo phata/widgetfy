@@ -39,6 +39,7 @@
 namespace Phata\Widgetfy\MediaFile;
 
 use Phata\Widgetfy\Utils\URL as URL;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 class HTML5Video implements Common {
 
@@ -48,7 +49,6 @@ class HTML5Video implements Common {
      * preprocess the URL
      * by this site adapter
      * @param string[] $url_parsed result of parse_url($url)
-     * @param string $url full url
      * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
     public static function preprocess($url_parsed) {
@@ -69,42 +69,44 @@ class HTML5Video implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param mixed[] $info array of preprocessed url information
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
+    public static function translate($info, $options=array()) {
 
         // determine fallback message by filetype
         $message = '';
         switch($info['filetype']) {
             case 'ogg':
-                $message = 'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <a href="http://www.theora.org/" target="_blank">OGG Theora</a>; or</li>
-<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.getfirefox.com" target="_blank">Firefox</a>.';
+                $message = 'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <a href="http://www.theora.org/" target="_blank">OGG Theora</a>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.getfirefox.com" target="_blank">Firefox</a>.';
                 break;
             case 'mp4':
-                $message = 'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <strong>MP4 Video</strong>; or</li>
-<li>It does not supportthe HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.';
+                $message = 'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <strong>MP4 Video</strong>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.';
                 break;
             case 'webm':
-                $message = 'Sorry, your browser has the following problem(s):
-<ul><li>It does not support playing <a href="http://www.webmproject.org/" target="_blank">WebM Video</a>; or</li>
-<li>It does not supportthe HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a
-href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.';
+                $message = 'Sorry, your browser has the following problem(s):'.
+'<ul><li>It does not support playing <a href="http://www.webmproject.org/" target="_blank">WebM Video</a>; or</li>'.
+'<li>It does not support the HTML5 &lt;video&gt; element.</li></ul> Please upgrade to a browser such as <a '.
+'href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.';
                 break;
         }
 
         // render output
-    	$width = 640; $height = FALSE;
+        $d = Dimension::fromOptions($options, array(
+            'default_width' => 640,
+        ), 'auto-height');
         return array(
-            'html' => '<video width="'.$width.'" controls="true" preload="metadata">'.
+            'html' => '<video '.$d->toAttr().' controls="true" preload="metadata">'.
                 '<source src="'.$info['url'].'" type="video/'.$info['filetype'].'" />'.
                 $message.
                 '</video>',
-            'width' => $width,
-            'height' => $height,
+            'dimension' => $d,
         );
 	}
 }

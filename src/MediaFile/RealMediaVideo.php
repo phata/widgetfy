@@ -39,6 +39,7 @@
 namespace Phata\Widgetfy\MediaFile;
 
 use Phata\Widgetfy\Utils\URL as URL;
+use Phata\Widgetfy\Utils\Dimension as Dimension;
 
 
 class RealMediaVideo implements Common {
@@ -69,24 +70,30 @@ class RealMediaVideo implements Common {
      * translate the provided URL into
      * HTML embed code of it
      * @param string[] $url_parsed result of parse_url($url)
+     * @param mixed[] $options array of options
      * @return mixed[] array of embed information or NULL if not applicable
      */
-    public static function translate($info) {
-    	$width = 400; $height = 300; $height_ctrl = 26;
+    public static function translate($info, $options=array()) {
+
+        // hardcorded controls height
+        $height_ctrl = 26;
+        $d = Dimension::fromOptions($options, array(
+            'default_width' => 400,
+        ), 'auto-height');
+
         return array(
             'html' => '<embed type="audio/x-pn-realaudio-plugin" '.
                 'src="'.$info['url'].'" '.
-                'width="'.$width.'" height="'.$height.'" autostart="false" '.
+                $d->toAttr().' autostart="false" '.
                 'controls="imagewindow" nojava="true" '.
                 'console="video" '.
                 'pluginspage="https://www.real.com/"></embed><br>'.
                 '<embed type="audio/x-pn-realaudio-plugin" '.
-                'src="%s" '.
-                'width="'.$width.'" height="'.$height_ctrl.'" autostart="false" '.
+                'src="'.$info['url'].'" '.
+                'width="'.$d->width.'" height="'.$height_ctrl.'" autostart="false" '.
                 'nojava="true" controls="ControlPanel" '.
                 'console="video"></embed>',
-            'width' => $width,
-            'height' => $height,
+            'dimension' => $d,
         );
 	}
 

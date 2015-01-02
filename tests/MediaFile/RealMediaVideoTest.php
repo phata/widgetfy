@@ -43,21 +43,23 @@ class RealMediaVideoTest extends PHPUnit_Framework_TestCase {
         $url = 'http://foobar.com/video.rmvb';
         $url_parsed = parse_url($url);
         $this->assertNotFalse($info = RealMediaVideo::preprocess($url_parsed));
-        $this->assertEquals(RealMediaVideo::translate($info), array(
-            'html' => '<embed type="audio/x-pn-realaudio-plugin" '.
-                'src="http://foobar.com/video.rmvb" '.
-                'width="400" height="300" autostart="false" '.
-                'controls="imagewindow" nojava="true" '.
-                'console="video" '.
-                'pluginspage="https://www.real.com/"></embed><br>'.
-                '<embed type="audio/x-pn-realaudio-plugin" '.
-                'src="%s" '.
-                'width="400" height="26" autostart="false" '.
-                'nojava="true" controls="ControlPanel" '.
-                'console="video"></embed>',
-            'width' => 400,
-            'height' => 300,
-        ));
+
+        // assert embed result
+        $options = array('width' => 640);
+        $embed = RealMediaVideo::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<embed type="audio/x-pn-realaudio-plugin" '.
+            'src="'.$url.'" '.
+            'width="640" autostart="false" '.
+            'controls="imagewindow" nojava="true" '.
+            'console="video" '.
+            'pluginspage="https://www.real.com/"></embed><br>'.
+            '<embed type="audio/x-pn-realaudio-plugin" '.
+            'src="'.$url.'" '.
+            'width="640" height="26" autostart="false" '.
+            'nojava="true" controls="ControlPanel" '.
+            'console="video"></embed>');
+        $this->assertEquals($embed['dimension']->width, 640);
     }
 
 }
