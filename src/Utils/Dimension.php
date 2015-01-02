@@ -62,11 +62,13 @@ class Dimension {
 
             case 'no-scale':
 
-                // 'no-scale' does not scale at all
-                // the size of them are fixed to defaults
-
-                /* Note:
-                 * 'no-scale' requires these fields in $scale_spec:
+                /*
+                 * 'no-scale':
+                 *
+                 * This scale model does not scale at all.
+                 * The width and height are fixed to defaults
+                 *
+                 * 'no-scale' **requires** these fields in $scale_spec:
                  * - 'default_width' int the fixed width value
                  * - 'default_height' int the fixed height value
                  */
@@ -106,10 +108,12 @@ class Dimension {
 
             case 'scale-width':
 
-                // Width of the element varies with definition
-                // Height scales to width automatically, or fixed
-
-                /* Note:
+                /*
+                 * 'scale-width':
+                 *
+                 * Width of the element varies with definition.
+                 * Height scales to width automatically, or fixed.
+                 *
                  * 'scale-width' accepts these fields in $scale_spec:
                  * - 'default_width' mixed width to use if no option provided
                  * - 'default_height' (optional) int the fixed height value
@@ -141,11 +145,13 @@ class Dimension {
             case 'scale-width-height':
             default:
 
-                // Represents normal iframe video embed
-                // Adapts width and height by given values
-                // Defining width doesn't hint the browser how height it is
-
-                /* Note:
+                /*
+                 * 'scale-width-height':
+                 *
+                 * Represents normal iframe video embed.
+                 * Adapts width and height by given values.
+                 * Defining width doesn't hint the browser how height it is.
+                 *
                  * 'scale-width-height' accepts these fields in $scale_spec:
                  * - 'factor' float factor height / width
                  * - 'default_width' mixed width to use if no option provided
