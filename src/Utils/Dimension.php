@@ -166,8 +166,7 @@ class Dimension {
                 $d->scale_model = $scale_model;
 
                 // determine dynamic property
-                $dynamic = isset($options['dynamic']) ?
-                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+                $d->dynamic = (bool) $scale_spec['dynamic'];
 
                 return $d;
 
@@ -208,8 +207,7 @@ class Dimension {
                 $d->scale_model = $scale_model;
 
                 // determine dynamic property
-                $dynamic = isset($options['dynamic']) ?
-                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+                $d->dynamic = (bool) $scale_spec['dynamic'];
 
                 return $d;
 
@@ -257,8 +255,7 @@ class Dimension {
                     $scale_spec['factor'], $scale_model);
 
                 // determine dynamic property
-                $dynamic = isset($options['dynamic']) ?
-                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+                $d->dynamic = (bool) $scale_spec['dynamic'];
 
                 return $d;
 
