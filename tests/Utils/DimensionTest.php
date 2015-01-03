@@ -140,6 +140,78 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('width:100px; height:100%;', $d->toCSS());
     }
 
+    // test 'scale-width-height'
+    public function testFromOptionsScaleWidthHeight() {
 
+        // default
+        $d = Dimension::fromOptions(array());
+        $this->assertEquals('scale-width-height', $d->scale_model);
+        $this->assertEquals(640, $d->width);
+        $this->assertEquals(360, $d->height);
+        $this->assertEquals(0.5625, $d->factor);
+        $this->assertTrue($d->dynamic);
+
+        // provide options
+        $d = Dimension::fromOptions(array(
+            'width' => 600,
+        ), array(
+            'default_width' => 800,
+            'factor' => 0.5,
+        ), 'scale-width-height');
+        $this->assertEquals('scale-width-height', $d->scale_model);
+        $this->assertEquals(600, $d->width);
+        $this->assertEquals(300, $d->height);
+        $this->assertEquals(0.5, $d->factor);
+        $this->assertTrue($d->dynamic);
+
+    }
+
+    // test 'scale-width'
+    public function testFromOptionsScaleWidth() {
+
+        // auto height
+        $d = Dimension::fromOptions(array(
+            'width' => 600,
+        ), array(
+            'default_width' => 800,
+        ), 'scale-width');
+        $this->assertEquals('scale-width', $d->scale_model);
+        $this->assertEquals(600, $d->width);
+        $this->assertFalse($d->height);
+        $this->assertFalse($d->factor);
+        $this->assertTrue($d->dynamic);
+
+        // fixed height
+        $d = Dimension::fromOptions(array(
+            'width' => 600,
+        ), array(
+            'default_width' => 800,
+            'default_height' => 900,
+        ), 'scale-width');
+        $this->assertEquals('scale-width', $d->scale_model);
+        $this->assertEquals(600, $d->width);
+        $this->assertEquals(900, $d->height);
+        $this->assertFalse($d->factor);
+        $this->assertTrue($d->dynamic);
+
+    }
+
+    // test 'no-scale'
+    public function testFromOptionsNoScale() {
+
+        $d = Dimension::fromOptions(array(
+            'width' => 600,
+            'height' => 400,
+        ), array(
+            'default_width' => 900,
+            'default_height' => 700,
+        ), 'no-scale');
+        $this->assertEquals('no-scale', $d->scale_model);
+        $this->assertEquals(900, $d->width);
+        $this->assertEquals(700, $d->height);
+        $this->assertFalse($d->factor);
+        $this->assertFalse($d->dynamic);
+
+    }
 
 }
