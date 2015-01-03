@@ -40,9 +40,55 @@ namespace Phata\Widgetfy\Utils;
 
 class Dimension {
 
+    /**
+     * The scaling model of the given dimension
+     *
+     * Describe how the object will response if we want to change
+     * the width of the dimension. For example if we want to change
+     * the width of a flash video of a certain provider, how we
+     * should generate the height parameter?
+     *
+     * 3 possible values:
+     *
+     * - 'scale-width-height':
+     *    The scale ratio should remain the same. The height should
+     *    be generated as proposion to the given width.
+     *
+     * - 'scale-width':
+     *    You wouldn't calculate the height by the width. The height
+     *    will simply change itself with the width or it will simply
+     *    stay the same.
+     *
+     * - 'no-scale':
+     *    You simply cannot scale the object. The width and height
+     *    are fixed.
+     *
+     * @var string
+     */
     public $scale_model = FALSE;
+
+    /**
+     * Pixel size of the object width
+     * Or FALSE if not applicable
+     *
+     * @var mixed
+     */
     public $width = FALSE;
+
+    /**
+     * Pixel size of the object height
+     * Or FALSE if not applicable
+     *
+     * @var mixed
+     */
     public $height = FALSE;
+
+    /**
+     * Pixel size of the object height
+     * Or FALSE if not applicable
+     *
+     * @var mixed
+     */
     public $factor = FALSE;
 
     /**
