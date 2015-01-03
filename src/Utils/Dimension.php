@@ -92,6 +92,15 @@ class Dimension {
     public $factor = FALSE;
 
     /**
+     * Whether or not this object could be changed
+     * dynamically with the browser width / device
+     * width.
+     *
+     * @var boolean
+     */
+    public $dynamic = FALSE;
+
+    /**
      * translate from width and ratio to dimension
      *
      * @param mixed[] $options array of options in link translation
@@ -117,7 +126,13 @@ class Dimension {
                  * 'no-scale' **requires** these fields in $scale_spec:
                  * - 'default_width' int the fixed width value
                  * - 'default_height' int the fixed height value
+                 * - 'dynamic' boolean if this object can scale dynamically
                  */
+
+                // default spec
+                $scale_spec = (array) $scale_spec + array(
+                    'dynamic' => FALSE,
+                );
 
                 $d = new Dimension;
 
@@ -150,6 +165,10 @@ class Dimension {
                 // note scale model
                 $d->scale_model = $scale_model;
 
+                // determine dynamic property
+                $dynamic = isset($options['dynamic']) ?
+                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+
                 return $d;
 
             case 'scale-width':
@@ -163,11 +182,13 @@ class Dimension {
                  * 'scale-width' accepts these fields in $scale_spec:
                  * - 'default_width' mixed width to use if no option provided
                  * - 'default_height' (optional) int the fixed height value
+                 * - 'dynamic' boolean if this object can scale dynamically
                  */
 
                 // default spec
                 $scale_spec = (array) $scale_spec + array(
                     'default_width' => 640,
+                    'dynamic' => TRUE,
                 );
 
                 $d = new Dimension;
@@ -186,6 +207,10 @@ class Dimension {
                 // note scale model
                 $d->scale_model = $scale_model;
 
+                // determine dynamic property
+                $dynamic = isset($options['dynamic']) ?
+                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+
                 return $d;
 
             case 'scale-width-height':
@@ -202,6 +227,7 @@ class Dimension {
                  * - 'factor' float factor height / width
                  * - 'default_width' mixed width to use if no option provided
                  * - 'max_width' int width to use if there is a maximum width
+                 * - 'dynamic' boolean if this object can scale dynamically
                  */
 
                 // default spec
@@ -209,6 +235,7 @@ class Dimension {
                     'factor' => 0.5625,
                     'default_width' => 640,
                     'max_width' => FALSE,
+                    'dynamic' => TRUE,
                 );
 
                 // validate spec
@@ -226,8 +253,14 @@ class Dimension {
                     ($scale_spec['max_width'] < $width) ?
                     $scale_spec['max_width'] : $width;
 
-                return self::fromWidth($width,
+                $d = self::fromWidth($width,
                     $scale_spec['factor'], $scale_model);
+
+                // determine dynamic property
+                $dynamic = isset($options['dynamic']) ?
+                    (bool) $options['dynamic'] : $scale_spec['dynamic'];
+
+                return $d;
 
         }
 
