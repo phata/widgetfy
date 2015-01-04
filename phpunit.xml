@@ -9,5 +9,8 @@
     <testsuite name="MediaFiles">
       <directory>tests/MediaFile</directory>
     </testsuite>
+    <testsuite name="Core">
+      <directory>tests/Core</directory>
+    </testsuite>
   </testsuites>
 </phpunit>
