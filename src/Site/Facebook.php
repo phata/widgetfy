@@ -89,8 +89,9 @@ class Facebook implements Common {
 
         // default width is 600
         $d = Dimension::fromOptions($options, array(
+            'scale_model' => 'scale-width',
             'default_width'=> 600,
-        ), 'scale-width');
+        ));
         return array(
             'type' => 'javascript',
             'javascript' => 'div',

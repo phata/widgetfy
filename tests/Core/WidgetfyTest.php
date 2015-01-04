@@ -44,13 +44,38 @@ class WidgetfyTest extends PHPUnit_Framework_TestCase {
         $options = array('width'=>640);
 
         // test returning embed code
-        $embed = Widgetfy::translate($url);
+        $embed = Widgetfy::translate($url, $options);
         $this->assertEquals($embed['html'],
             '<iframe width="640" height="360" '.
             'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
         $this->assertEquals($embed['dimension']->factor, 0.5625);
+    }
+
+    public function testSiteOverride() {
+        $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';
+        $options = array(
+            'width' => 640,
+            'sites' => array(
+                // override global options
+                'Youtube' => array(
+                    'width' => 800,
+                    'factor' => 0.75
+                ),
+            ),
+        );
+
+        // test returning embed code
+        $embed = Widgetfy::translate($url, $options);
+        $this->assertEquals($embed['html'],
+            '<iframe width="800" height="600" '.
+            'src="//www.youtube.com/embed/PBLuP2JZcEg" frameborder="0" allowfullscreen></iframe>'
+        );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->width, 800);
+        $this->assertEquals($embed['dimension']->height, 600);
+        $this->assertEquals($embed['dimension']->factor, 0.75);
     }
 
 }

@@ -120,8 +120,9 @@ class Youtube implements Common {
                 // size of default thumbnail is 480x320
                 // aspect ratio is 4:3, different from video (16:9)
                 $d = Dimension::fromOptions($options, array(
+                    'scale_model' => 'scale-width',
                     'default_width'=> 480,
-                ), 'scale-width');
+                ));
                 return array(
                     'type' => 'link_image',
                     'html' => '<a target="_blank" '.

@@ -155,9 +155,10 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
         $d = Dimension::fromOptions(array(
             'width' => 600,
         ), array(
+            'scale_model' => 'scale-width-height',
             'default_width' => 800,
             'factor' => 0.5,
-        ), 'scale-width-height');
+        ));
         $this->assertEquals('scale-width-height', $d->scale_model);
         $this->assertEquals(600, $d->width);
         $this->assertEquals(300, $d->height);
@@ -173,8 +174,9 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
         $d = Dimension::fromOptions(array(
             'width' => 600,
         ), array(
+            'scale_model' => 'scale-width',
             'default_width' => 800,
-        ), 'scale-width');
+        ));
         $this->assertEquals('scale-width', $d->scale_model);
         $this->assertEquals(600, $d->width);
         $this->assertFalse($d->height);
@@ -185,9 +187,10 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
         $d = Dimension::fromOptions(array(
             'width' => 600,
         ), array(
+            'scale_model' => 'scale-width',
             'default_width' => 800,
             'default_height' => 900,
-        ), 'scale-width');
+        ));
         $this->assertEquals('scale-width', $d->scale_model);
         $this->assertEquals(600, $d->width);
         $this->assertEquals(900, $d->height);
@@ -203,9 +206,10 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
             'width' => 600,
             'height' => 400,
         ), array(
+            'scale_model' => 'no-scale',
             'default_width' => 900,
             'default_height' => 700,
-        ), 'no-scale');
+        ));
         $this->assertEquals('no-scale', $d->scale_model);
         $this->assertEquals(900, $d->width);
         $this->assertEquals(700, $d->height);

@@ -99,8 +99,9 @@ class HTML5Video implements Common {
 
         // render output
         $d = Dimension::fromOptions($options, array(
+            'scale_model' => 'scale-width',
             'default_width' => 640,
-        ), 'scale-width');
+        ));
         return array(
             'html' => '<video '.$d->toAttr().' controls="true" preload="metadata">'.
                 '<source src="'.$info['url'].'" type="video/'.$info['filetype'].'" />'.

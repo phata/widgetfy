@@ -48,9 +48,20 @@ class MediaFile {
 
     public static function translate($url, $options=array()) {
         $url_parsed = parse_url($url);
+
+        // add empty site configurations
+        $options += array(
+            'mediafiles' => array(),
+        );
+
+
         foreach (self::$paths as $regex => $class) {
             // if path matches
             if (preg_match($regex, $url_parsed['path'])) {
+
+                // local options
+                $local_options = isset($options['mediafiles'][$class]) ?
+                    $options['mediafiles'][$class] + (array) $options : (array) $options;
 
                 // callbacks
                 $cb_preprocess = array(

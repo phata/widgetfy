@@ -78,6 +78,7 @@ class RealMediaVideo implements Common {
         // hardcorded controls height
         $height_ctrl = 26;
         $d = Dimension::fromOptions($options, array(
+            'scale_model' => 'scale-width',
             'default_width' => 400,
         ), 'scale-width');
 

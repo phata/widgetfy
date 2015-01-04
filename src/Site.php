@@ -65,9 +65,19 @@ class Site {
 
     public static function translate($url, $options=array()) {
         $url_parsed = parse_url($url);
+
+        // add empty site configurations
+        $options += array(
+            'sites' => array(),
+        );
+
         foreach (self::$sites as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
+
+                // local options
+                $local_options = isset($options['sites'][$class]) ?
+                    $options['sites'][$class] + (array) $options : (array) $options;
 
                 // callbacks
                 $cb_preprocess = array(
@@ -81,7 +91,7 @@ class Site {
 
                 // if translatable
                 if ($info !== FALSE) {
-                    return call_user_func($cb_translate, $info, $options);
+                    return call_user_func($cb_translate, $info, $local_options);
                 }
             }
         }
