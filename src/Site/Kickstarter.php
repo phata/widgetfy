@@ -78,10 +78,11 @@ class Kickstarter implements Common {
 
         // default dimension of widget is 420 x 220
         $d2 = Dimension::fromOptions($options, array(
+            'scale_model'=> 'no-scale',
             'default_width' => 220,
             'default_height' => ($d->height > 420) ?
                 $d->height : 420,
-        ), 'no-scale');
+        ));
 
         // Note: Kickstarter supports HTTP only. No HTTPS.
         return array(
