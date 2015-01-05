@@ -117,7 +117,9 @@ class Dimension {
 
         // apply defaults
         $options += array(
+            'width' => FALSE,
             'scale_model' => 'scale-width-height',
+            'dynamic' => TRUE,
         );
 
         // render Dimension according to scale model
@@ -134,13 +136,10 @@ class Dimension {
                  * 'no-scale' **requires** these fields in $options:
                  * - 'default_width' int the fixed width value
                  * - 'default_height' int the fixed height value
-                 * - 'dynamic' boolean if this object can scale dynamically
                  */
 
                 // default spec
-                $options = (array) $options + array(
-                    'dynamic' => FALSE,
-                );
+                $options = (array) $options;
 
                 $d = new Dimension;
 
@@ -189,13 +188,11 @@ class Dimension {
                  * 'scale-width' accepts these fields in $options:
                  * - 'default_width' mixed width to use if no option provided
                  * - 'default_height' (optional) int the fixed height value
-                 * - 'dynamic' boolean if this object can scale dynamically
                  */
 
                 // default spec
                 $options = (array) $options + array(
                     'default_width' => 640,
-                    'dynamic' => TRUE,
                 );
 
                 $d = new Dimension;
@@ -233,7 +230,6 @@ class Dimension {
                  * - 'factor' float factor height / width
                  * - 'default_width' mixed width to use if no option provided
                  * - 'max_width' int width to use if there is a maximum width
-                 * - 'dynamic' boolean if this object can scale dynamically
                  */
 
                 // default spec
@@ -241,7 +237,6 @@ class Dimension {
                     'factor' => 0.5625,
                     'default_width' => 640,
                     'max_width' => FALSE,
-                    'dynamic' => TRUE,
                 );
 
                 // validate spec
@@ -250,7 +245,7 @@ class Dimension {
                 }
 
                 // determine width
-                $width = isset($options['width']) ? 
+                $width = (isset($options['width']) && ($options['width'] != FALSE)) ?
                     $options['width'] : $options['default_width'];
 
                 // if max widht presents, use max width

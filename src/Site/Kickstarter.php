@@ -82,6 +82,7 @@ class Kickstarter implements Common {
             'default_width' => 220,
             'default_height' => ($d->height > 420) ?
                 $d->height : 420,
+            'dynamic' => FALSE,
         ));
 
         // Note: Kickstarter supports HTTP only. No HTTPS.

@@ -214,7 +214,7 @@ class DimensionTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(900, $d->width);
         $this->assertEquals(700, $d->height);
         $this->assertFalse($d->factor);
-        $this->assertFalse($d->dynamic);
+        $this->assertTrue($d->dynamic);
 
     }
 

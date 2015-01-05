@@ -75,6 +75,7 @@ class NicoNico implements Common {
             'scale_model' => 'no-scale',
             'default_width'=> 485,
             'default_height'=> 385,
+            'dynamic' => FALSE,
         ));
 
         // Note: NicoNico supports HTTP only. No HTTPS.
