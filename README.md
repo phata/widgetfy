@@ -8,16 +8,25 @@ embed / widget.
 Example Code
 ------------
 
-    <?php
+```php
 
-    require_once 'PATH/TO/Widgetfy/autoload.php';
-    if (($embed = Phata\Widgetfy::translate($link)) != NULL) {
-        $code = $embed['html'];
-        // display the embed code the way you like
-    }
+require_once 'PATH/TO/Widgetfy/autoload.php';
 
-    ?>
+// simple setup
+if (($embed = Phata\Widgetfy::translate($link)) != NULL) {
+    echo $embed['html'];
+}
 
+// adjust all video to width 640px, if the source support that
+$options = array('width'=>640);
+if (($embed = Phata\Widgetfy::translate($link, $options)) != NULL) {
+    echo $embed['html'];
+}
+
+```
+
+For more detailed documentation, please visit our
+[Documentation page on GitHub](https://github.com/Phata/Widgetfy/wiki/Documentation).
 
 Licence
 -----------
