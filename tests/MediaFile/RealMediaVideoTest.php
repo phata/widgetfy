@@ -50,7 +50,7 @@ class RealMediaVideoTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($embed['html'],
             '<embed type="audio/x-pn-realaudio-plugin" '.
             'src="'.$url.'" '.
-            'width="640" autostart="false" '.
+            'width="640" height="360" autostart="false" '.
             'controls="imagewindow" nojava="true" '.
             'console="video" '.
             'pluginspage="https://www.real.com/"></embed><br>'.

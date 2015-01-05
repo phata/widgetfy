@@ -76,22 +76,36 @@ class RealMediaVideo implements Common {
     public static function translate($info, $options=array()) {
 
         // hardcorded controls height
+        $default_width = 400;
         $height_ctrl = 26;
         $d = Dimension::fromOptions($options, array(
             'scale_model' => 'scale-width',
-            'default_width' => 400,
+            'default_width' => $default_width,
+        ), 'scale-width');
+
+        // video portion
+        $d_embed1 = Dimension::fromOptions($options, array(
+            'scale_model' => 'scale-width-height',
+            'default_width' => $default_width,
+        ), 'scale-width');
+
+        // control portion
+        $d_embed2 = Dimension::fromOptions($options, array(
+            'scale_model' => 'scale-width',
+            'default_width' => $default_width,
+            'default_height' => $height_ctrl,
         ), 'scale-width');
 
         return array(
             'html' => '<embed type="audio/x-pn-realaudio-plugin" '.
                 'src="'.$info['url'].'" '.
-                $d->toAttr().' autostart="false" '.
+                $d_embed1->toAttr().' autostart="false" '.
                 'controls="imagewindow" nojava="true" '.
                 'console="video" '.
                 'pluginspage="https://www.real.com/"></embed><br>'.
                 '<embed type="audio/x-pn-realaudio-plugin" '.
                 'src="'.$info['url'].'" '.
-                'width="'.$d->width.'" height="'.$height_ctrl.'" autostart="false" '.
+                $d_embed2->toAttr().' autostart="false" '.
                 'nojava="true" controls="ControlPanel" '.
                 'console="video"></embed>',
             'dimension' => $d,

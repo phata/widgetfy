@@ -47,7 +47,7 @@ class ClassicVideoTest extends PHPUnit_Framework_TestCase {
         $options = array('width' => 640);
         $embed = ClassicVideo::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<object id="mediaplayer" width="640" '.
+            '<object id="mediaplayer" width="640" height="480" '.
             'classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" '.
             'standby="loading windows media player components..." '.
             'type="application/x-oleobject">'.
@@ -58,11 +58,11 @@ class ClassicVideoTest extends PHPUnit_Framework_TestCase {
             '<param name="ShowDisplay" value="false" />'.
             '<embed type="application/x-mplayer2" '.
             'src="http://foobar.com/video.mpg" '.
-            'name="mediaplayer" width="640" '.
+            'name="mediaplayer" width="640" height="480" '.
             'ShowControls="1" ShowStatusBar="1" ShowDisplay="0" '.
             'autostart="0"></embed></object>');
         $this->assertEquals($embed['dimension']->width, 640);
-        $this->assertEquals($embed['dimension']->height, FALSE);
+        $this->assertEquals($embed['dimension']->height, 480);
     }
 
 }

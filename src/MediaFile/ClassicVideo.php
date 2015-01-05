@@ -76,8 +76,8 @@ class ClassicVideo implements Common {
      */
     public static function translate($info, $options=array()) {
         $d = Dimension::fromOptions($options, array(
-            'scale_model' => 'scale-width',
             'default_width' => 640,
+            'factor' => 0.75, // most classic video are of 4:3 ratio
         ));
         return array(
             'html' => '<object id="mediaplayer" '.$d->toAttr().' '.
