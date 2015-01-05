@@ -145,22 +145,22 @@ class Dimension {
 
                 // validate spec
                 if (!isset($options['default_width'])) {
-                    throw DimensionError('scale model `no-scale` '.
+                    throw new DimensionError('scale model `no-scale` '.
                         'requires `default_width`');
                     return;
                 }
                 if (!isset($options['default_height'])) {
-                    throw DimensionError('scale model `no-scale` '.
+                    throw new DimensionError('scale model `no-scale` '.
                         'requires `default_height`');
                     return;
                 }
                 if (!self::isInt($options['default_width'])) {
-                    throw DimensionError('scale model `no-scale` '.
+                    throw new DimensionError('scale model `no-scale` '.
                         'requires integer for `default_width`');
                     return;
                 }
                 if (!self::isInt($options['default_height'])) {
-                    throw DimensionError('scale model `no-scale` '.
+                    throw new DimensionError('scale model `no-scale` '.
                         'requires integer for `default_height`');
                     return;
                 }
@@ -278,26 +278,26 @@ class Dimension {
     public static function &fromWidth($width,
         $factor=FALSE, $scale_model=FALSE) {
 
-    	// validate parameter
-    	if (!self::isInt($width)) {
-    		throw new DimensionError(
-    			'First parameter must be integer or integer string');
-    		return NULL;
-    	} elseif (($factor !== FALSE) && !is_numeric($factor)) {
-    		throw new DimensionError(
-    			'Second parameter must be a number');
-    		return NULL;
-    	}
+        // validate parameter
+        if (!self::isInt($width)) {
+            throw new DimensionError(
+                'First parameter must be integer or integer string');
+            return NULL;
+        } elseif (($factor !== FALSE) && !is_numeric($factor)) {
+            throw new DimensionError(
+                'Second parameter must be a number');
+            return NULL;
+        }
 
-    	// render dimension
-    	$d = new Dimension;
-    	$d->width = $width;
-    	if ($factor !== FALSE) {
-    		$d->height = Calc::rectHeight($width, $factor);
-    	}
+        // render dimension
+        $d = new Dimension;
+        $d->width = $width;
+        if ($factor !== FALSE) {
+            $d->height = Calc::rectHeight($width, $factor);
+        }
         $d->factor = $factor;
         $d->scale_model = $scale_model;
-    	return $d;
+        return $d;
     }
 
     /**
@@ -307,14 +307,14 @@ class Dimension {
      * @return string HTML/XML attribute width and height
      */
     public function toAttr($prefix='', $suffix='') {
-    	$attrs = array();
-    	if ($this->width !== FALSE) {
-    		$attrs[] = 'width="'.addslashes($this->width).'"';
-    	}
-    	if ($this->height !== FALSE) {
-    		$attrs[] = 'height="'.addslashes($this->height).'"';
-    	}
-    	return $prefix.implode(' ', $attrs).$suffix;
+        $attrs = array();
+        if ($this->width !== FALSE) {
+            $attrs[] = 'width="'.addslashes($this->width).'"';
+        }
+        if ($this->height !== FALSE) {
+            $attrs[] = 'height="'.addslashes($this->height).'"';
+        }
+        return $prefix.implode(' ', $attrs).$suffix;
     }
 
     /**
@@ -324,24 +324,24 @@ class Dimension {
      * @return string HTML/XML attribute width and height
      */
     public function toCSS($prefix='', $suffix='') {
-    	$defs = array();
-    	if ($this->width !== FALSE) {
-    		$defs[] = 'width:'.
-    			addslashes(self::toCSSvalue($this->width)).';';
-    	}
-    	if ($this->height !== FALSE) {
-    		$defs[] = 'height:'.
-    			addslashes(self::toCSSvalue($this->height)).';';
-    	}
-    	return $prefix.implode(' ', $defs).$suffix;
+        $defs = array();
+        if ($this->width !== FALSE) {
+            $defs[] = 'width:'.
+                addslashes(self::toCSSvalue($this->width)).';';
+        }
+        if ($this->height !== FALSE) {
+            $defs[] = 'height:'.
+                addslashes(self::toCSSvalue($this->height)).';';
+        }
+        return $prefix.implode(' ', $defs).$suffix;
     }
 
     /**
      * translate a variable to CSS value
      */
     public static function toCSSvalue($var) {
-    	if (self::isInt($var)) return $var.'px';
-    	return $var;
+        if (self::isInt($var)) return $var.'px';
+        return $var;
     }
 
     /**
@@ -352,7 +352,7 @@ class Dimension {
      * @return boolean whether the variable pass the test
      */
     public static function valid($var) {
-    	return self::isInt($var) || self::isPercentage($var);
+        return self::isInt($var) || self::isPercentage($var);
     }
 
     /**
@@ -363,7 +363,7 @@ class Dimension {
      * @return boolean whether the variable pass the test
      */
     public static function isInt($var) {
-    	return is_int($var) || preg_match('/^\d+$/', (string) $var);
+        return is_int($var) || preg_match('/^\d+$/', (string) $var);
     }
 
     /**
@@ -373,7 +373,7 @@ class Dimension {
      * @return boolean whether the variable pass the test
      */
     public static function isPercentage($var) {
-    	return preg_match('/^\d+\%$/', (string) $var) == 1;
+        return preg_match('/^\d+\%$/', (string) $var) == 1;
     }
 
 }
