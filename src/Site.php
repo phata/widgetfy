@@ -40,27 +40,27 @@ namespace Phata\Widgetfy;
 
 class Site {
 
-    public static $sites = array(
-        '/^(\w+\.|)youtube\.com$/' => 'Youtube',
-        '/^www\.ted\.com$/' => 'TED',
-        '/^myspace\.com$/' => 'MySpace',
-        '/^[\w]+\.liveleak\.com$/' => 'LiveLeak',
-        '/^www\.dailymotion\.com$/' => 'Dailymotion',
-        '/^www\.metacafe\.com$/' => 'Metacafe',
-        '/^vimeo\.com$/' => 'Vimeo',
-        '/^(\w+\.|)nicovideo\.jp$/' => 'NicoNico',
-        '/^www\.kickstarter\.com$/' => 'Kickstarter',
-        '/^\w+\.collegehumor\.com$/' => 'CollegeHumor',
-        '/^vlog\.xuite\.net$/' => 'Xuite',
-        '/^www\.dorkly\.com$/' => 'Dorkly',
-        '/^www\.facebook\.com$/' => 'Facebook',
-        '/^www\.56\.com$/' => 'V56',
-        '/^store\.steampowered\.com$/' => 'SteamStore',
-        '/^\w+\.ku6\.com$/' => 'Ku6',
-        '/^\w+\.youku\.com$/' => 'Youku',
-        '/^(\w+\.|)tudou\.com$/' => 'Tudou',
-        '/^tv\.on\.cc/' => 'OnCc',
-        '/^www\.ign\.com$/' => 'IGN',
+    public static $registry = array(
+        '/^(\w+\.|)youtube\.com$/'     => 'Phata\Widgetfy\Site\Youtube',
+        '/^www\.ted\.com$/'            => 'Phata\Widgetfy\Site\TED',
+        '/^myspace\.com$/'             => 'Phata\Widgetfy\Site\MySpace',
+        '/^[\w]+\.liveleak\.com$/'     => 'Phata\Widgetfy\Site\LiveLeak',
+        '/^www\.dailymotion\.com$/'    => 'Phata\Widgetfy\Site\Dailymotion',
+        '/^www\.metacafe\.com$/'       => 'Phata\Widgetfy\Site\Metacafe',
+        '/^vimeo\.com$/'               => 'Phata\Widgetfy\Site\Vimeo',
+        '/^(\w+\.|)nicovideo\.jp$/'    => 'Phata\Widgetfy\Site\NicoNico',
+        '/^www\.kickstarter\.com$/'    => 'Phata\Widgetfy\Site\Kickstarter',
+        '/^\w+\.collegehumor\.com$/'   => 'Phata\Widgetfy\Site\CollegeHumor',
+        '/^vlog\.xuite\.net$/'         => 'Phata\Widgetfy\Site\Xuite',
+        '/^www\.dorkly\.com$/'         => 'Phata\Widgetfy\Site\Dorkly',
+        '/^www\.facebook\.com$/'       => 'Phata\Widgetfy\Site\Facebook',
+        '/^www\.56\.com$/'             => 'Phata\Widgetfy\Site\V56',
+        '/^store\.steampowered\.com$/' => 'Phata\Widgetfy\Site\SteamStore',
+        '/^\w+\.ku6\.com$/'            => 'Phata\Widgetfy\Site\Ku6',
+        '/^\w+\.youku\.com$/'          => 'Phata\Widgetfy\Site\Youku',
+        '/^(\w+\.|)tudou\.com$/'       => 'Phata\Widgetfy\Site\Tudou',
+        '/^tv\.on\.cc/'                => 'Phata\Widgetfy\Site\OnCc',
+        '/^www\.ign\.com$/'            => 'Phata\Widgetfy\Site\IGN',
     );
 
     public static function translate($url, $options=array()) {
@@ -68,26 +68,23 @@ class Site {
 
         // add empty site configurations
         $options += array(
-            'sites' => array(),
+            'overrides' => array(),
         );
 
-        foreach (self::$sites as $regex => $class) {
+        foreach (self::$registry as $regex => $class) {
             // if host matches
             if (preg_match($regex, $url_parsed['host'])) {
 
                 // local options
-                $local_options = isset($options['sites'][$class]) ?
-                    $options['sites'][$class] + (array) $options : (array) $options;
+                $local_options = isset($options['overrides'][$class]) ?
+                    $options['overrides'][$class] + (array) $options : (array) $options;
 
                 // callbacks
-                $cb_preprocess = array(
-                    'Phata\Widgetfy\Site\\'.$class, 'preprocess');
-                $cb_translate  = array(
-                    'Phata\Widgetfy\Site\\'.$class, 'translate');
+                $cb_preprocess = array($class, 'preprocess');
+                $cb_translate  = array($class, 'translate');
 
                 // preprocess
-                $info = call_user_func(
-                        $cb_preprocess, $url_parsed);
+                $info = call_user_func($cb_preprocess, $url_parsed);
 
                 // if translatable
                 if ($info !== FALSE) {

@@ -40,10 +40,10 @@ namespace Phata\Widgetfy;
 
 class MediaFile {
 
-    public static $paths = array(
-        '/\.(ogg|mp4|webm)$/i' => 'HTML5Video',
-        '/\.(wmv|avi|asx|mpg|mpeg)$/i' => 'ClassicVideo',
-        '/\.(rm|rmvb)$/i' => 'RealMediaVideo',
+    public static $registry = array(
+        '/\.(ogg|mp4|webm)$/i'         => 'Phata\Widgetfy\MediaFile\HTML5Video',
+        '/\.(wmv|avi|asx|mpg|mpeg)$/i' => 'Phata\Widgetfy\MediaFile\ClassicVideo',
+        '/\.(rm|rmvb)$/i'              => 'Phata\Widgetfy\MediaFile\RealMediaVideo',
     );
 
     public static function translate($url, $options=array()) {
@@ -51,27 +51,24 @@ class MediaFile {
 
         // add empty site configurations
         $options += array(
-            'mediafiles' => array(),
+            'overrides' => array(),
         );
 
 
-        foreach (self::$paths as $regex => $class) {
+        foreach (self::$registry as $regex => $class) {
             // if path matches
             if (preg_match($regex, $url_parsed['path'])) {
 
                 // local options
-                $local_options = isset($options['mediafiles'][$class]) ?
-                    $options['mediafiles'][$class] + (array) $options : (array) $options;
+                $local_options = isset($options['overrides'][$class]) ?
+                    $options['overrides'][$class] + (array) $options : (array) $options;
 
                 // callbacks
-                $cb_preprocess = array(
-                    'Phata\Widgetfy\MediaFile\\'.$class, 'preprocess');
-                $cb_translate  = array(
-                    'Phata\Widgetfy\MediaFile\\'.$class, 'translate');
+                $cb_preprocess = array($class, 'preprocess');
+                $cb_translate  = array($class, 'translate');
 
                 // preprocess
-                $info = call_user_func(
-                        $cb_preprocess, $url_parsed);
+                $info = call_user_func($cb_preprocess, $url_parsed);
 
                 // if translatable
                 if ($info !== FALSE) {

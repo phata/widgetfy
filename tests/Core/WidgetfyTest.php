@@ -57,9 +57,9 @@ class WidgetfyTest extends PHPUnit_Framework_TestCase {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';
         $options = array(
             'width' => 640,
-            'sites' => array(
-                // override global options
-                'Youtube' => array(
+            'overrides' => array(
+                // override global options in specific class
+                'Phata\Widgetfy\Site\Youtube' => array(
                     'width' => 800,
                     'factor' => 0.75
                 ),
