@@ -4,7 +4,6 @@ Widgetfy
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
 
-
 Example Code
 ------------
 
@@ -27,6 +26,15 @@ if (($embed = Phata\Widgetfy::translate($link, $options)) != NULL) {
 
 For more detailed documentation, please visit our
 [Documentation page on GitHub](https://github.com/Phata/Widgetfy/wiki/Documentation).
+
+
+Branches
+--------
+Branch | Purpose          | Status
+-------|------------------|----------------------------------------------------------------------------------
+1.x    | Stable / Default | ![Travis Test Status](https://api.travis-ci.org/Phata/Widgetfy.svg?branch=1.x)  
+master | Development      | ![Travis Test Status](https://api.travis-ci.org/Phata/Widgetfy.svg?branch=master)
+
 
 Licence
 -----------
