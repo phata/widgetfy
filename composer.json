@@ -1,0 +1,18 @@
+{
+    "name": "Phata/Widgetfy",
+    "description": "",
+    "autoload": {
+        "psr-0" : {
+            "Phata\\Widgetfy\\" : "src/"
+        },
+        "psr-4" : {
+            "Phata\\Widgetfy\\" : "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Phata/Widgetfy"
+        }
+    ]
+}
