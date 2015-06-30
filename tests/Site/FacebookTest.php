@@ -47,16 +47,19 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         // test returning embed code
         $options = array('width'=>640);
         $embed = Facebook::translate($info, $options);
+        $this->assertEquals($info['data-href'], 'https://www.facebook.com/video.php?v=10152802584496147&type=1');
         $this->assertEquals($embed['html'],
-            '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-            'var js, fjs = d.getElementsByTagName(s)[0]; '.
-            'if (d.getElementById(id)) return; js = d.createElement(s); '.
-            'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-            'fjs.parentNode.insertBefore(js, fjs); }'.
-            '(document, \'script\', \'facebook-jssdk\'));</script>'.
-            '<div class="fb-post" '.
-            'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-            'data-width="640"></div>'
+            '<div id="fb-root"></div>'.
+            '<script>'.
+            '(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];'.
+            'if (d.getElementById(id)) return;js = d.createElement(s); '.
+            'js.id = id;js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.3";'.
+            'fjs.parentNode.insertBefore(js, fjs);}'.
+            '(document, \'script\', \'facebook-jssdk\'));'.
+            '</script>'.
+            '<div class="fb-video" data-allowfullscreen="1" '.
+            'data-href="'.$info['data-href'].'" data-width="640">'.
+            '</div>'
         );
         $this->assertEquals($embed['type'], 'javascript');
         $this->assertEquals($embed['dimension']->width, 640);
@@ -71,20 +74,51 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         // test returning embed code
         $options = array('width'=>640);
         $embed = Facebook::translate($info, $options);
+        $this->assertEquals($info['data-href'], 'https://www.facebook.com/video.php?v=10152802584496147&type=1');
         $this->assertEquals($embed['html'],
-            '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-            'var js, fjs = d.getElementsByTagName(s)[0]; '.
-            'if (d.getElementById(id)) return; js = d.createElement(s); '.
-            'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-            'fjs.parentNode.insertBefore(js, fjs); }'.
-            '(document, \'script\', \'facebook-jssdk\'));</script>'.
-            '<div class="fb-post" '.
-            'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-            'data-width="640"></div>'
+            '<div id="fb-root"></div>'.
+            '<script>'.
+            '(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];'.
+            'if (d.getElementById(id)) return;js = d.createElement(s); '.
+            'js.id = id;js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.3";'.
+            'fjs.parentNode.insertBefore(js, fjs);}'.
+            '(document, \'script\', \'facebook-jssdk\'));'.
+            '</script>'.
+            '<div class="fb-video" data-allowfullscreen="1" '.
+            'data-href="'.$info['data-href'].'" data-width="640">'.
+            '</div>'
         );
         $this->assertEquals($embed['type'], 'javascript');
         $this->assertEquals($embed['dimension']->width, 640);
         $this->assertFalse($embed['dimension']->factor);
     }
+
+    public function testTranslateVideo3() {
+        $url = 'https://www.facebook.com/RedBullBike/videos/vb.572719819512238/781424595308425/?type=2&theater';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>640);
+        $embed = Facebook::translate($info, $options);
+        $this->assertEquals($info['data-href'], '/RedBullBike/videos/vb.572719819512238/781424595308425/?type=1');
+        $this->assertEquals($embed['html'],
+            '<div id="fb-root"></div>'.
+            '<script>'.
+            '(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];'.
+            'if (d.getElementById(id)) return;js = d.createElement(s); '.
+            'js.id = id;js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.3";'.
+            'fjs.parentNode.insertBefore(js, fjs);}'.
+            '(document, \'script\', \'facebook-jssdk\'));'.
+            '</script>'.
+            '<div class="fb-video" data-allowfullscreen="1" '.
+            'data-href="'.$info['data-href'].'" data-width="640">'.
+            '</div>'
+        );
+        $this->assertEquals($embed['type'], 'javascript');
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertFalse($embed['dimension']->factor);
+    }
+
 
 }
