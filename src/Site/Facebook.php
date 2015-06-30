@@ -40,6 +40,8 @@ namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Utils\Dimension as Dimension;
 
+define('RE_VIDEO_PATH_2015', '/^(\/(\w+)\/videos\/([\w\.]+)\/(\d+)\/)$/');
+
 class Facebook implements Common {
 
     /**
@@ -61,7 +63,7 @@ class Facebook implements Common {
             $url_parsed = parse_url($url);
         }
 
-        // test if the path is preprocess
+        // test if the path can be preprocess
         if (in_array($url_parsed['path'],
                 array('/video/video.php', '/video.php', '/photo.php'))) {
             // find parameter 'v' if exists
@@ -71,6 +73,10 @@ class Facebook implements Common {
                     'vid' => $args['v'],
                 );
             }
+        } elseif (preg_match(RE_VIDEO_PATH_2015, $url_parsed['path'], $matches)) {
+            return array(
+                'data-href' => $matches[1] . '?type=1',
+            );
         }
 
         return FALSE;
@@ -86,25 +92,45 @@ class Facebook implements Common {
      * @return mixed[] array of embed information or NULL if not applicable
      */
     public static function translate($info, $options=array()) {
-
         // default width is 600
         $d = Dimension::fromOptions($options, array(
             'scale_model' => 'scale-width',
             'default_width'=> 600,
         ));
-        return array(
-            'type' => 'javascript',
-            'javascript' => 'div',
-            'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-                'var js, fjs = d.getElementsByTagName(s)[0]; '.
-                'if (d.getElementById(id)) return; js = d.createElement(s); '.
-                'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-                'fjs.parentNode.insertBefore(js, fjs); }'.
-                '(document, \'script\', \'facebook-jssdk\'));</script>'.
-                '<div class="fb-post" '.
-                'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-                'data-width="'.$d->width.'"></div>',
-            'dimension' => $d,
-        );
+ 
+        if (isset($info['vid'])) {
+           // older embed code
+           return array(
+                'type' => 'javascript',
+                'javascript' => 'div',
+                'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
+                    'var js, fjs = d.getElementsByTagName(s)[0]; '.
+                    'if (d.getElementById(id)) return; js = d.createElement(s); '.
+                    'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
+                    'fjs.parentNode.insertBefore(js, fjs); }'.
+                    '(document, \'script\', \'facebook-jssdk\'));</script>'.
+                    '<div class="fb-post" '.
+                    'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
+                    'data-width="'.$d->width.'"></div>',
+                'dimension' => $d,
+            );
+        } elseif (isset($info['data-href'])) {
+           return array(
+                'type' => 'javascript',
+                'javascript' => 'div',
+                'html' => '<div id="fb-root"></div>'.
+                    '<script>(function(d, s, id) {'.
+                    'var js, fjs = d.getElementsByTagName(s)[0];'.
+                    'if (d.getElementById(id)) return;'.
+                    'js = d.createElement(s); js.id = id;'.
+                    'js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.3";'.
+                    'fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));'.
+                    '</script>'.
+                    '<div class="fb-video" data-allowfullscreen="1" '.
+                    'data-href="'.$info['data-href'].'" '.
+                    'data-width="'.$d->width.'"></div>',
+                'dimension' => $d,
+            );
+        }
     }
 }
