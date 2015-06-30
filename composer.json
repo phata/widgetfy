@@ -1,6 +1,27 @@
 {
-    "name": "Phata/Widgetfy",
-    "description": "",
+    "name": "phata/widgetfy",
+    "type": "library",
+    "description": "Widgetfy is a PHP library to translate URLs of video sites into the embed / widget",
+    "keywords": ["embed","url translate"],
+    "homepage": "https://github.com/Phata/Widgetfy",
+    "license": "LGPL v3",
+    "authors": [
+        {
+            "name": "Koala Yeung",
+            "email": "koalay@gmail.com",
+            "homepage": "https://github.com/yookoala",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Phata/Widgetfy"
+        }
+    ],
     "autoload": {
         "psr-0" : {
             "Phata\\Widgetfy\\" : "src/"
@@ -8,11 +29,5 @@
         "psr-4" : {
             "Phata\\Widgetfy\\" : "src/"
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Phata/Widgetfy"
-        }
-    ]
+    }
 }
