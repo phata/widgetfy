@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Unit test for Phata\Widgetfy\Core
+ * Unit test for Phata\Widgetfy
  *
  * Licence:
  *
@@ -35,9 +35,9 @@
  * @link      http://github.com/Phata/Widgetfy
  */
 
-use Phata\Widgetfy\Core as Widgetfy;
+use Phata\Widgetfy as Widgetfy;
 
-class WidgetfyTest extends PHPUnit_Framework_TestCase {
+class shortcutTest extends PHPUnit_Framework_TestCase {
 
     public function testGeneric() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';

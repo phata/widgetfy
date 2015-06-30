@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class Phata\Widgetfy
+ * class Phata\Widgetfy\Core
  *
  * Licence:
  *
@@ -35,8 +35,26 @@
  * @link      http://github.com/Phata/Widgetfy
  */
 
-namespace Phata;
+namespace Phata\Widgetfy;
 
-class Widgetfy extends Widgetfy\Core {
-    // only a shortcut to Widgetfy\Widgetfy
+class Core {
+
+    /**
+     * simplified interface to translate a url into embed code
+     *
+     * @param string $url URL to be translated
+     * @return mixed array of embed information or
+     *         NULL if not translatable
+     */
+    public static function translate($url, $options=array()) {
+        if (($embed = \Phata\Widgetfy\Site::translate($url,
+                $options)) != NULL) {
+            return $embed;
+        } elseif (($embed = \Phata\Widgetfy\MediaFile::translate($url,
+                $options)) != NULL) {
+            return $embed;
+        }
+        return NULL;
+    }
+
 }
