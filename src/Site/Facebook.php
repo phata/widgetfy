@@ -66,11 +66,13 @@ class Facebook implements Common {
         // test if the path can be preprocess
         if (in_array($url_parsed['path'],
                 array('/video/video.php', '/video.php', '/photo.php'))) {
-            // find parameter 'v' if exists
+            // build data-href from old style video url
             parse_str($url_parsed['query'], $args);
             if (isset($args['v'])) {
+                $query = array('v' => $args['v'], 'type' => 1,);
+                if (isset($args['set'])) $query['set'] = $args['set'];
                 return array(
-                    'vid' => $args['v'],
+                  'data-href' => 'https://www.facebook.com/video.php?' . http_build_query($query),
                 );
             }
         } elseif (preg_match(RE_VIDEO_PATH_2015, $url_parsed['path'], $matches)) {
@@ -98,23 +100,8 @@ class Facebook implements Common {
             'default_width'=> 600,
         ));
  
-        if (isset($info['vid'])) {
-           // older embed code
-           return array(
-                'type' => 'javascript',
-                'javascript' => 'div',
-                'html' => '<div id="fb-root"></div> <script>(function(d, s, id) { '.
-                    'var js, fjs = d.getElementsByTagName(s)[0]; '.
-                    'if (d.getElementById(id)) return; js = d.createElement(s); '.
-                    'js.id = id; js.src = "//connect.facebook.net/zh_HK/all.js#xfbml=1"; '.
-                    'fjs.parentNode.insertBefore(js, fjs); }'.
-                    '(document, \'script\', \'facebook-jssdk\'));</script>'.
-                    '<div class="fb-post" '.
-                    'data-href="https://www.facebook.com/video.php?v='.$info['vid'].'" '.
-                    'data-width="'.$d->width.'"></div>',
-                'dimension' => $d,
-            );
-        } elseif (isset($info['data-href'])) {
+        // build embed code with data-href
+        if (isset($info['data-href'])) {
            return array(
                 'type' => 'javascript',
                 'javascript' => 'div',
