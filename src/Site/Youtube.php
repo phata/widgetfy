@@ -107,31 +107,14 @@ class Youtube implements Common {
 
             // if vid exists in the link, and
             // the video can be embeded
-            if (self::canEmbed($params['vid'])) {
-                return array(
-                    'type' => 'iframe',
-                    'html' => '<iframe '.$d->toAttr().' '.
-                        'src="//www.youtube.com/embed/'.
-                        $params['vid'].$query_str.'" '.
-                        'frameborder="0" allowfullscreen></iframe>',
-                    'dimension' => $d,
-                );
-            } else {
-                // size of default thumbnail is 480x320
-                // aspect ratio is 4:3, different from video (16:9)
-                $d = Dimension::fromOptions($options, array(
-                    'scale_model' => 'scale-width',
-                    'default_width'=> 480,
-                ));
-                return array(
-                    'type' => 'link_image',
-                    'html' => '<a target="_blank" '.
-                        'href="http://www.youtube.com/watch?v='.$params['vid'].'">'.
-                        '<img src="//img.youtube.com/vi/'.$params['vid'].'/0.jpg" '.
-                        'style="'.$d->toCSS().'"/></a>',
-                    'dimension' => $d,
-                );
-            }
+            return array(
+                'type' => 'iframe',
+                'html' => '<iframe '.$d->toAttr().' '.
+                    'src="//www.youtube.com/embed/'.
+                    $params['vid'].$query_str.'" '.
+                    'frameborder="0" allowfullscreen></iframe>',
+                'dimension' => $d,
+            );
 
         } elseif ($info['path_type'] == 'playlist') {
             $args = &$info['query'];
@@ -155,44 +138,6 @@ class Youtube implements Common {
 
         }
         return NULL;
-    }
-
-    /**
-     * Helper funciton. Use youtube api to check if a video can be embeded or not
-     * @param string $vid video id of the youtube video
-     */
-    public static function canEmbed($vid) {
-        Cache::init();
-        $cache_group = 'youtubeapi';
-        if (!Cache::exists($cache_group, $vid)) {
-            try {
-                $resp_json = file_get_contents(sprintf(
-                    'https://gdata.youtube.com/feeds/api/videos/%s?v=2&alt=json',
-                    $vid)
-                );
-                $response = json_decode($resp_json, TRUE); // decode to asso array
-
-                $acs = $response['entry']['yt$accessControl'];
-                $can_embed = FALSE;
-                foreach ($acs as $ac) {
-                    if ($ac['action'] == 'embed') {
-                        $can_embed = ($ac['permission'] == "allowed");
-                        break;
-                    }
-                }
-
-                Cache::set($cache_group, $vid, array('can_embed'=>$can_embed));
-
-            } catch (Exception $e) {
-                $can_embed = TRUE; // assume to be embedable
-            }
-
-        } else {
-            $cache = Cache::get($cache_group, $vid);
-            $can_embed = $cache["value"]["can_embed"];
-        }
-
-        return $can_embed;
     }
 
     /**
