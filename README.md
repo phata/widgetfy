@@ -11,14 +11,16 @@ Example Code
 
 require_once 'PATH/TO/Widgetfy/autoload.php';
 
+use Phata\Widgetfy\Core as Widgetfy;
+
 // simple setup
-if (($embed = Phata\Widgetfy::translate($link)) != NULL) {
+if (($embed = Widgetfy::translate($link)) != NULL) {
     echo $embed['html'];
 }
 
 // adjust all video to width 640px, if the source support that
 $options = array('width'=>640);
-if (($embed = Phata\Widgetfy::translate($link, $options)) != NULL) {
+if (($embed = Widgetfy::translate($link, $options)) != NULL) {
     echo $embed['html'];
 }
 
