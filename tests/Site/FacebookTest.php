@@ -120,5 +120,33 @@ class FacebookTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($embed['dimension']->factor);
     }
 
+    public function testTranslateVideo4() {
+        $url = 'https://www.facebook.com/Usavich/videos/919568248066129/';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = Facebook::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>640);
+        $embed = Facebook::translate($info, $options);
+        $this->assertEquals($info['data-href'], '/Usavich/videos/919568248066129/?type=1');
+        $this->assertEquals($embed['html'],
+            '<div id="fb-root"></div>'.
+            '<script>'.
+            '(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];'.
+            'if (d.getElementById(id)) return;js = d.createElement(s); '.
+            'js.id = id;js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.3";'.
+            'fjs.parentNode.insertBefore(js, fjs);}'.
+            '(document, \'script\', \'facebook-jssdk\'));'.
+            '</script>'.
+            '<div class="fb-video" data-allowfullscreen="1" '.
+            'data-href="'.$info['data-href'].'" data-width="640">'.
+            '</div>'
+        );
+        $this->assertEquals($embed['type'], 'javascript');
+        $this->assertEquals($embed['dimension']->width, 640);
+        $this->assertFalse($embed['dimension']->factor);
+    }
+
+
 
 }

@@ -40,7 +40,7 @@ namespace Phata\Widgetfy\Site;
 
 use Phata\Widgetfy\Utils\Dimension as Dimension;
 
-define('RE_VIDEO_PATH_2015', '/^(\/(\w+)\/videos\/([\w\.]+)\/(\d+)\/)$/');
+define('RE_VIDEO_PATH_2015', '/^(\/(\w+)\/videos\/(.*\/|)(\d+)\/)$/');
 
 class Facebook implements Common {
 
