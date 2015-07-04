@@ -34,8 +34,8 @@ Branches
 --------
 Branch | Purpose          | Status
 -------|------------------|----------------------------------------------------------------------------------
-1.x    | Stable / Default | ![Travis Test Status](https://api.travis-ci.org/Phata/Widgetfy.svg?branch=1.x)  
-master | Development      | ![Travis Test Status](https://api.travis-ci.org/Phata/Widgetfy.svg?branch=master)
+1.x    | Stable / Default | ![Travis Test Status](https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x)  
+master | Development      | ![Travis Test Status](https://api.travis-ci.org/phata/widgetfy.svg?branch=master)
 
 
 Licence
