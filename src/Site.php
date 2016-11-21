@@ -62,6 +62,7 @@ class Site {
         '/^tv\.on\.cc/'                => 'Phata\Widgetfy\Site\OnCc',
         '/^www\.ign\.com$/'            => 'Phata\Widgetfy\Site\IGN',
         '/^(\w+\.|)twitter\.com$/'     => 'Phata\Widgetfy\Site\Twitter',
+        '/^www\.bilibili\.com$/'       => 'Phata\Widgetfy\Site\BiliBili',
     );
 
     public static function translate($url, $options=array()) {
