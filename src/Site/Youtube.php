@@ -52,7 +52,16 @@ class Youtube implements Common {
      * @return mixed array of preprocess result; boolean FALSE if not translatable
      */
     public static function preprocess($url_parsed) {
-        if (preg_match('/^\/watch$/', $url_parsed['path'])) {
+        if (($url_parsed['host'] === 'youtu.be')
+            && preg_match('/^\/([a-zA-Z0-9\-_]+?)$/', $url_parsed['path'], $matches)
+        ) {
+            $params = self::parseParams($url_parsed);
+            $params['vid'] = $matches[1];
+            return array(
+                'path_type' => 'video',
+                'params' => &$params,
+            );
+        } elseif (preg_match('/^\/watch$/', $url_parsed['path'])) {
             $params = self::parseParams($url_parsed);
             if ($params == FALSE) return FALSE;
             if (!isset($params['vid']) || ($params['vid'] == FALSE)) return FALSE;

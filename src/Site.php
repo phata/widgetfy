@@ -2,7 +2,7 @@
 
 /**
  * class Phata\Widgetfy\Site
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -41,7 +41,7 @@ namespace Phata\Widgetfy;
 class Site {
 
     public static $registry = array(
-        '/^(\w+\.|)youtube\.com$/'     => 'Phata\Widgetfy\Site\Youtube',
+        '/^(\w+\.|)(youtube\.com|youtu\.be)$/'     => 'Phata\Widgetfy\Site\Youtube',
         '/^www\.ted\.com$/'            => 'Phata\Widgetfy\Site\TED',
         '/^myspace\.com$/'             => 'Phata\Widgetfy\Site\MySpace',
         '/^[\w]+\.liveleak\.com$/'     => 'Phata\Widgetfy\Site\LiveLeak',
