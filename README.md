@@ -38,6 +38,10 @@ if (($embed = Widgetfy::translate($link, $options)) != NULL) {
     echo $embed['html'];
 }
 
+// using the default theme, and inlining the default CSS
+// along with the first embed code.
+echo Phata\Widgetfy\Theme::toHTML($embed, true);
+
 ```
 
 For more detailed documentation, please visit our
