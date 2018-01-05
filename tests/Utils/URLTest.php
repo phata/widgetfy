@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Utils\URL as URL;
+use PHPUnit\Framework\TestCase;
 
-class URLTest extends PHPUnit_Framework_TestCase {
+class URLTest extends TestCase {
 
     // basic, full test
     public function testURL1() {

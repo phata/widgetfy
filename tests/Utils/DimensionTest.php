@@ -37,8 +37,9 @@
 
 use Phata\Widgetfy\Utils\Dimension as Dimension;
 use Phata\Widgetfy\Utils\DimensionError as DimensionError;
+use PHPUnit\Framework\TestCase;
 
-class DimensionTest extends PHPUnit_Framework_TestCase {
+class DimensionTest extends TestCase {
 
     public function testIsInt() {
         $this->assertTrue(Dimension::isInt(123));

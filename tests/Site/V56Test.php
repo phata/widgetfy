@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\V56 as V56;
+use PHPUnit\Framework\TestCase;
 
-class V56Test extends PHPUnit_Framework_TestCase {
+class V56Test extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.56.com/u74/v_MTI4MDY5MDE1.html';

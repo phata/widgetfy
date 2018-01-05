@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Youku as Youku;
+use PHPUnit\Framework\TestCase;
 
-class YoukuTest extends PHPUnit_Framework_TestCase {
+class YoukuTest extends TestCase {
 
     public function testTranslateVideo() {
         $url ='http://v.youku.com/v_show/id_XMjMxOTQzOTI=.html';

@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\MediaFile\RealMediaVideo as RealMediaVideo;
+use PHPUnit\Framework\TestCase;
 
-class RealMediaVideoTest extends PHPUnit_Framework_TestCase {
+class RealMediaVideoTest extends TestCase {
 
     public function testTranslateVideoMpg() {
         $url = 'http://foobar.com/video.rmvb';

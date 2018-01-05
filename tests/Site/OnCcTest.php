@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\OnCc as OnCc;
+use PHPUnit\Framework\TestCase;
 
-class OnCcTest extends PHPUnit_Framework_TestCase {
+class OnCcTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://tv.on.cc/hk/index.html?s=201&i=OCM141221-13212-201M&d=1419092839';

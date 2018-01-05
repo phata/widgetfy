@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Metacafe as Metacafe;
+use PHPUnit\Framework\TestCase;
 
-class MetacafeTest extends PHPUnit_Framework_TestCase {
+class MetacafeTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.metacafe.com/watch/11395429/arma_iii_altis_life_honest_farmers_lan_party/';

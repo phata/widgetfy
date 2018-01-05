@@ -2,7 +2,7 @@
 
 /**
  * Unit test for Phata\Widgetfy\Site\Youtube
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Youtube as Youtube;
+use PHPUnit\Framework\TestCase;
 
-class YoutubeTest extends PHPUnit_Framework_TestCase {
+class YoutubeTest extends TestCase {
 
     public function testTranslateVideoRoot() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';

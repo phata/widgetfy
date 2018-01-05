@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\LiveLeak as LiveLeak;
+use PHPUnit\Framework\TestCase;
 
-class LiveLeakTest extends PHPUnit_Framework_TestCase {
+class LiveLeakTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.liveleak.com/view?i=8ed_1220480664';

@@ -2,7 +2,7 @@
 
 /**
  * Unit test for Phata\Widgetfy\Site\TED
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\TED as TED;
+use PHPUnit\Framework\TestCase;
 
-class TEDTest extends PHPUnit_Framework_TestCase {
+class TEDTest extends TestCase {
 
     public function testTranslateVideoOld() {
         $url = 'http://www.ted.com/talks/pattie_maes_demos_the_sixth_sense.html';

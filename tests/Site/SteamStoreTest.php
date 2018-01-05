@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\SteamStore as SteamStore;
+use PHPUnit\Framework\TestCase;
 
-class SteamStoreTest extends PHPUnit_Framework_TestCase {
+class SteamStoreTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://store.steampowered.com/app/252530/';

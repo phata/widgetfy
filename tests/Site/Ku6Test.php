@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Ku6 as Ku6;
+use PHPUnit\Framework\TestCase;
 
-class Ku6Test extends PHPUnit_Framework_TestCase {
+class Ku6Test extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://v.ku6.com/show/PbIRDjlz7Q18Iikf.html';

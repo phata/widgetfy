@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Dailymotion as Dailymotion;
+use PHPUnit\Framework\TestCase;
 
-class DailymotionTest extends PHPUnit_Framework_TestCase {
+class DailymotionTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.dailymotion.com/video/x4rj9p_tron_creation';

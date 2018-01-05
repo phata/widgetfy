@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\CollegeHumor as CollegeHumor;
+use PHPUnit\Framework\TestCase;
 
-class CollegeHumorTest extends PHPUnit_Framework_TestCase {
+class CollegeHumorTest extends TestCase {
 
     public function testTranslateVideo1a() {
         $url = 'http://www.collegehumor.com/video:1817806';

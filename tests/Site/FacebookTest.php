@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Facebook as Facebook;
+use PHPUnit\Framework\TestCase;
 
-class FacebookTest extends PHPUnit_Framework_TestCase {
+class FacebookTest extends TestCase {
 
     public function testTranslateVideo1() {
         $url = 'https://www.facebook.com/video.php?v=10152802584496147';

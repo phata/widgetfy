@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy as Widgetfy;
+use PHPUnit\Framework\TestCase;
 
-class shortcutTest extends PHPUnit_Framework_TestCase {
+class shortcutTest extends TestCase {
 
     public function testGeneric() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';

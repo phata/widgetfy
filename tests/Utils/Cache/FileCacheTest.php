@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Utils\Cache\FileCache as FileCache;
+use PHPUnit\Framework\TestCase;
 
-class FileCacheTest extends PHPUnit_Framework_TestCase {
+class FileCacheTest extends TestCase {
 
     public function testFile() {
         $c = new FileCache;

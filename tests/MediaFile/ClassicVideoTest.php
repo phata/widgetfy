@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\MediaFile\ClassicVideo as ClassicVideo;
+use PHPUnit\Framework\TestCase;
 
-class ClassicVideoTest extends PHPUnit_Framework_TestCase {
+class ClassicVideoTest extends TestCase {
 
     public function testTranslateVideoMpg() {
         $url = 'http://foobar.com/video.mpg';

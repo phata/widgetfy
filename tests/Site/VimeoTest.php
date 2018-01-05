@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Vimeo as Vimeo;
+use PHPUnit\Framework\TestCase;
 
-class VimeoTest extends PHPUnit_Framework_TestCase {
+class VimeoTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://vimeo.com/97875604';

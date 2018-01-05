@@ -2,7 +2,7 @@
 
 /**
  * Unit test for Phata\Widgetfy\Site\IGN
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\IGN as IGN;
+use PHPUnit\Framework\TestCase;
 
-class IGNTest extends PHPUnit_Framework_TestCase {
+class IGNTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.ign.com/videos/2011/05/19/'.

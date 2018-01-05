@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\MediaFile\HTML5Video as HTML5Video;
+use PHPUnit\Framework\TestCase;
 
-class HTML5VideoTest extends PHPUnit_Framework_TestCase {
+class HTML5VideoTest extends TestCase {
 
     public function testTranslateVideoOgg() {
         $url = 'http://foobar.com/video.ogg';

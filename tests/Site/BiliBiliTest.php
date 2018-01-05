@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\BiliBili as BiliBili;
+use PHPUnit\Framework\TestCase;
 
-class BiliBiliTest extends PHPUnit_Framework_TestCase {
+class BiliBiliTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.bilibili.com/video/av5833793/';

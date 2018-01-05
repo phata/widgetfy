@@ -2,7 +2,7 @@
 
 /**
  * Unit test for Phata\Widgetfy\Site\MySpace
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\MySpace as MySpace;
+use PHPUnit\Framework\TestCase;
 
-class MySpaceTest extends PHPUnit_Framework_TestCase {
+class MySpaceTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'https://myspace.com/themahoganysessions/video/fink-this-is-the-thing-mahogany-session/109566653';

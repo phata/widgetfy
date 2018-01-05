@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Xuite as Xuite;
+use PHPUnit\Framework\TestCase;
 
-class XuiteTest extends PHPUnit_Framework_TestCase {
+class XuiteTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://vlog.xuite.net/play/czRuNEo0LTIwOTE5OTkzLmZsdg==';

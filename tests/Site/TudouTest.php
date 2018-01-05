@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Tudou as Tudou;
+use PHPUnit\Framework\TestCase;
 
-class TudouTest extends PHPUnit_Framework_TestCase {
+class TudouTest extends TestCase {
 
     public function testTranslateVideo1() {
         $url = 'http://www.tudou.com/programs/view/VJlCrFBCh0s/';

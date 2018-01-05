@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Dorkly as Dorkly;
+use PHPUnit\Framework\TestCase;
 
-class DorklyTest extends PHPUnit_Framework_TestCase {
+class DorklyTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.dorkly.com/video/6441/angry-birds-peace-treaty';

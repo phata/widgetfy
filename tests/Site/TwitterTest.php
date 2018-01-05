@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Twitter as Twitter;
+use PHPUnit\Framework\TestCase;
 
-class TwitterTest extends PHPUnit_Framework_TestCase {
+class TwitterTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'https://twitter.com/rantyu_xx/status/629262344196001793/video/1';

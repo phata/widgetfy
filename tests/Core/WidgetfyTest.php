@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Core as Widgetfy;
+use PHPUnit\Framework\TestCase;
 
-class WidgetfyTest extends PHPUnit_Framework_TestCase {
+class WidgetfyTest extends TestCase {
 
     public function testGeneric() {
         $url = 'https://youtube.com/watch?v=PBLuP2JZcEg';

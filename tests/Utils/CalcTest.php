@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Utils\Calc as Calc;
+use PHPUnit\Framework\TestCase;
 
-class CalcTest extends PHPUnit_Framework_TestCase {
+class CalcTest extends TestCase {
 
     public function testCalc_default() {
         $width = 640;

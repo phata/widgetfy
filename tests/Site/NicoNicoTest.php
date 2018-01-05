@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\NicoNico as NicoNico;
+use PHPUnit\Framework\TestCase;
 
-class NicoNicoTest extends PHPUnit_Framework_TestCase {
+class NicoNicoTest extends TestCase {
 
     public function testTranslateVideo() {
         $url = 'http://www.nicovideo.jp/watch/sm4772361';

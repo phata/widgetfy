@@ -36,8 +36,9 @@
  */
 
 use Phata\Widgetfy\Site\Kickstarter as Kickstarter;
+use PHPUnit\Framework\TestCase;
 
-class KickstarterTest extends PHPUnit_Framework_TestCase {
+class KickstarterTest extends TestCase {
 
     public function testTranslateVideo() {
         $name = 'trammel/the-official-settlers-of-catan-gaming-board';
