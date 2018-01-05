@@ -57,7 +57,7 @@ master | Development      | 7.1, 7.2          | ![Travis Test Status][travis-bad
 [travis-badge-1.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x
 [travis-badge]: https://api.travis-ci.org/phata/widgetfy.svg?branch=master
 
-Licence
+License
 -------
 
 This file is part of Widgetfy.
