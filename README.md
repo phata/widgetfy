@@ -15,7 +15,7 @@ Then run this in your project folder:
 composer require phata/widgetfy
 ```
 
-composer: [https://getcomposer.org/download/]
+[composer]: https://getcomposer.org/download/
 
 Example Code
 ------------
