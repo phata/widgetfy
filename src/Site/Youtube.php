@@ -60,10 +60,13 @@ class Youtube implements Common {
                 'path_type' => 'video',
                 'params' => &$params,
             );
-        } elseif (preg_match('/^\/v\/(.+?)(|\/)$/', $url_parsed['path'], $matches)) {
+        } elseif (preg_match('/^\/v\/([a-zA-Z0-9]+?)(&.+?|)(|\/)$/', $url_parsed['path'], $matches)) {
             $params = self::parseParams($url_parsed);
             $params['vid'] = $matches[1];
-            if ($params == FALSE) return FALSE;
+            if (!empty($matches[2])) {
+                parse_str($matches[2], $embed_query);
+                $params += $embed_query;
+            }
             if (!isset($params['vid']) || ($params['vid'] == FALSE)) return FALSE;
             return array(
                 'path_type' => 'video',
@@ -99,9 +102,18 @@ class Youtube implements Common {
 
         if ($info['path_type'] == 'video') {
 
-            $params       = &$info['params'];
-            $query_params = array();
-            $query_str    = '';
+            $params = &$info['params'];
+            $query_params = array_reduce(
+                array_keys($params),
+                function ($carry, $key) use ($params) {
+                    if (in_array($key, array('hl', 'fs'))) {
+                        $carry[$key] = $params[$key];
+                    }
+                    return $carry;
+                },
+                array()
+            );
+            $query_str = '';
 
             // calculating start time with "t" parameter
             if (!empty($params["t"])) {
