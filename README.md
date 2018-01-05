@@ -4,12 +4,26 @@ Widgetfy
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
 
+Install
+-------
+
+First, install [composer] to your development platform.
+
+Then run this in your project folder:
+
+```shell
+composer require phata/widgetfy
+```
+
+composer: [https://getcomposer.org/download/]
+
 Example Code
 ------------
 
 ```php
 
-require_once 'PATH/TO/Widgetfy/autoload.php';
+// require the composer autoload script
+require_once './vendor/autoload.php';
 
 use Phata\Widgetfy\Core as Widgetfy;
 
@@ -43,8 +57,6 @@ master | Development      | 7.1, 7.2          | ![Travis Test Status][travis-bad
 [travis-badge-1.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x
 [travis-badge]: https://api.travis-ci.org/phata/widgetfy.svg?branch=master
 
-
-
 Licence
 -------
 
@@ -60,5 +72,5 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU Lesser General Public Licensefor more
 details.
 
-You should have received a copy of the GNU Lesser General Public License along
+You should have received [a copy](LICENSE) of the GNU Lesser General Public License along
 with Widgetfy.  If not, see <http://www.gnu.org/licenses/lgpl.html>.
