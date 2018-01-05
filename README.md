@@ -32,14 +32,22 @@ For more detailed documentation, please visit our
 
 Branches
 --------
-Branch | Purpose          | Status
--------|------------------|----------------------------------------------------------------------------------
-1.x    | Stable / Default | ![Travis Test Status](https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x)  
-master | Development      | ![Travis Test Status](https://api.travis-ci.org/phata/widgetfy.svg?branch=master)
+
+Branch | Purpose          | PHP Version       | Status
+-------|------------------|-------------------|----------------------------------------
+2.x    | Stable / Default | 7.1, 7.2          | ![Travis Test Status][travis-badge-2.x]
+1.x    | Maintenance      | 5.3, 5.4 5.5, 5.6 | ![Travis Test Status][travis-badge-1.x]
+master | Development      | 7.1, 7.2          | ![Travis Test Status][travis-badge]
+
+[travis-badge-2.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=2.x
+[travis-badge-1.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x
+[travis-badge]: https://api.travis-ci.org/phata/widgetfy.svg?branch=master
+
 
 
 Licence
------------
+-------
+
 This file is part of Widgetfy.
 
 Widgetfy is free software: you can redistribute it and/or modify it under the
