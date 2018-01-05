@@ -2,7 +2,7 @@
 
 /**
  * class Phata\Widgetfy\MediaFile
- * 
+ *
  * Licence:
  *
  * This file is part of Widgetfy.
@@ -57,7 +57,7 @@ class MediaFile {
 
         foreach (self::$registry as $regex => $class) {
             // if path matches
-            if (preg_match($regex, $url_parsed['path'])) {
+            if (isset($url_parsed['path']) && preg_match($regex, $url_parsed['path'])) {
 
                 // local options
                 $local_options = isset($options['overrides'][$class]) ?
