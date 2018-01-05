@@ -72,6 +72,22 @@ class YoutubeTest extends TestCase {
         $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
+    public function testTranslateFlashURL() {
+        $url = 'http://www.youtube.com/v/WiGCOm8Bkco';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//www.youtube.com/embed/WiGCOm8Bkco" frameborder="0" allowfullscreen></iframe>'
+        );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
+    }
+
     public function testTranslatePlayList() {
         $url = 'https://www.youtube.com/playlist?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z';
         $url_parsed = parse_url($url);
