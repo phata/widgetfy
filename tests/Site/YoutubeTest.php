@@ -104,6 +104,38 @@ class YoutubeTest extends TestCase {
         $this->assertEquals($embed['dimension']->factor, 0.5625);
     }
 
+    public function testTranslateFlashURLwithInvalidParam2() {
+        $url = 'http://www.youtube.com/v/2W56q0w-SZs&hl=zh_TW&fs=1';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//www.youtube.com/embed/2W56q0w-SZs?hl=zh_TW&fs=1" frameborder="0" allowfullscreen></iframe>'
+        );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
+    }
+
+    public function testTranslateFlashURLwithInvalidParam3() {
+        $url = 'http://www.youtube.com/v/TaVvm0r_gho&hl=zh_TW&fs=1';
+        $url_parsed = parse_url($url);
+        $this->assertNotFalse($info = Youtube::preprocess($url_parsed));
+
+        // test returning embed code
+        $options = array('width'=>640);
+        $embed = Youtube::translate($info, $options);
+        $this->assertEquals($embed['html'],
+            '<iframe width="640" height="360" '.
+            'src="//www.youtube.com/embed/TaVvm0r_gho?hl=zh_TW&fs=1" frameborder="0" allowfullscreen></iframe>'
+        );
+        $this->assertEquals($embed['type'], 'iframe');
+        $this->assertEquals($embed['dimension']->factor, 0.5625);
+    }
+
     public function testTranslatePlayList() {
         $url = 'https://www.youtube.com/playlist?list=PLJicmE8fK0EiEzttYMD1zYkT-SmNf323z';
         $url_parsed = parse_url($url);

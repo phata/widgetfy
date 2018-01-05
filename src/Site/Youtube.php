@@ -60,7 +60,7 @@ class Youtube implements Common {
                 'path_type' => 'video',
                 'params' => &$params,
             );
-        } elseif (preg_match('/^\/v\/([a-zA-Z0-9]+?)(&.+?|)(|\/)$/', $url_parsed['path'], $matches)) {
+        } elseif (preg_match('/^\/v\/([a-zA-Z0-9\-_]+?)(&.+?|)(|\/)$/', $url_parsed['path'], $matches)) {
             $params = self::parseParams($url_parsed);
             $params['vid'] = $matches[1];
             if (!empty($matches[2])) {
