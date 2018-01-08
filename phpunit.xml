@@ -10,6 +10,7 @@
       <directory>tests/MediaFile</directory>
     </testsuite>
     <testsuite name="Core">
+      <directory suffix="Test.php">tests</directory>
       <directory>tests/Core</directory>
     </testsuite>
   </testsuites>
