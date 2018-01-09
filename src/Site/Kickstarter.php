@@ -70,9 +70,9 @@ class Kickstarter implements Common {
      */
     public static function translate($info, $options=array()) {
 
-        // default dimension (medium) is 640 x 480
+        // default dimension (medium) is 640 x 360
         $d = Dimension::fromOptions($options, array(
-            'factor' => 0.75, // 4:3
+            'factor' => 0.5622, // approx. 16:9
             'default_width'=> 640,
         ));
 

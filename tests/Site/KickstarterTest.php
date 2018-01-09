@@ -50,12 +50,12 @@ class KickstarterTest extends TestCase {
         $options = array('width'=>640);
         $embed = Kickstarter::translate($info, $options);
         $this->assertEquals($embed['html'],
-            '<iframe width="640" height="480" '.
+            '<iframe width="640" height="360" '.
             'src="//www.kickstarter.com/projects/'.$name.'/widget/video.html" '.
             'frameborder="0" scrolling="no"></iframe>'
         );
         $this->assertEquals($embed['type'], 'iframe');
-        $this->assertEquals($embed['dimension']->factor, 0.75);
+        $this->assertEquals($embed['dimension']->factor, 0.5622);
     }
 
 }
