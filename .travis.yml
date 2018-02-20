@@ -5,6 +5,9 @@ php:
  - 7.2
  - nightly
 
-before_script: composer install
+before_script:
+ - composer install
+ - composer validate
 
-script: composer run test
+script:
+ - composer run test
