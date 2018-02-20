@@ -4,7 +4,7 @@
     "description": "Widgetfy is a PHP library to translate URLs of video sites into the embed / widget",
     "keywords": ["embed","url translate"],
     "homepage": "https://github.com/Phata/Widgetfy",
-    "license": "LGPL v3",
+    "license": "LGPL-3.0",
     "authors": [
         {
             "name": "Koala Yeung",
