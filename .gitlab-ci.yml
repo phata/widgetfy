@@ -9,6 +9,7 @@ before_script:
   - apt-get update && apt-get install -y zlib1g-dev libzip-dev
   - docker-php-ext-install zip
   # install composer packages
+  - composer validate
   - composer install
 
 stages:
@@ -19,19 +20,19 @@ test:php-7.1:
   stage: test
   image: php:7.1
   script:
-    - composer run test
+    - composer test
 
 test:php-7.2:
   stage: test
   image: php:7.2
   script:
-    - composer run test
+    - composer test
 
 test:php-rc:
   stage: test
   image: php:rc
   script:
-    - composer run test
+    - composer test
 
 packagist:
   stage: deploy
