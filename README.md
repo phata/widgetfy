@@ -53,13 +53,14 @@ Branches
 
 Branch | Purpose          | PHP Version       | Status
 -------|------------------|-------------------|----------------------------------------
-2.x    | Stable / Default | 7.1, 7.2          | ![Travis Test Status][travis-badge-2.x]
-1.x    | Maintenance      | 5.3, 5.4 5.5, 5.6 | ![Travis Test Status][travis-badge-1.x]
-master | Development      | 7.1, 7.2          | ![Travis Test Status][travis-badge]
+2.x    | Stable / Default | 7.1, 7.2          | [![Travis Test Status][travis-badge-2.x]][travis-branches-url]
+1.x    | Maintenance      | 5.3, 5.4 5.5, 5.6 | [![Travis Test Status][travis-badge-1.x]][travis-branches-url]
+master | Development      | 7.1, 7.2          | [![Travis Test Status][travis-badge]][travis-branches-url]
 
 [travis-badge-2.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=2.x
 [travis-badge-1.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x
 [travis-badge]: https://api.travis-ci.org/phata/widgetfy.svg?branch=master
+[travis-branches-url]: https://travis-ci.org/phata/widgetfy/branches
 
 License
 -------
