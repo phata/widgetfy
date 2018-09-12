@@ -7,6 +7,8 @@
 [download-badge]: https://poser.pugx.org/phata/widgetfy/downloads
 [packagist-url]: https://packagist.org/packages/phata/widgetfy
 
+<span style="color:red">**!!Notice!!**<span>: Development of Widgetfy has migrated to [GitLab.com](https://gitlab.com/phata/widgetfy).
+
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
 
