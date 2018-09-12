@@ -13,13 +13,16 @@
             "role": "Developer"
         }
     ],
-    "scripts": {
-        "test": "./vendor/bin/phpunit"
-    },
     "require": {
         "php": ">=7.1"
     },
-    "repositories": [
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
+   "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/Phata/Widgetfy"
@@ -32,8 +35,5 @@
         "psr-4" : {
             "Phata\\Widgetfy\\" : "src/"
         }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.5"
     }
 }

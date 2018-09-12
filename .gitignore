@@ -1,2 +1,5 @@
+# composer lock file
+/composer.lock
+
 # composer vendor folder
 /vendor
