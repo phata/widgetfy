@@ -10,8 +10,7 @@
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
 
-Install
--------
+## Install
 
 First, install [composer] to your development platform.
 
@@ -23,8 +22,7 @@ composer require phata/widgetfy
 
 [composer]: https://getcomposer.org/download/
 
-Example Code
-------------
+## Example Code
 
 ```php
 
@@ -53,9 +51,7 @@ echo Phata\Widgetfy\Theme::toHTML($embed, true);
 For more detailed documentation, please visit our
 [Documentation page on GitLab](https://gitlab.com/phata/widgetfy/wikis/Documentation).
 
-
-Branches
---------
+## Branches
 
 Branch | Purpose          | PHP Version       | Status
 -------|------------------|-------------------|----------------------------------------
@@ -68,8 +64,7 @@ master | Development      | 7.1, 7.2          | [![Travis Test Status][ci-badge]
 [ci-badge]: https://gitlab.com/phata/widgetfy/badges/master/build.svg
 [ci-branches-url]: https://gitlab.com/phata/widgetfy/pipelines?scope=branches&page=1
 
-License
--------
+## License
 
 This file is part of Widgetfy.
 
