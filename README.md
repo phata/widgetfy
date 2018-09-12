@@ -1,5 +1,11 @@
-Widgetfy
-========
+# Widgetfy
+
+[![Travis Test Status][ci-badge]][ci-branches-url] [![stable-version-badge]][packagist-url] [![license-badge]][packagist-url] [![download-badge]][packagist-url]
+
+[stable-version-badge]: https://poser.pugx.org/phata/widgetfy/v/stable
+[license-badge]: https://poser.pugx.org/phata/widgetfy/license
+[download-badge]: https://poser.pugx.org/phata/widgetfy/downloads
+[packagist-url]: https://packagist.org/packages/phata/widgetfy
 
 **Widgetfy** is a PHP library to translate URLs of video sites into the
 embed / widget.
@@ -45,7 +51,7 @@ echo Phata\Widgetfy\Theme::toHTML($embed, true);
 ```
 
 For more detailed documentation, please visit our
-[Documentation page on GitHub](https://github.com/Phata/Widgetfy/wiki/Documentation).
+[Documentation page on GitLab](https://gitlab.com/phata/widgetfy/wikis/Documentation).
 
 
 Branches
@@ -53,14 +59,14 @@ Branches
 
 Branch | Purpose          | PHP Version       | Status
 -------|------------------|-------------------|----------------------------------------
-2.x    | Stable / Default | 7.1, 7.2          | [![Travis Test Status][travis-badge-2.x]][travis-branches-url]
-1.x    | Maintenance      | 5.3, 5.4 5.5, 5.6 | [![Travis Test Status][travis-badge-1.x]][travis-branches-url]
-master | Development      | 7.1, 7.2          | [![Travis Test Status][travis-badge]][travis-branches-url]
+2.x    | Stable / Default | 7.1, 7.2          | [![Travis Test Status][ci-badge-2.x]][ci-branches-url]
+1.x    | Maintenance      | 5.3, 5.4 5.5, 5.6 | [![Travis Test Status][ci-badge-1.x]][ci-branches-url]
+master | Development      | 7.1, 7.2          | [![Travis Test Status][ci-badge]][ci-branches-url]
 
-[travis-badge-2.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=2.x
-[travis-badge-1.x]: https://api.travis-ci.org/phata/widgetfy.svg?branch=1.x
-[travis-badge]: https://api.travis-ci.org/phata/widgetfy.svg?branch=master
-[travis-branches-url]: https://travis-ci.org/phata/widgetfy/branches
+[ci-badge-2.x]: https://gitlab.com/phata/widgetfy/badges/2.x/build.svg
+[ci-badge-1.x]: https://gitlab.com/phata/widgetfy/badges/1.x/build.svg
+[ci-badge]: https://gitlab.com/phata/widgetfy/badges/master/build.svg
+[ci-branches-url]: https://gitlab.com/phata/widgetfy/pipelines?scope=branches&page=1
 
 License
 -------
